@@ -1,0 +1,5 @@
+// Telling Babel that it will find both ES2015+(env) and React JSX(react) files
+{
+    "presets" : ["env", "react"],
+    "plugins" : ["transform-class-properties"]
+}
