@@ -1,23 +1,19 @@
 import React from 'react';
 import axios from 'axios';
 import { MovieCard } from '../movie-card/movie-card';
+import { MovieView } from '../movie-view/movie-view';
 
-// class MainView extends React.Component{
-//     constructor(){
-//         super();
-//         // initalize empty object state to be destructured later
-//         // so it can be accessed later by const { something } = this.state
-//         this.state = {};
-//     }
-
-//     render() {
-//         return(
-//             <div className="main-view"></div>
-//         );
-//     }
-// }
 
 export class MainView extends React.Component {
+    constructor() {
+        super();
+
+        this.state = {
+            movies: null,
+            selectedMovie: null
+        };
+    }
+
     componentDidMount() {
         axios.get('https://m-y-f-l-i-x.herokuapp.com/movies')
             .then (response => {
@@ -26,22 +22,31 @@ export class MainView extends React.Component {
                     movies: response.data
                 });
             })
-            .catch(function(error) {
+            .catch(function (error) {
                 console.log(error);
             });
     }
 
-    render() {
-        const { movies } = this.state;
+    onMovieClick(movie) {
+        this.setState({
+            selectedMovie: movie
+        });
+    }
 
-        if(!movies) return <div className="main-view"></div>;
+    render() {
+        const { movies, selectedMovie } = this.state;
+
+        if (!movies) return <div className="main-view"></div>;
 
         return (
-            <div className="main-view">
-                { movies.map(movie => (
-                    <MovieCard key={movie._id} movie={movie}/>
-                ))}
-            </div>
+        <div className="main-view">
+        {selectedMovie
+            ? <MovieView movie={selectedMovie}/>
+            : movies.map(movie => (
+            <MovieCard key={movie._id} movie={movie} onClick={movie => this.onMovieClick(movie)}/>
+            ))
+        }
+        </div>
         );
     }
 }
