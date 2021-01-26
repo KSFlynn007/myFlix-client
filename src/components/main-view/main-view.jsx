@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import { MovieCard } from '../movie-card/movie-card';
 
 // class MainView extends React.Component{
 //     constructor(){
@@ -31,16 +32,14 @@ export class MainView extends React.Component {
     }
 
     render() {
-        const {movies} = this.state;
+        const { movies } = this.state;
 
         if(!movies) return <div className="main-view"></div>;
 
         return (
             <div className="main-view">
                 { movies.map(movie => (
-                    <div className="movie-card" key={movie.id}>
-                        {movie.Title}
-                    </div> 
+                    <MovieCard key={movie._id} movie={movie}/>
                 ))}
             </div>
         );
