@@ -15,3 +15,34 @@ class MainView extends React.Component{
         );
     }
 }
+
+export class MainView extends React.Component {
+    componentDidMount() {
+        axios.get('https://m-y-f-l-i-x.herokuapp.com/movies')
+            .then (response => {
+                // never directly mutate state once defined, otherwise component won't update:
+                this.setState({
+                    movies: response.data
+                });
+            })
+            .catch(function(error) {
+                console.log(error);
+            });
+    }
+
+    render() {
+        const {movies} = this.state;
+
+        if(!movies) return <div className="main-view"></div>;
+
+        return (
+            <div className="main-view">
+                { movies.map(movie => (
+                    <div className="movie-card" key={movie.id}>
+                        {movie.Title}
+                    </div> 
+                ))}
+            </div>
+        );
+    }
+}
