@@ -31793,7 +31793,12 @@ var MovieView = /*#__PURE__*/function (_React$Component) {
         className: "label"
       }, "Director: "), _react.default.createElement("span", {
         className: "value"
-      }, movie.Director.Name)));
+      }, movie.Director.Name)), _react.default.createElement("button", {
+        className: "return-button",
+        onClick: function onClick() {
+          return window.open("mainView", "_self");
+        }
+      }, "Return to Movie List"));
     }
   }]);
 
