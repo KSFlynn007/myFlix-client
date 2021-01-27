@@ -1,5 +1,7 @@
 import React from 'react';
 
+import './movie-view.scss';
+
 export class MovieView extends React.Component {
 
     constructor () {
@@ -15,7 +17,7 @@ export class MovieView extends React.Component {
 
         return(
             <div className="movie-view">
-                <img className="movie-poster" src={movie.ImagePath} />
+                <img className="movie-poster" src={movie.ImageURL} />
                 <div className="movie-title">
                 <span className="label">Title: </span>
                 <span className="value">{movie.Title}</span>
