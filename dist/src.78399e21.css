@@ -1,6 +1,11 @@
 .movie-poster {
   width: 50%;
 }
+
+.return-button {
+  margin: 15px;
+  font-size: 12px;
+}
 .my-flix {
   color: steelblue;
 }
