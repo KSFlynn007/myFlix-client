@@ -47,6 +47,7 @@ export class MainView extends React.Component {
         return (
         <div className="main-view">
         {selectedMovie
+        // assign the key onClick to the function defined above, onButtonClick, so it can be passed as a prop to Movie-Card
             ? <MovieView movie={selectedMovie} onClick={() => this.onButtonClick()}/>
             : movies.map(movie => (
             <MovieCard key={movie._id} movie={movie} onClick={movie => this.onMovieClick(movie)}/>
