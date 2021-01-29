@@ -3,6 +3,7 @@ import axios from 'axios';
 import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
 import { LoginView } from '../login-view/login-view';
+import { RegistrationView } from '../registration-view/registration-view'
 
 
 export class MainView extends React.Component {
@@ -53,10 +54,12 @@ export class MainView extends React.Component {
 
 // if no user, LoginView is rendered. If there is a logged in user, the user details are passed as a prop to the Login View
         if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)}/>
+
         if (!movies) return <div className="main-view"></div>;
 
         return (
         <div className="main-view">
+{/* If state of selectedMovie is not null, that selected movie will be return, otherwise all movies will be returned */}
         {selectedMovie
         // assign the key onClick to the function defined above, onButtonClick, so it can be passed as a prop to Movie-Card
             ? <MovieView movie={selectedMovie} onClick={() => this.onButtonClick()}/>
