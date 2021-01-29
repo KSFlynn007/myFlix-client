@@ -2,15 +2,17 @@ import React from 'react';
 import axios from 'axios';
 import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
+import { LoginView } from '../login-view/login-view';
 
 
 export class MainView extends React.Component {
     constructor() {
         super();
-
+//initial state is set to null
         this.state = {
             movies: null,
-            selectedMovie: null
+            selectedMovie: null,
+            user: null
         };
     }
 
@@ -27,21 +29,30 @@ export class MainView extends React.Component {
             });
     }
 
+// when movie is clicked, this function is invoked and updates the state of the 'selectedovie' property to that movie
     onMovieClick(movie) {
         this.setState({
             selectedMovie: movie
         });
     }
-
+// when clicked, this function sets selectedMovie state back to null, rendering the main-view page on the DOM
     onButtonClick() {
         this.setState({
             selectedMovie: null
         })
     }
+// when user successsfully logs in, this function updates the 'user' property in thstate to that particular user
+    onLoggedIn(user) {
+        this.setState({
+            user: user
+        });
+    }
 
     render() {
-        const { movies, selectedMovie } = this.state;
+        const { movies, selectedMovie, user } = this.state;
 
+// if no user, LoginView is rendered. If there is a logged in user, the user details are passed as a prop to the Login View
+        if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)}/>
         if (!movies) return <div className="main-view"></div>;
 
         return (
