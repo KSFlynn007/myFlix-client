@@ -19,15 +19,14 @@ export function LoginView(props) {
   return (
     <React.Fragment>
       <Form className='form-login'>
-        <h1 className='text-danger'>Welcome to myFlix!</h1>
-        <p className='mb-5'>Please login to continue.</p>
+        <h1 className='text-danger'>Login Here:</h1>
         <Form.Group controlId='formBasicEmail'>
           <Form.Label>Username</Form.Label>
           <Form.Control
             type='text'
             value={username}
             onChange={(e) => setUsername(e.target.value)}
-            placeholder='Enter Username'
+            placeholder='Your Username goes here!'
           />
         </Form.Group>
         <Form.Group controlId='formBasicPassword'>
@@ -37,15 +36,9 @@ export function LoginView(props) {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             type='password'
-            placeholder='Enter Password'
+            placeholder='Your password goes here!'
           />
         </Form.Group>
-        {/*<p>
-          Dont have an account?
-          <Button onClick={handleRegister} variant='link'>
-            Register
-          </Button>
-        </p>*/}
         <Button onClick={handleSubmit} variant='primary' type='submit'>
           Submit
         </Button>
