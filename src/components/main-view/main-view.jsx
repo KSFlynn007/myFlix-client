@@ -3,16 +3,13 @@ import axios from 'axios';
 import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
 import { LoginView } from '../login-view/login-view';
-import { RegistrationView } from '../registration-view/registration-view'
+import { RegisterView } from '../registration-view/registration-view'
 
 import './main-view.scss'
 
 import {
     Navbar,
     Nav,
-    Form,
-    FormControl,
-    InputGroup,
     Container,
     Row,
     Col,
@@ -75,10 +72,10 @@ export class MainView extends React.Component {
     render() {
         const { movies, selectedMovie, user, register } = this.state;
 
+        if (!register) return <RegisterView onRegister={(register) => this.onRegister(register)}/>
+
 // if no user, LoginView is rendered. If there is a logged in user, the user details are passed as a prop to the Login View
         if (!user) return <LoginView onLoggedIn={(user) => this.onLoggedIn(user)}/>
-
-        if (!register) return <RegistrationView onRegister={(register) => this.onRegister(register)}/>
 
         if (!movies) return <div className="main-view"></div>;
 
@@ -86,44 +83,6 @@ export class MainView extends React.Component {
             <React.Fragment>
                 <div className='main-view'>
                 <header>
-                    <Navbar
-                    collapseOnSelect
-                    expand='lg'
-                    bg='dark'
-                    variant='dark'
-                    fixed='top'
-                    >
-                    <Navbar.Brand href='#home'>
-                        <img
-                        src={logo}
-                        className='d-inline-block align-top'
-                        alt='React Bootstrap logo'
-                        />
-                    </Navbar.Brand>
-                    <Navbar.Toggle aria-controls='responsive-navbar-nav' />
-                    <Navbar.Collapse id='responsive-navbar-nav'>
-                        <Nav className='mr-auto'>
-                        <Nav.Link href='#movies'>Movies</Nav.Link>
-                        <Nav.Link href='#genre'>Genre</Nav.Link>
-                        <Nav.Link href='#director'>Director</Nav.Link>
-                        <Nav.Link href='#login'>Logout</Nav.Link>
-                        </Nav>
-                        <Form inline>
-                        <InputGroup>
-                            <FormControl
-                            placeholder='Enter keyword here'
-                            aria-label='Enter keyword here'
-                            aria-describedby='basic-addon2'
-                            />
-                            <InputGroup.Append>
-                            <InputGroup.Text id='basic-addon2'>
-                                <FaSearch />
-                            </InputGroup.Text>
-                            </InputGroup.Append>
-                        </InputGroup>
-                        </Form>
-                    </Navbar.Collapse>
-                    </Navbar>
                 </header>
                 <div className='main-body text-center'>
                     {selectedMovie ? (
