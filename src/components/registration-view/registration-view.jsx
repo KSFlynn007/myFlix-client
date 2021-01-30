@@ -10,18 +10,18 @@ export function RegisterView(props) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [birthdate, setBirthday] = useState('');
+  const [birthdate, setBirthdate] = useState('');
 
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log(username, password, confirmPassword, email, birthdate);
-        props.onRegister('test');
+        props.onRegister(register);
     };
 
     return(
         <React.Fragment>
             <Form>
-                <h1>Welcome!</h1>
+                <h1>Registration Welcome!</h1>
                 <Form.Group controlId="formBasicText">
                     <Form.Label>Username</Form.Label>
                     <Form.Control 
@@ -31,10 +31,21 @@ export function RegisterView(props) {
                     placeholder="Enter Username"
                     />
                 </Form.Group>
+                <Form.Group controlId='formBasicEmail'>
+                    <Form.Label>Email</Form.Label>
+                    <Form.Control
+                    type='email'
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder='Enter Email'
+                    />
+                </Form.Group>
             </Form>
-            <button type="button" onClick={handleSubmit}>Submit</button>
+            <Button type="button" onClick={handleSubmit}>Submit</Button>
         </React.Fragment>
         
+
+        // OLD VERSION FOR REFERENCE:
         // <form>
         //     <label>
         //         Username: 
@@ -58,11 +69,9 @@ export function RegisterView(props) {
         //     </label>
         // </form>
     );
-
-
 }
 
-RegistrationView.propTypes = {
+RegisterView.propTypes = {
     register: PropTypes.shape({
         username: PropTypes.string.isRequired,
         password: PropTypes.string.isRequired,
@@ -71,4 +80,3 @@ RegistrationView.propTypes = {
     }).isRequired,
     onClick: PropTypes.func.isRequred
 };
-
