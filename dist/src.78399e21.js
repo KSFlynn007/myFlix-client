@@ -48066,9 +48066,7 @@ function LoginView(props) {
     className: "form-login"
   }, _react.default.createElement("h1", {
     className: "text-danger"
-  }, "Welcome to myFlix!"), _react.default.createElement("p", {
-    className: "mb-5"
-  }, "Please login to continue."), _react.default.createElement(_reactBootstrap.Form.Group, {
+  }, "Login Here:"), _react.default.createElement(_reactBootstrap.Form.Group, {
     controlId: "formBasicEmail"
   }, _react.default.createElement(_reactBootstrap.Form.Label, null, "Username"), _react.default.createElement(_reactBootstrap.Form.Control, {
     type: "text",
@@ -48076,7 +48074,7 @@ function LoginView(props) {
     onChange: function onChange(e) {
       return setUsername(e.target.value);
     },
-    placeholder: "Enter Username"
+    placeholder: "Your Username goes here!"
   })), _react.default.createElement(_reactBootstrap.Form.Group, {
     controlId: "formBasicPassword"
   }, _react.default.createElement(_reactBootstrap.Form.Label, null, "Password"), _react.default.createElement(_reactBootstrap.Form.Control, (_React$createElement = {
@@ -48085,7 +48083,7 @@ function LoginView(props) {
     onChange: function onChange(e) {
       return setPassword(e.target.value);
     }
-  }, _defineProperty(_React$createElement, "type", "password"), _defineProperty(_React$createElement, "placeholder", "Enter Password"), _React$createElement))), _react.default.createElement(_reactBootstrap.Button, {
+  }, _defineProperty(_React$createElement, "type", "password"), _defineProperty(_React$createElement, "placeholder", "Your password goes here!"), _React$createElement))), _react.default.createElement(_reactBootstrap.Button, {
     onClick: handleSubmit,
     variant: "primary",
     type: "submit"
@@ -48163,15 +48161,15 @@ function RegisterView(props) {
   var _useState9 = (0, _react.useState)(''),
       _useState10 = _slicedToArray(_useState9, 2),
       birthdate = _useState10[0],
-      setBirthday = _useState10[1];
+      setBirthdate = _useState10[1];
 
   var handleSubmit = function handleSubmit(e) {
     e.preventDefault();
     console.log(username, password, confirmPassword, email, birthdate);
-    props.onRegister('test');
+    props.onRegister(register);
   };
 
-  return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement(_reactBootstrap.Form, null, _react.default.createElement("h1", null, "Welcome!"), _react.default.createElement(_reactBootstrap.Form.Group, {
+  return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement(_reactBootstrap.Form, null, _react.default.createElement("h1", null, "Registration Welcome!"), _react.default.createElement(_reactBootstrap.Form.Group, {
     controlId: "formBasicText"
   }, _react.default.createElement(_reactBootstrap.Form.Label, null, "Username"), _react.default.createElement(_reactBootstrap.Form.Control, {
     type: "text",
@@ -48180,10 +48178,20 @@ function RegisterView(props) {
       return setUsername(e.target.value);
     },
     placeholder: "Enter Username"
-  }))), _react.default.createElement("button", {
+  })), _react.default.createElement(_reactBootstrap.Form.Group, {
+    controlId: "formBasicEmail"
+  }, _react.default.createElement(_reactBootstrap.Form.Label, null, "Email"), _react.default.createElement(_reactBootstrap.Form.Control, {
+    type: "email",
+    value: email,
+    onChange: function onChange(e) {
+      return setEmail(e.target.value);
+    },
+    placeholder: "Enter Email"
+  }))), _react.default.createElement(_reactBootstrap.Button, {
     type: "button",
     onClick: handleSubmit
-  }, "Submit")) // <form>
+  }, "Submit")) // OLD VERSION FOR REFERENCE:
+  // <form>
   //     <label>
   //         Username: 
   //         <input type="text" value={username} onChange={e => setUsername(e.target.value)} />
@@ -48208,7 +48216,7 @@ function RegisterView(props) {
   ;
 }
 
-RegistrationView.propTypes = {
+RegisterView.propTypes = {
   register: _propTypes.default.shape({
     username: _propTypes.default.string.isRequired,
     password: _propTypes.default.string.isRequired,
@@ -48345,16 +48353,16 @@ var MainView = /*#__PURE__*/function (_React$Component) {
           movies = _this$state.movies,
           selectedMovie = _this$state.selectedMovie,
           user = _this$state.user,
-          register = _this$state.register; // if no user, LoginView is rendered. If there is a logged in user, the user details are passed as a prop to the Login View
+          register = _this$state.register;
+      if (!register) return _react.default.createElement(_registrationView.RegisterView, {
+        onRegister: function onRegister(register) {
+          return _this3.onRegister(register);
+        }
+      }); // if no user, LoginView is rendered. If there is a logged in user, the user details are passed as a prop to the Login View
 
       if (!user) return _react.default.createElement(_loginView.LoginView, {
         onLoggedIn: function onLoggedIn(user) {
           return _this3.onLoggedIn(user);
-        }
-      });
-      if (!register) return _react.default.createElement(_registrationView.RegistrationView, {
-        onRegister: function onRegister(register) {
-          return _this3.onRegister(register);
         }
       });
       if (!movies) return _react.default.createElement("div", {
@@ -48362,41 +48370,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
       });
       return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement("div", {
         className: "main-view"
-      }, _react.default.createElement("header", null, _react.default.createElement(_reactBootstrap.Navbar, {
-        collapseOnSelect: true,
-        expand: "lg",
-        bg: "dark",
-        variant: "dark",
-        fixed: "top"
-      }, _react.default.createElement(_reactBootstrap.Navbar.Brand, {
-        href: "#home"
-      }, _react.default.createElement("img", {
-        src: logo,
-        className: "d-inline-block align-top",
-        alt: "React Bootstrap logo"
-      })), _react.default.createElement(_reactBootstrap.Navbar.Toggle, {
-        "aria-controls": "responsive-navbar-nav"
-      }), _react.default.createElement(_reactBootstrap.Navbar.Collapse, {
-        id: "responsive-navbar-nav"
-      }, _react.default.createElement(_reactBootstrap.Nav, {
-        className: "mr-auto"
-      }, _react.default.createElement(_reactBootstrap.Nav.Link, {
-        href: "#movies"
-      }, "Movies"), _react.default.createElement(_reactBootstrap.Nav.Link, {
-        href: "#genre"
-      }, "Genre"), _react.default.createElement(_reactBootstrap.Nav.Link, {
-        href: "#director"
-      }, "Director"), _react.default.createElement(_reactBootstrap.Nav.Link, {
-        href: "#login"
-      }, "Logout")), _react.default.createElement(_reactBootstrap.Form, {
-        inline: true
-      }, _react.default.createElement(_reactBootstrap.InputGroup, null, _react.default.createElement(_reactBootstrap.FormControl, {
-        placeholder: "Enter keyword here",
-        "aria-label": "Enter keyword here",
-        "aria-describedby": "basic-addon2"
-      }), _react.default.createElement(_reactBootstrap.InputGroup.Append, null, _react.default.createElement(_reactBootstrap.InputGroup.Text, {
-        id: "basic-addon2"
-      }, _react.default.createElement(FaSearch, null)))))))), _react.default.createElement("div", {
+      }, _react.default.createElement("header", null), _react.default.createElement("div", {
         className: "main-body text-center"
       }, selectedMovie ? _react.default.createElement(_movieView.MovieView, {
         movie: selectedMovie,
