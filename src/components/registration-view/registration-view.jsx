@@ -15,20 +15,20 @@ export function RegisterView(props) {
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log(username, password, confirmPassword, email, birthdate);
-        props.onRegister(register);
+        props.onRegister('test');
     };
 
     return(
         <React.Fragment>
             <Form>
                 <h1>Registration Welcome!</h1>
-                <Form.Group controlId="formBasicText">
+                <Form.Group controlId='formBasicText'>
                     <Form.Label>Username</Form.Label>
                     <Form.Control 
-                    type="text"
+                    type='password'
                     value={username}
-                    onChange={e => setUsername(e.target.value)}
-                    placeholder="Enter Username"
+                    onChange={(e) => setUsername(e.target.value)}
+                    placeholder='Enter usename'
                     />
                 </Form.Group>
                 <Form.Group controlId='formBasicEmail'>
@@ -37,7 +37,34 @@ export function RegisterView(props) {
                     type='email'
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    placeholder='Enter Email'
+                    placeholder='Enter email'
+                    />
+                </Form.Group>
+                <Form.Group>
+                    <Form.Label>Password</Form.Label>
+                    <Form.Control
+                    type='password'
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    placeholder='Enter new password'
+                    />
+                </Form.Group>
+                <Form.Group>
+                    <Form.Label>Confirm Password</Form.Label>
+                    <Form.Control
+                    type='password'
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    placeholder='Confirm your password'
+                    />
+                </Form.Group>
+                <Form.Group>
+                    <Form.Label>Birthdate</Form.Label>
+                    <Form.Control
+                    type='date'
+                    value={birthdate}
+                    onChange={(e) => setBirthdate(e.target.value)}
+                    placeholder='Enter your birthdate'
                     />
                 </Form.Group>
             </Form>
@@ -76,7 +103,7 @@ RegisterView.propTypes = {
         username: PropTypes.string.isRequired,
         password: PropTypes.string.isRequired,
         confirmPassword: PropTypes.string.isRequired,
-        Birthdate: PropTypes.string.isRequired
-    }).isRequired,
-    onClick: PropTypes.func.isRequred
+        birthdate: PropTypes.string.isRequired
+    }),
+    onRegister: PropTypes.func.isRequired,
 };
