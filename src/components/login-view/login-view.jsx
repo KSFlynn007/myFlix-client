@@ -9,7 +9,7 @@ export function LoginView(props) {
     const [ username, setUsername ] = useState('');
     const [ password, setPassword ] = useState('');
 
-    const handleSubmit = () => {
+    const handleSubmit = (e) => {
         e.preventDefault();
         console.log(username, password);
         // send a request to server for authentication, then calls props.onLoggedIn(username)
@@ -53,5 +53,5 @@ LoginView.propTypes = {
         pasword: PropTypes.string.isRequired
     }),
     onLoggedIn: PropTypes.func.isRequired,
-    onRegister: PropTypes.func,
+    onRegister: PropTypes.func.isRequired
 };
