@@ -20,8 +20,8 @@ export function RegisterView(props) {
 
     return(
         <React.Fragment>
-            <Form>
-                <h1>Registration Welcome!</h1>
+            <Form className='register-form'>
+                <h1 className='register-header'>Registration Welcome!</h1>
                 <Form.Group controlId='formBasicText'>
                     <Form.Label>Username</Form.Label>
                     <Form.Control 
@@ -40,7 +40,7 @@ export function RegisterView(props) {
                     placeholder='Enter email'
                     />
                 </Form.Group>
-                <Form.Group>
+                <Form.Group controlID='formBasicPassword'>
                     <Form.Label>Password</Form.Label>
                     <Form.Control
                     type='password'
@@ -49,7 +49,7 @@ export function RegisterView(props) {
                     placeholder='Enter new password'
                     />
                 </Form.Group>
-                <Form.Group>
+                <Form.Group controlID='formBasicPassword'>
                     <Form.Label>Confirm Password</Form.Label>
                     <Form.Control
                     type='password'
@@ -58,7 +58,7 @@ export function RegisterView(props) {
                     placeholder='Confirm your password'
                     />
                 </Form.Group>
-                <Form.Group>
+                <Form.Group controlID='formBasicDate'>
                     <Form.Label>Birthdate</Form.Label>
                     <Form.Control
                     type='date'
@@ -67,34 +67,9 @@ export function RegisterView(props) {
                     placeholder='Enter your birthdate'
                     />
                 </Form.Group>
+                <Button type='button' variant='dark' onClick={handleSubmit}>Submit</Button>
             </Form>
-            <Button type="button" onClick={handleSubmit}>Submit</Button>
         </React.Fragment>
-        
-
-        // OLD VERSION FOR REFERENCE:
-        // <form>
-        //     <label>
-        //         Username: 
-        //         <input type="text" value={username} onChange={e => setUsername(e.target.value)} />
-        //     </label>
-        //     <label>
-        //         Email:
-        //         <input type="email" value={email} onChange={e => setEmail(e.target.value)}/>
-        //     </label>
-        //     <label>
-        //         Password:
-        //         <input type="password" value={password} onChange={e => setPassword(e.target.value)} />
-        //     </label>
-        //     <label>
-        //         Confirm Password:
-        //         <input type="email" value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)}/>
-        //     </label>
-        //     <label>
-        //         Birthdate:
-        //         <input type="birthdate" value={birthdate} onChange={e => setBirthdate(e.target.value)}/>
-        //     </label>
-        // </form>
     );
 }
 
