@@ -18,8 +18,8 @@ export function LoginView(props) {
 
   return (
     <React.Fragment>
-      <Form className='form-login'>
-        <h1 className='text-danger'>Login Here:</h1>
+      <Form className='login-form'>
+        <h1 className='login-header'>Login Here:</h1>
         <Form.Group controlId='formBasicEmail'>
           <Form.Label>Username</Form.Label>
           <Form.Control
@@ -39,7 +39,7 @@ export function LoginView(props) {
             placeholder='Your password goes here!'
           />
         </Form.Group>
-        <Button onClick={handleSubmit} variant='primary' type='submit'>
+        <Button onClick={handleSubmit} variant='dark' type='submit'>
           Submit
         </Button>
       </Form>
