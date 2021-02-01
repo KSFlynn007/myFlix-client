@@ -82,8 +82,24 @@ export class MainView extends React.Component {
         return (
             <React.Fragment>
                 <div className='main-view'>
-                <header>
-                </header>
+                    <header>
+                        <Navbar bg='dark' variant='dark'>
+                            <Nav className='justify-content-center'>
+                                <Nav.Item>
+                                    <Nav.Link target='_blank' href='#Home'>Home</Nav.Link>
+                                </Nav.Item>
+                                <Nav.Item>
+                                    <Nav.Link target='_blank' href='#Directors'>Directors</Nav.Link>
+                                </Nav.Item>
+                                <Nav.Item>
+                                    <Nav.Link target='_blank' href='#Genres'>Genres</Nav.Link>
+                                </Nav.Item>
+                                <Nav.Item>
+                                    <Nav.Link className='logout-button' target='_blank' href='#Home'>Logout</Nav.Link>
+                                </Nav.Item>
+                            </Nav>
+                        </Navbar>
+                    </header>
                 <div className='main-body text-center'>
                     {selectedMovie ? (
                     <MovieView
@@ -91,10 +107,10 @@ export class MainView extends React.Component {
                         onClick={() => this.onButtonClick()}
                     />
                     ) : (
-                    <Container className='p-5'>
+                    <Container>
                         <Row>
                         {movies.map((movie) => (
-                            <Col xs={12} md={3} key={movie._id} className='p-2'>
+                            <Col xs={12} sm={6} md={4} key={movie._id}>
                             <MovieCard
                                 key={movie._id}
                                 movie={movie}
