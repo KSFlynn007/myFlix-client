@@ -6,6 +6,9 @@
   margin: 15px;
   font-size: 12px;
 }
+.register-view {
+  background-color: pink;
+}
 .my-flix {
   color: steelblue;
 }

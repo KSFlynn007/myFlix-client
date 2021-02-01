@@ -47876,23 +47876,23 @@ MovieCard.propTypes = {
   // shape({...}) means it expects an object
   movie: _propTypes.default.shape({
     // movie prop may contain Title, and IF it does, it must be a string
-    Title: _propTypes.default.string.isRequired,
-    Description: _propTypes.default.string.isRequired,
-    Year: _propTypes.default.string.isRequired,
-    ImageURL: _propTypes.default.string.isRequired,
-    Genre: _propTypes.default.shape({
-      Name: _propTypes.default.string.isRequired,
-      Biography: _propTypes.default.string.isRequired
+    title: _propTypes.default.string.isRequired,
+    description: _propTypes.default.string.isRequired,
+    year: _propTypes.default.string.isRequired,
+    imageURL: _propTypes.default.string.isRequired,
+    genre: _propTypes.default.shape({
+      name: _propTypes.default.string.isRequired,
+      biography: _propTypes.default.string.isRequired
     }),
-    Director: _propTypes.default.shape({
-      Name: _propTypes.default.string.isRequired,
-      Bio: _propTypes.default.string.isRequred,
-      Birthdate: _propTypes.default.instanceOf(Date).isRequired
+    director: _propTypes.default.shape({
+      name: _propTypes.default.string.isRequired,
+      bio: _propTypes.default.string.isRequred,
+      birthdate: _propTypes.default.instanceOf(Date)
     }),
     Featured: _propTypes.default.bool
   }).isRequired,
   // props object must contain onClick and it MUST be a function
-  onClick: _propTypes.default.func.isRequred
+  onClick: _propTypes.default.func.isRequired
 };
 },{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js","./movie-card.scss":"components/movie-card/movie-card.scss"}],"components/movie-view/movie-view.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
@@ -48055,7 +48055,7 @@ function LoginView(props) {
       password = _useState4[0],
       setPassword = _useState4[1];
 
-  var handleSubmit = function handleSubmit() {
+  var handleSubmit = function handleSubmit(e) {
     e.preventDefault();
     console.log(username, password); // send a request to server for authentication, then calls props.onLoggedIn(username)
 
@@ -48096,7 +48096,7 @@ LoginView.propTypes = {
     pasword: _propTypes.default.string.isRequired
   }),
   onLoggedIn: _propTypes.default.func.isRequired,
-  onRegister: _propTypes.default.func
+  onRegister: _propTypes.default.func.isRequired
 };
 },{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","./login-view.scss":"components/login-view/login-view.scss","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js"}],"components/registration-view/registration-view.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
@@ -48166,18 +48166,18 @@ function RegisterView(props) {
   var handleSubmit = function handleSubmit(e) {
     e.preventDefault();
     console.log(username, password, confirmPassword, email, birthdate);
-    props.onRegister(register);
+    props.onRegister('test');
   };
 
   return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement(_reactBootstrap.Form, null, _react.default.createElement("h1", null, "Registration Welcome!"), _react.default.createElement(_reactBootstrap.Form.Group, {
     controlId: "formBasicText"
   }, _react.default.createElement(_reactBootstrap.Form.Label, null, "Username"), _react.default.createElement(_reactBootstrap.Form.Control, {
-    type: "text",
+    type: "password",
     value: username,
     onChange: function onChange(e) {
       return setUsername(e.target.value);
     },
-    placeholder: "Enter Username"
+    placeholder: "Enter usename"
   })), _react.default.createElement(_reactBootstrap.Form.Group, {
     controlId: "formBasicEmail"
   }, _react.default.createElement(_reactBootstrap.Form.Label, null, "Email"), _react.default.createElement(_reactBootstrap.Form.Control, {
@@ -48186,7 +48186,28 @@ function RegisterView(props) {
     onChange: function onChange(e) {
       return setEmail(e.target.value);
     },
-    placeholder: "Enter Email"
+    placeholder: "Enter email"
+  })), _react.default.createElement(_reactBootstrap.Form.Group, null, _react.default.createElement(_reactBootstrap.Form.Label, null, "Password"), _react.default.createElement(_reactBootstrap.Form.Control, {
+    type: "password",
+    value: password,
+    onChange: function onChange(e) {
+      return setPassword(e.target.value);
+    },
+    placeholder: "Enter new password"
+  })), _react.default.createElement(_reactBootstrap.Form.Group, null, _react.default.createElement(_reactBootstrap.Form.Label, null, "Confirm Password"), _react.default.createElement(_reactBootstrap.Form.Control, {
+    type: "password",
+    value: confirmPassword,
+    onChange: function onChange(e) {
+      return setConfirmPassword(e.target.value);
+    },
+    placeholder: "Confirm your password"
+  })), _react.default.createElement(_reactBootstrap.Form.Group, null, _react.default.createElement(_reactBootstrap.Form.Label, null, "Birthdate"), _react.default.createElement(_reactBootstrap.Form.Control, {
+    type: "date",
+    value: birthdate,
+    onChange: function onChange(e) {
+      return setBirthdate(e.target.value);
+    },
+    placeholder: "Enter your birthdate"
   }))), _react.default.createElement(_reactBootstrap.Button, {
     type: "button",
     onClick: handleSubmit
@@ -48221,9 +48242,9 @@ RegisterView.propTypes = {
     username: _propTypes.default.string.isRequired,
     password: _propTypes.default.string.isRequired,
     confirmPassword: _propTypes.default.string.isRequired,
-    Birthdate: _propTypes.default.string.isRequired
-  }).isRequired,
-  onClick: _propTypes.default.func.isRequred
+    birthdate: _propTypes.default.string.isRequired
+  }),
+  onRegister: _propTypes.default.func.isRequired
 };
 },{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js","./registration-view.scss":"components/registration-view/registration-view.scss"}],"components/main-view/main-view.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
@@ -48375,7 +48396,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
       }, selectedMovie ? _react.default.createElement(_movieView.MovieView, {
         movie: selectedMovie,
         onClick: function onClick() {
-          return _this3.setInititalState();
+          return _this3.onButtonClick();
         }
       }) : _react.default.createElement(_reactBootstrap.Container, {
         className: "p-5"
@@ -48496,7 +48517,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57598" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63190" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
