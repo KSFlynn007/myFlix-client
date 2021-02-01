@@ -47853,18 +47853,21 @@ var MovieCard = /*#__PURE__*/function (_React$Component) {
           movie = _this$props.movie,
           _onClick = _this$props.onClick;
       return _react.default.createElement(_reactBootstrap.Card, {
-        style: {
-          width: '16rem'
-        }
+        className: "movie-card",
+        border: "info"
       }, _react.default.createElement(_reactBootstrap.Card.Img, {
+        className: "movie-img",
         variant: "top",
         src: movie.ImageURL
-      }), _react.default.createElement(_reactBootstrap.Card.Body, null, _react.default.createElement(_reactBootstrap.Card.Title, null, movie.Title), _react.default.createElement(_reactBootstrap.Card.Text, null, movie.Description), _react.default.createElement(_reactBootstrap.Button, {
+      }), _react.default.createElement(_reactBootstrap.Card.Body, null, _react.default.createElement(_reactBootstrap.Card.Title, null, movie.Title), _react.default.createElement(_reactBootstrap.Card.Subtitle, {
+        className: "text-muted"
+      }, movie.Year), _react.default.createElement(_reactBootstrap.Button, {
+        className: "more-button",
         onClick: function onClick() {
           return _onClick(movie);
         },
-        variant: "link"
-      }, "Open")));
+        variant: "info"
+      }, "See Details")));
     }
   }]);
 
@@ -47909,7 +47912,9 @@ exports.MovieView = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
-var _mainView = require("../main-view/main-view");
+var _propTypes = _interopRequireDefault(require("prop-types"));
+
+var _reactBootstrap = require("react-bootstrap");
 
 require("./movie-view.scss");
 
@@ -47961,39 +47966,25 @@ var MovieView = /*#__PURE__*/function (_React$Component) {
       if (!movie) return null;
       return _react.default.createElement("div", {
         className: "movie-view"
-      }, _react.default.createElement("img", {
+      }, _react.default.createElement(_reactBootstrap.Card, null, _react.default.createElement(_reactBootstrap.Card.Img, {
         className: "movie-poster",
+        variant: "top",
         src: movie.ImageURL
-      }), _react.default.createElement("div", {
-        className: "movie-title"
-      }, _react.default.createElement("span", {
-        className: "label"
-      }, "Title: "), _react.default.createElement("span", {
-        className: "value"
-      }, movie.Title)), _react.default.createElement("div", {
-        className: "movie-description"
-      }, _react.default.createElement("span", {
-        className: "label"
-      }, "Description: "), _react.default.createElement("span", {
-        className: "value"
-      }, movie.Description)), _react.default.createElement("div", {
-        className: "movie-genre"
-      }, _react.default.createElement("span", {
-        className: "label"
-      }, "Genre: "), _react.default.createElement("span", {
-        className: "value"
-      }, movie.Genre.Name)), _react.default.createElement("div", {
-        className: "movie-director"
-      }, _react.default.createElement("span", {
-        className: "label"
-      }, "Director: "), _react.default.createElement("span", {
-        className: "value"
-      }, movie.Director.Name)), _react.default.createElement("button", {
+      }), _react.default.createElement(_reactBootstrap.Card.Title, {
+        className: "label-title"
+      }, movie.Title), _react.default.createElement(_reactBootstrap.Card.Body, null, _react.default.createElement(_reactBootstrap.Card.Text, {
+        className: "label-body"
+      }, movie.Description), _react.default.createElement(_reactBootstrap.Card.Text, {
+        className: "label-body"
+      }, "Director: ", movie.Director.Name), _react.default.createElement(_reactBootstrap.Card.Text, {
+        className: "label-body"
+      }, "Genre: ", movie.Genre.Name)), _react.default.createElement(_reactBootstrap.Button, {
         className: "return-button",
+        variant: "dark",
         onClick: function onClick() {
           return _onClick(movie);
         }
-      }, "Return to Movie List"));
+      }, "Return to Movie List")));
     }
   }]);
 
@@ -48001,7 +47992,7 @@ var MovieView = /*#__PURE__*/function (_React$Component) {
 }(_react.default.Component);
 
 exports.MovieView = MovieView;
-},{"react":"../node_modules/react/index.js","../main-view/main-view":"components/main-view/main-view.jsx","./movie-view.scss":"components/movie-view/movie-view.scss"}],"components/login-view/login-view.scss":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js","./movie-view.scss":"components/movie-view/movie-view.scss"}],"components/login-view/login-view.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
@@ -48063,9 +48054,9 @@ function LoginView(props) {
   };
 
   return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement(_reactBootstrap.Form, {
-    className: "form-login"
+    className: "login-form"
   }, _react.default.createElement("h1", {
-    className: "text-danger"
+    className: "login-header"
   }, "Login Here:"), _react.default.createElement(_reactBootstrap.Form.Group, {
     controlId: "formBasicEmail"
   }, _react.default.createElement(_reactBootstrap.Form.Label, null, "Username"), _react.default.createElement(_reactBootstrap.Form.Control, {
@@ -48085,7 +48076,7 @@ function LoginView(props) {
     }
   }, _defineProperty(_React$createElement, "type", "password"), _defineProperty(_React$createElement, "placeholder", "Your password goes here!"), _React$createElement))), _react.default.createElement(_reactBootstrap.Button, {
     onClick: handleSubmit,
-    variant: "primary",
+    variant: "dark",
     type: "submit"
   }, "Submit")));
 }
@@ -48169,7 +48160,11 @@ function RegisterView(props) {
     props.onRegister('test');
   };
 
-  return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement(_reactBootstrap.Form, null, _react.default.createElement("h1", null, "Registration Welcome!"), _react.default.createElement(_reactBootstrap.Form.Group, {
+  return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement(_reactBootstrap.Form, {
+    className: "register-form"
+  }, _react.default.createElement("h1", {
+    className: "register-header"
+  }, "Registration Welcome!"), _react.default.createElement(_reactBootstrap.Form.Group, {
     controlId: "formBasicText"
   }, _react.default.createElement(_reactBootstrap.Form.Label, null, "Username"), _react.default.createElement(_reactBootstrap.Form.Control, {
     type: "password",
@@ -48187,54 +48182,38 @@ function RegisterView(props) {
       return setEmail(e.target.value);
     },
     placeholder: "Enter email"
-  })), _react.default.createElement(_reactBootstrap.Form.Group, null, _react.default.createElement(_reactBootstrap.Form.Label, null, "Password"), _react.default.createElement(_reactBootstrap.Form.Control, {
+  })), _react.default.createElement(_reactBootstrap.Form.Group, {
+    controlID: "formBasicPassword"
+  }, _react.default.createElement(_reactBootstrap.Form.Label, null, "Password"), _react.default.createElement(_reactBootstrap.Form.Control, {
     type: "password",
     value: password,
     onChange: function onChange(e) {
       return setPassword(e.target.value);
     },
     placeholder: "Enter new password"
-  })), _react.default.createElement(_reactBootstrap.Form.Group, null, _react.default.createElement(_reactBootstrap.Form.Label, null, "Confirm Password"), _react.default.createElement(_reactBootstrap.Form.Control, {
+  })), _react.default.createElement(_reactBootstrap.Form.Group, {
+    controlID: "formBasicPassword"
+  }, _react.default.createElement(_reactBootstrap.Form.Label, null, "Confirm Password"), _react.default.createElement(_reactBootstrap.Form.Control, {
     type: "password",
     value: confirmPassword,
     onChange: function onChange(e) {
       return setConfirmPassword(e.target.value);
     },
     placeholder: "Confirm your password"
-  })), _react.default.createElement(_reactBootstrap.Form.Group, null, _react.default.createElement(_reactBootstrap.Form.Label, null, "Birthdate"), _react.default.createElement(_reactBootstrap.Form.Control, {
+  })), _react.default.createElement(_reactBootstrap.Form.Group, {
+    controlID: "formBasicDate"
+  }, _react.default.createElement(_reactBootstrap.Form.Label, null, "Birthdate"), _react.default.createElement(_reactBootstrap.Form.Control, {
     type: "date",
     value: birthdate,
     onChange: function onChange(e) {
       return setBirthdate(e.target.value);
     },
     placeholder: "Enter your birthdate"
-  }))), _react.default.createElement(_reactBootstrap.Button, {
+  })), _react.default.createElement(_reactBootstrap.Button, {
     type: "button",
+    variant: "dark",
     onClick: handleSubmit
-  }, "Submit")) // OLD VERSION FOR REFERENCE:
-  // <form>
-  //     <label>
-  //         Username: 
-  //         <input type="text" value={username} onChange={e => setUsername(e.target.value)} />
-  //     </label>
-  //     <label>
-  //         Email:
-  //         <input type="email" value={email} onChange={e => setEmail(e.target.value)}/>
-  //     </label>
-  //     <label>
-  //         Password:
-  //         <input type="password" value={password} onChange={e => setPassword(e.target.value)} />
-  //     </label>
-  //     <label>
-  //         Confirm Password:
-  //         <input type="email" value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)}/>
-  //     </label>
-  //     <label>
-  //         Birthdate:
-  //         <input type="birthdate" value={birthdate} onChange={e => setBirthdate(e.target.value)}/>
-  //     </label>
-  // </form>
-  ;
+  }, "Submit")));
 }
 
 RegisterView.propTypes = {
@@ -48391,21 +48370,37 @@ var MainView = /*#__PURE__*/function (_React$Component) {
       });
       return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement("div", {
         className: "main-view"
-      }, _react.default.createElement("header", null), _react.default.createElement("div", {
+      }, _react.default.createElement("header", null, _react.default.createElement(_reactBootstrap.Navbar, {
+        bg: "dark",
+        variant: "dark"
+      }, _react.default.createElement(_reactBootstrap.Nav, {
+        className: "justify-content-center"
+      }, _react.default.createElement(_reactBootstrap.Nav.Item, null, _react.default.createElement(_reactBootstrap.Nav.Link, {
+        target: "_blank",
+        href: "#Home"
+      }, "Home")), _react.default.createElement(_reactBootstrap.Nav.Item, null, _react.default.createElement(_reactBootstrap.Nav.Link, {
+        target: "_blank",
+        href: "#Directors"
+      }, "Directors")), _react.default.createElement(_reactBootstrap.Nav.Item, null, _react.default.createElement(_reactBootstrap.Nav.Link, {
+        target: "_blank",
+        href: "#Genres"
+      }, "Genres")), _react.default.createElement(_reactBootstrap.Nav.Item, null, _react.default.createElement(_reactBootstrap.Nav.Link, {
+        className: "logout-button",
+        target: "_blank",
+        href: "#Home"
+      }, "Logout"))))), _react.default.createElement("div", {
         className: "main-body text-center"
       }, selectedMovie ? _react.default.createElement(_movieView.MovieView, {
         movie: selectedMovie,
         onClick: function onClick() {
           return _this3.onButtonClick();
         }
-      }) : _react.default.createElement(_reactBootstrap.Container, {
-        className: "p-5"
-      }, _react.default.createElement(_reactBootstrap.Row, null, movies.map(function (movie) {
+      }) : _react.default.createElement(_reactBootstrap.Container, null, _react.default.createElement(_reactBootstrap.Row, null, movies.map(function (movie) {
         return _react.default.createElement(_reactBootstrap.Col, {
           xs: 12,
-          md: 3,
-          key: movie._id,
-          className: "p-2"
+          sm: 6,
+          md: 4,
+          key: movie._id
         }, _react.default.createElement(_movieCard.MovieCard, {
           key: movie._id,
           movie: movie,
@@ -48517,7 +48512,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63190" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53342" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
