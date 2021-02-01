@@ -88,7 +88,7 @@ export class MainView extends React.Component {
                     {selectedMovie ? (
                     <MovieView
                         movie={selectedMovie}
-                        onClick={() => this.setInititalState()}
+                        onClick={() => this.onButtonClick()}
                     />
                     ) : (
                     <Container className='p-5'>
