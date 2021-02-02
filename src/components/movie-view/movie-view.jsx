@@ -34,3 +34,26 @@ export class MovieView extends React.Component {
         );
     }
 }
+
+MovieView.propTypes = {
+    // shape({...}) means it expects an object
+    movie: PropTypes.shape({
+        // movie prop may contain Title, and IF it does, it must be a string
+        Title: PropTypes.string.isRequired,
+        Description: PropTypes.string,
+        Year: PropTypes.number.isRequired,
+        ImageURL: PropTypes.string.isRequired,
+        Genre: PropTypes.shape({
+            Name: PropTypes.string,
+           Biography: PropTypes.string 
+        }),
+        Director: PropTypes.shape({
+            Name: PropTypes.string,
+            Bio: PropTypes.string,
+            Birthdate: PropTypes.string
+        }),
+        Featured: PropTypes.bool
+    }).isRequired,
+    // props object must contain onClick and it MUST be a function
+    onClick: PropTypes.func.isRequired
+};

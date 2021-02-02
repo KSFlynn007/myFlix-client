@@ -25,18 +25,18 @@ MovieCard.propTypes = {
     // shape({...}) means it expects an object
     movie: PropTypes.shape({
         // movie prop may contain Title, and IF it does, it must be a string
-        title: PropTypes.string.isRequired,
-        description: PropTypes.string.isRequired,
-        year: PropTypes.string.isRequired,
-        imageURL: PropTypes.string.isRequired,
-        genre: PropTypes.shape({
-            name: PropTypes.string.isRequired,
-           biography: PropTypes.string.isRequired 
+        Title: PropTypes.string.isRequired,
+        Description: PropTypes.string,
+        Year: PropTypes.number.isRequired,
+        ImageURL: PropTypes.string.isRequired,
+        Genre: PropTypes.shape({
+            Name: PropTypes.string,
+           Biography: PropTypes.string 
         }),
-        director: PropTypes.shape({
-            name: PropTypes.string.isRequired,
-            bio: PropTypes.string.isRequred,
-            birthdate: PropTypes.instanceOf(Date)
+        Director: PropTypes.shape({
+            Name: PropTypes.string,
+            Bio: PropTypes.string,
+            Birthdate: PropTypes.string
         }),
         Featured: PropTypes.bool
     }).isRequired,

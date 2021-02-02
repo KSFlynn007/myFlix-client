@@ -40,7 +40,7 @@ export function RegisterView(props) {
                     placeholder='Enter email'
                     />
                 </Form.Group>
-                <Form.Group controlID='formBasicPassword'>
+                <Form.Group controlId='formBasicPassword'>
                     <Form.Label>Password</Form.Label>
                     <Form.Control
                     type='password'
@@ -49,7 +49,7 @@ export function RegisterView(props) {
                     placeholder='Enter new password'
                     />
                 </Form.Group>
-                <Form.Group controlID='formBasicPassword'>
+                <Form.Group controlId='formBasicConfirmPassword'>
                     <Form.Label>Confirm Password</Form.Label>
                     <Form.Control
                     type='password'
@@ -58,7 +58,7 @@ export function RegisterView(props) {
                     placeholder='Confirm your password'
                     />
                 </Form.Group>
-                <Form.Group controlID='formBasicDate'>
+                <Form.Group controlId='formBasicDate'>
                     <Form.Label>Birthdate</Form.Label>
                     <Form.Control
                     type='date'
@@ -80,5 +80,5 @@ RegisterView.propTypes = {
         confirmPassword: PropTypes.string.isRequired,
         birthdate: PropTypes.string.isRequired
     }),
-    onRegister: PropTypes.func.isRequired,
+    onRegister: PropTypes.func,
 };

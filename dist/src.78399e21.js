@@ -47879,18 +47879,18 @@ MovieCard.propTypes = {
   // shape({...}) means it expects an object
   movie: _propTypes.default.shape({
     // movie prop may contain Title, and IF it does, it must be a string
-    title: _propTypes.default.string.isRequired,
-    description: _propTypes.default.string.isRequired,
-    year: _propTypes.default.string.isRequired,
-    imageURL: _propTypes.default.string.isRequired,
-    genre: _propTypes.default.shape({
-      name: _propTypes.default.string.isRequired,
-      biography: _propTypes.default.string.isRequired
+    Title: _propTypes.default.string.isRequired,
+    Description: _propTypes.default.string,
+    Year: _propTypes.default.number.isRequired,
+    ImageURL: _propTypes.default.string.isRequired,
+    Genre: _propTypes.default.shape({
+      Name: _propTypes.default.string,
+      Biography: _propTypes.default.string
     }),
-    director: _propTypes.default.shape({
-      name: _propTypes.default.string.isRequired,
-      bio: _propTypes.default.string.isRequred,
-      birthdate: _propTypes.default.instanceOf(Date)
+    Director: _propTypes.default.shape({
+      Name: _propTypes.default.string,
+      Bio: _propTypes.default.string,
+      Birthdate: _propTypes.default.string
     }),
     Featured: _propTypes.default.bool
   }).isRequired,
@@ -47992,6 +47992,28 @@ var MovieView = /*#__PURE__*/function (_React$Component) {
 }(_react.default.Component);
 
 exports.MovieView = MovieView;
+MovieView.propTypes = {
+  // shape({...}) means it expects an object
+  movie: _propTypes.default.shape({
+    // movie prop may contain Title, and IF it does, it must be a string
+    Title: _propTypes.default.string.isRequired,
+    Description: _propTypes.default.string,
+    Year: _propTypes.default.number.isRequired,
+    ImageURL: _propTypes.default.string.isRequired,
+    Genre: _propTypes.default.shape({
+      Name: _propTypes.default.string,
+      Biography: _propTypes.default.string
+    }),
+    Director: _propTypes.default.shape({
+      Name: _propTypes.default.string,
+      Bio: _propTypes.default.string,
+      Birthdate: _propTypes.default.string
+    }),
+    Featured: _propTypes.default.bool
+  }).isRequired,
+  // props object must contain onClick and it MUST be a function
+  onClick: _propTypes.default.func.isRequired
+};
 },{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js","./movie-view.scss":"components/movie-view/movie-view.scss"}],"components/login-view/login-view.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
@@ -48087,7 +48109,7 @@ LoginView.propTypes = {
     pasword: _propTypes.default.string.isRequired
   }),
   onLoggedIn: _propTypes.default.func.isRequired,
-  onRegister: _propTypes.default.func.isRequired
+  onRegister: _propTypes.default.func
 };
 },{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","./login-view.scss":"components/login-view/login-view.scss","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js"}],"components/registration-view/registration-view.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
@@ -48183,7 +48205,7 @@ function RegisterView(props) {
     },
     placeholder: "Enter email"
   })), _react.default.createElement(_reactBootstrap.Form.Group, {
-    controlID: "formBasicPassword"
+    controlId: "formBasicPassword"
   }, _react.default.createElement(_reactBootstrap.Form.Label, null, "Password"), _react.default.createElement(_reactBootstrap.Form.Control, {
     type: "password",
     value: password,
@@ -48192,7 +48214,7 @@ function RegisterView(props) {
     },
     placeholder: "Enter new password"
   })), _react.default.createElement(_reactBootstrap.Form.Group, {
-    controlID: "formBasicPassword"
+    controlId: "formBasicConfirmPassword"
   }, _react.default.createElement(_reactBootstrap.Form.Label, null, "Confirm Password"), _react.default.createElement(_reactBootstrap.Form.Control, {
     type: "password",
     value: confirmPassword,
@@ -48201,7 +48223,7 @@ function RegisterView(props) {
     },
     placeholder: "Confirm your password"
   })), _react.default.createElement(_reactBootstrap.Form.Group, {
-    controlID: "formBasicDate"
+    controlId: "formBasicDate"
   }, _react.default.createElement(_reactBootstrap.Form.Label, null, "Birthdate"), _react.default.createElement(_reactBootstrap.Form.Control, {
     type: "date",
     value: birthdate,
@@ -48223,7 +48245,7 @@ RegisterView.propTypes = {
     confirmPassword: _propTypes.default.string.isRequired,
     birthdate: _propTypes.default.string.isRequired
   }),
-  onRegister: _propTypes.default.func.isRequired
+  onRegister: _propTypes.default.func
 };
 },{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js","./registration-view.scss":"components/registration-view/registration-view.scss"}],"components/main-view/main-view.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
@@ -48353,18 +48375,10 @@ var MainView = /*#__PURE__*/function (_React$Component) {
           movies = _this$state.movies,
           selectedMovie = _this$state.selectedMovie,
           user = _this$state.user,
-          register = _this$state.register;
-      if (!register) return _react.default.createElement(_registrationView.RegisterView, {
-        onRegister: function onRegister(register) {
-          return _this3.onRegister(register);
-        }
-      }); // if no user, LoginView is rendered. If there is a logged in user, the user details are passed as a prop to the Login View
+          register = _this$state.register; // if (!register) return <RegisterView onRegister={(register) => this.onRegister(register)}/>
+      // if no user, LoginView is rendered. If there is a logged in user, the user details are passed as a prop to the Login View
+      // if (!user) return <LoginView onLoggedIn={(user) => this.onLoggedIn(user)}/>
 
-      if (!user) return _react.default.createElement(_loginView.LoginView, {
-        onLoggedIn: function onLoggedIn(user) {
-          return _this3.onLoggedIn(user);
-        }
-      });
       if (!movies) return _react.default.createElement("div", {
         className: "main-view"
       });
@@ -48512,7 +48526,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53342" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58889" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
