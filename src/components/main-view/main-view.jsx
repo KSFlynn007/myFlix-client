@@ -29,17 +29,13 @@ export class MainView extends React.Component {
     }
 
     componentDidMount() {
-        // entire URL is in package.json under "proxy" to get past CORS
-        axios.get('/movies')
-            .then (response => {
-                // never directly mutate state once defined, otherwise component won't update
-                this.setState({
-                    movies: response.data
-                });
-            })
-            .catch(function (error) {
-                console.log(error);
+        let accessToken = localStorage.getItem('token');
+        if (accessToken !== null) {
+            this.setState({
+                user: localStorage.getItem('user')
             });
+            this.getMovies(accessToken);
+        }
     }
 
 // when movie is clicked, this function is invoked and updates the state of the 'selectedovie' property to that movie
@@ -56,14 +52,34 @@ export class MainView extends React.Component {
     }
 
 // when user successsfully logs in, this function updates the 'user' property in thstate to that particular user
-    onLoggedIn(user) {
+    onLoggedIn(authData) {
+        console.log(authData);
         this.setState({
-            user
+            user: authData.user.Username
+        });
+
+        localStorage.setItem('token', authData.token);
+        localStorage.setItem('user', authData.Username);
+        this.getMovies(authData.token);
+    }
+
+    getMovies(token) {
+        axios.get('https://m-y-f-l-i-x.herokuapp.com/movies', {
+            headers: { Authorization: `Bearer ${token}`}
+        })
+        .then(response => {
+            // Assigning result to state
+            this.setState({
+                movies: response.data
+            });
+        })
+        .catch(function(error) {
+            console.log(error);
         });
     }
 
 // when clicked, this function sets selectedMovie state back to null, rendering the main-view page on the DOM
-    onButtonClick() {
+    onBackButtonClick() {
         this.setState({
             selectedMovie: null
         });
@@ -72,7 +88,7 @@ export class MainView extends React.Component {
     render() {
         const { movies, selectedMovie, user, register } = this.state;
 
-        // if (!register) return <RegisterView onRegister={(register) => this.onRegister(register)}/>
+        if (!register) return <RegisterView onRegister={(register) => this.onRegister(register)}/>
 
 // if no user, LoginView is rendered. If there is a logged in user, the user details are passed as a prop to the Login View
         if (!user) return <LoginView onLoggedIn={(user) => this.onLoggedIn(user)}/>
@@ -104,7 +120,7 @@ export class MainView extends React.Component {
                     {selectedMovie ? (
                     <MovieView
                         movie={selectedMovie}
-                        onClick={() => this.onButtonClick()}
+                        onClick={() => this.onBackButtonClick()}
                     />
                     ) : (
                     <Container>
