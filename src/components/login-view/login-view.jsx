@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import PropTypes from 'prop-types';
+import axios from 'axios';
 
 import './login-view.scss';
 
@@ -11,9 +12,19 @@ export function LoginView(props) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(username, password);
-        // send a request to server for authentication, then calls props.onLoggedIn(username)
-        props.onLoggedIn(username);
+        // sends request to server for authentication
+        // entire URL is in package.json under "proxy" to get past CORS
+        axios.post('/login', {
+          Username: username,
+          Password: password
+        })
+        .then(response => {
+          const data = response.data;
+          props.onLoggedIn(data);
+        })
+        .catch(e => {
+          console.log('No such user')
+        });
     };
 
   return (
