@@ -14,7 +14,7 @@ export function LoginView(props) {
         e.preventDefault();
         // sends request to server for authentication
         // entire URL is in package.json under "proxy" to get past CORS
-        axios.post('https://m-y-f-l-i-x.herokuapp.com/login', {
+        axios.post(`https://m-y-f-l-i-x.herokuapp.com/login`, {
           Username: username,
           Password: password
         })

@@ -48074,7 +48074,7 @@ function LoginView(props) {
     e.preventDefault(); // sends request to server for authentication
     // entire URL is in package.json under "proxy" to get past CORS
 
-    _axios.default.post('https://m-y-f-l-i-x.herokuapp.com/login', {
+    _axios.default.post("https://m-y-f-l-i-x.herokuapp.com/login", {
       Username: username,
       Password: password
     }).then(function (response) {
@@ -48377,7 +48377,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
     value: function getMovies(token) {
       var _this2 = this;
 
-      _axios.default.get('https://m-y-f-l-i-x.herokuapp.com/movies', {
+      _axios.default.get("https://m-y-f-l-i-x.herokuapp.com/movies", {
         headers: {
           Authorization: "Bearer ".concat(token)
         }
@@ -48407,12 +48407,8 @@ var MainView = /*#__PURE__*/function (_React$Component) {
           movies = _this$state.movies,
           selectedMovie = _this$state.selectedMovie,
           user = _this$state.user,
-          register = _this$state.register;
-      if (!register) return _react.default.createElement(_registrationView.RegisterView, {
-        onRegister: function onRegister(register) {
-          return _this3.onRegister(register);
-        }
-      }); // if no user, LoginView is rendered. If there is a logged in user, the user details are passed as a prop to the Login View
+          register = _this$state.register; // if (!register) return <RegisterView onRegister={(register) => this.onRegister(register)}/>
+      // if no user, LoginView is rendered. If there is a logged in user, the user details are passed as a prop to the Login View
 
       if (!user) return _react.default.createElement(_loginView.LoginView, {
         onLoggedIn: function onLoggedIn(user) {
@@ -48566,7 +48562,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51127" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60513" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
