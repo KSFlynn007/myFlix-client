@@ -17,6 +17,7 @@
     "url": "https://github.com/KSFlynn007/myFlix-client/issues"
   },
   "homepage": "https://github.com/KSFlynn007/myFlix-client#readme",
+  "proxy": "https://m-y-f-l-i-x.herokuapp.com",
   "dependencies": {
     "axios": "^0.21.1",
     "prop-types": "^15.7.2",
