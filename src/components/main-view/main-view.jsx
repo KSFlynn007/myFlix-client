@@ -29,8 +29,8 @@ export class MainView extends React.Component {
     }
 
     componentDidMount() {
-        axios
-            .get('https://m-y-f-l-i-x.herokuapp.com/movies')
+        // entire URL is in package.json under "proxy" to get past CORS
+        axios.get('/movies')
             .then (response => {
                 // never directly mutate state once defined, otherwise component won't update
                 this.setState({
@@ -72,7 +72,7 @@ export class MainView extends React.Component {
     render() {
         const { movies, selectedMovie, user, register } = this.state;
 
-        if (!register) return <RegisterView onRegister={(register) => this.onRegister(register)}/>
+        // if (!register) return <RegisterView onRegister={(register) => this.onRegister(register)}/>
 
 // if no user, LoginView is rendered. If there is a logged in user, the user details are passed as a prop to the Login View
         if (!user) return <LoginView onLoggedIn={(user) => this.onLoggedIn(user)}/>
