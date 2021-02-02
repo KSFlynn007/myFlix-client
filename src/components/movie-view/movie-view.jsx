@@ -41,7 +41,7 @@ MovieView.propTypes = {
         // movie prop may contain Title, and IF it does, it must be a string
         Title: PropTypes.string.isRequired,
         Description: PropTypes.string,
-        Year: PropTypes.number.isRequired,
+        Year: PropTypes.number,
         ImageURL: PropTypes.string.isRequired,
         Genre: PropTypes.shape({
             Name: PropTypes.string,
