@@ -48031,6 +48031,8 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _propTypes = _interopRequireDefault(require("prop-types"));
 
+var _axios = _interopRequireDefault(require("axios"));
+
 require("./login-view.scss");
 
 var _reactBootstrap = require("react-bootstrap");
@@ -48068,11 +48070,24 @@ function LoginView(props) {
       password = _useState4[0],
       setPassword = _useState4[1];
 
-  var handleSubmit = function handleSubmit(e) {
+  var swapView = function swapView(e) {
     e.preventDefault();
-    console.log(username, password); // send a request to server for authentication, then calls props.onLoggedIn(username)
+    window.open('/register', '_self');
+  };
 
-    props.onLoggedIn(username);
+  var handleSubmit = function handleSubmit(e) {
+    e.preventDefault(); // sends request to server for authentication
+    // entire URL is in package.json under "proxy" to get past CORS
+
+    _axios.default.post("https://m-y-f-l-i-x.herokuapp.com/login", {
+      Username: username,
+      Password: password
+    }).then(function (response) {
+      var data = response.data;
+      props.onLoggedIn(data);
+    }).catch(function (error) {
+      console.log(error);
+    });
   };
 
   return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement(_reactBootstrap.Form, {
@@ -48100,7 +48115,12 @@ function LoginView(props) {
     onClick: handleSubmit,
     variant: "dark",
     type: "submit"
-  }, "Submit")));
+  }, "Submit"), _react.default.createElement(_reactBootstrap.Button, {
+    className: "swap-button",
+    type: "button",
+    variant: "info",
+    onClick: swapView
+  }, "Not Registered?")));
 }
 
 LoginView.propTypes = {
@@ -48111,7 +48131,7 @@ LoginView.propTypes = {
   onLoggedIn: _propTypes.default.func.isRequired,
   onRegister: _propTypes.default.func
 };
-},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","./login-view.scss":"components/login-view/login-view.scss","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js"}],"components/registration-view/registration-view.scss":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","axios":"../node_modules/axios/index.js","./login-view.scss":"components/login-view/login-view.scss","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js"}],"components/registration-view/registration-view.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
@@ -48178,10 +48198,27 @@ function RegisterView(props) {
       birthdate = _useState10[0],
       setBirthdate = _useState10[1];
 
-  var handleSubmit = function handleSubmit(e) {
+  var swapView = function swapView(e) {
     e.preventDefault();
-    console.log(username, password, confirmPassword, email, birthdate);
-    props.onRegister('test');
+    window.open('/login', '_self');
+  };
+
+  var handleSubmit = function handleSubmit(e) {
+    e.preventDefault(); // sends request to server for authentication
+    // entire URL is in package.json under "proxy" to get past CORS
+
+    _axios.default.post("https://m-y-f-l-i-x.herokuapp.com/users", {
+      Username: username,
+      Email: email,
+      Password: password,
+      Birthdate: birthdate
+    }).then(function (response) {
+      var data = response.data;
+      console.log(data);
+      props.onRegister(data);
+    }).catch(function (error) {
+      console.log(error);
+    });
   };
 
   return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement(_reactBootstrap.Form, {
@@ -48191,12 +48228,12 @@ function RegisterView(props) {
   }, "Registration Welcome!"), _react.default.createElement(_reactBootstrap.Form.Group, {
     controlId: "formBasicText"
   }, _react.default.createElement(_reactBootstrap.Form.Label, null, "Username"), _react.default.createElement(_reactBootstrap.Form.Control, {
-    type: "password",
+    type: "username",
     value: username,
     onChange: function onChange(e) {
       return setUsername(e.target.value);
     },
-    placeholder: "Enter usename"
+    placeholder: "Enter username"
   })), _react.default.createElement(_reactBootstrap.Form.Group, {
     controlId: "formBasicEmail"
   }, _react.default.createElement(_reactBootstrap.Form.Label, null, "Email"), _react.default.createElement(_reactBootstrap.Form.Control, {
@@ -48237,7 +48274,12 @@ function RegisterView(props) {
     type: "button",
     variant: "dark",
     onClick: handleSubmit
-  }, "Submit")));
+  }, "Submit"), _react.default.createElement(_reactBootstrap.Button, {
+    className: "swap-button",
+    type: "button",
+    variant: "info",
+    onClick: swapView
+  }, "Already registered?")));
 }
 
 RegisterView.propTypes = {
@@ -48327,17 +48369,15 @@ var MainView = /*#__PURE__*/function (_React$Component) {
   _createClass(MainView, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      var _this2 = this;
+      var accessToken = localStorage.getItem('token');
 
-      _axios.default.get('https://m-y-f-l-i-x.herokuapp.com/movies').then(function (response) {
-        // never directly mutate state once defined, otherwise component won't update
-        _this2.setState({
-          movies: response.data
+      if (accessToken !== null) {
+        this.setState({
+          user: localStorage.getItem('user')
         });
-      }).catch(function (error) {
-        console.log(error);
-      });
-    } // when movie is clicked, this function is invoked and updates the state of the 'selectedovie' property to that movie
+        this.getMovies(accessToken);
+      }
+    } // when movie is clicked, this function is invoked and updates the state of the 'selectedmovie' property to that movie
 
   }, {
     key: "onMovieClick",
@@ -48348,18 +48388,22 @@ var MainView = /*#__PURE__*/function (_React$Component) {
     }
   }, {
     key: "onRegister",
-    value: function onRegister(register) {
+    value: function onRegister(registerData) {
       this.setState({
-        register: register
+        register: registerData
       });
-    } // when user successsfully logs in, this function updates the 'user' property in thstate to that particular user
+    } // when user successsfully logs in, this function updates the 'user' property in the state to that particular user
 
   }, {
     key: "onLoggedIn",
-    value: function onLoggedIn(user) {
+    value: function onLoggedIn(data) {
+      console.log(data.user.Username);
       this.setState({
-        user: user
+        user: data.user.Username
       });
+      localStorage.setItem('token', data.token);
+      localStorage.setItem('user', data.user.Username);
+      this.getMovies(data.token);
     }
   }, {
     key: "onLoggedOut",
@@ -48368,13 +48412,32 @@ var MainView = /*#__PURE__*/function (_React$Component) {
         return {
           user: null
         };
-      }); // localStorage.removeItem('user');
-      // localStorage.removeItem('token');
+      });
+      localStorage.removeItem('user');
+      localStorage.removeItem('token');
+    }
+  }, {
+    key: "getMovies",
+    value: function getMovies(token) {
+      var _this2 = this;
+
+      _axios.default.get("https://m-y-f-l-i-x.herokuapp.com/movies", {
+        headers: {
+          Authorization: "Bearer ".concat(token)
+        }
+      }).then(function (response) {
+        // Assigning result to state
+        _this2.setState({
+          movies: response.data
+        });
+      }).catch(function (error) {
+        console.log(error);
+      });
     } // when clicked, this function sets selectedMovie state back to null, rendering the main-view page on the DOM
 
   }, {
-    key: "onButtonClick",
-    value: function onButtonClick() {
+    key: "onBackButtonClick",
+    value: function onBackButtonClick() {
       this.setState({
         selectedMovie: null
       });
@@ -48388,12 +48451,16 @@ var MainView = /*#__PURE__*/function (_React$Component) {
           movies = _this$state.movies,
           selectedMovie = _this$state.selectedMovie,
           user = _this$state.user,
-          register = _this$state.register; // if (!register) return <RegisterView onRegister={(register) => this.onRegister(register)}/>
-      // if no user, LoginView is rendered. If there is a logged in user, the user details are passed as a prop to the Login View
+          register = _this$state.register;
+      if (!register) return _react.default.createElement(_registrationView.RegisterView, {
+        onRegister: function onRegister(register) {
+          return _this3.onRegister(register);
+        }
+      }); // if no user, LoginView is rendered. If there is a logged in user, the user details are passed as a prop to the Login View
 
       if (!user) return _react.default.createElement(_loginView.LoginView, {
-        onLoggedIn: function onLoggedIn(user) {
-          return _this3.onLoggedIn(user);
+        onLoggedIn: function onLoggedIn(data) {
+          return _this3.onLoggedIn(data);
         }
       });
       if (!movies) return _react.default.createElement("div", {
@@ -48415,17 +48482,16 @@ var MainView = /*#__PURE__*/function (_React$Component) {
       }, "Directors")), _react.default.createElement(_reactBootstrap.Nav.Item, null, _react.default.createElement(_reactBootstrap.Nav.Link, {
         target: "_blank",
         href: "#Genres"
-      }, "Genres")), _react.default.createElement(_reactBootstrap.Button, {
+      }, "Genres")), _react.default.createElement(_reactBootstrap.Nav.Item, null, _react.default.createElement(_reactBootstrap.Nav.Link, {
         className: "logout-button",
-        variant: "light",
-        type: "submit",
+        target: "_blank",
         onClick: this.onLoggedOut
-      }, "Logout")))), _react.default.createElement("div", {
+      }, "Logout"))))), _react.default.createElement("div", {
         className: "main-body text-center"
       }, selectedMovie ? _react.default.createElement(_movieView.MovieView, {
         movie: selectedMovie,
         onClick: function onClick() {
-          return _this3.onButtonClick();
+          return _this3.onBackButtonClick();
         }
       }) : _react.default.createElement(_reactBootstrap.Container, null, _react.default.createElement(_reactBootstrap.Row, null, movies.map(function (movie) {
         return _react.default.createElement(_reactBootstrap.Col, {

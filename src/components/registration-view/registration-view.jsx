@@ -13,11 +13,31 @@ export function RegisterView(props) {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [birthdate, setBirthdate] = useState('');
 
+    const swapView = (e) => {
+        e.preventDefault();
+        window.open('/login', '_self')
+    }
+  
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(username, password, confirmPassword, email, birthdate);
-        props.onRegister('test');
+        // sends request to server for authentication
+        // entire URL is in package.json under "proxy" to get past CORS
+        axios.post(`https://m-y-f-l-i-x.herokuapp.com/users`, {
+          Username: username,
+          Email: email,
+          Password: password,
+          Birthdate: birthdate
+        })
+        .then(response => {
+          const data = response.data;
+          console.log(data);
+          props.onRegister(data);
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
     };
+  
 
     return(
         <React.Fragment>
@@ -26,10 +46,10 @@ export function RegisterView(props) {
                 <Form.Group controlId='formBasicText'>
                     <Form.Label>Username</Form.Label>
                     <Form.Control 
-                    type='password'
+                    type='username'
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
-                    placeholder='Enter usename'
+                    placeholder='Enter username'
                     />
                 </Form.Group>
                 <Form.Group controlId='formBasicEmail'>
@@ -69,6 +89,7 @@ export function RegisterView(props) {
                     />
                 </Form.Group>
                 <Button type='button' variant='dark' onClick={handleSubmit}>Submit</Button>
+                <Button className='swap-button' type='button' variant='info' onClick={swapView}>Already registered?</Button>
             </Form>
         </React.Fragment>
     );

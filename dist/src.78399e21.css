@@ -46,6 +46,11 @@
 .register-header {
   text-align: center;
 }
+
+.swap-button {
+  display: block;
+  margin: 20px auto 0px;
+}
 .main-body {
   padding: 20px;
 }
