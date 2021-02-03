@@ -63,6 +63,15 @@ export class MainView extends React.Component {
         this.getMovies(authData.token);
     }
 
+    onLoggedOut() {
+        this.setState({
+            user: null
+        });
+
+        localStorage.removeItem('user');
+        localStorage.removeItem('token');
+    }
+
     getMovies(token) {
         axios.get(`https://m-y-f-l-i-x.herokuapp.com/movies`, {
             headers: { Authorization: `Bearer ${token}`}
@@ -111,7 +120,7 @@ export class MainView extends React.Component {
                                     <Nav.Link target='_blank' href='#Genres'>Genres</Nav.Link>
                                 </Nav.Item>
                                 <Nav.Item>
-                                    <Nav.Link className='logout-button' target='_blank' href='#Home'>Logout</Nav.Link>
+                                    <Nav.Link className='logout-button' target='_blank' onClick={() => this.onLoggedOut()}>Logout</Nav.Link>
                                 </Nav.Item>
                             </Nav>
                         </Navbar>
