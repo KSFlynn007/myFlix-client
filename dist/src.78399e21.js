@@ -48363,14 +48363,23 @@ var MainView = /*#__PURE__*/function (_React$Component) {
 
   }, {
     key: "onLoggedIn",
-    value: function onLoggedIn(authData) {
-      console.log(authData);
+    value: function onLoggedIn(data) {
+      console.log(data);
       this.setState({
-        user: authData.user.Username
+        user: data.user.Username
       });
-      localStorage.setItem('token', authData.token);
-      localStorage.setItem('user', authData.Username);
-      this.getMovies(authData.token);
+      localStorage.setItem('token', data.token);
+      localStorage.setItem('user', data.user.Username);
+      this.getMovies(data.token);
+    }
+  }, {
+    key: "onLoggedOut",
+    value: function onLoggedOut() {
+      this.setState({
+        user: null
+      });
+      localStorage.removeItem('user');
+      localStorage.removeItem('token');
     }
   }, {
     key: "getMovies",
@@ -48407,16 +48416,12 @@ var MainView = /*#__PURE__*/function (_React$Component) {
           movies = _this$state.movies,
           selectedMovie = _this$state.selectedMovie,
           user = _this$state.user,
-          register = _this$state.register;
-      if (!register) return _react.default.createElement(_registrationView.RegisterView, {
-        onRegister: function onRegister(register) {
-          return _this3.onRegister(register);
-        }
-      }); // if no user, LoginView is rendered. If there is a logged in user, the user details are passed as a prop to the Login View
+          register = _this$state.register; // if (!register) return <RegisterView onRegister={(register) => this.onRegister(register)}/>
+      // if no user, LoginView is rendered. If there is a logged in user, the user details are passed as a prop to the Login View
 
       if (!user) return _react.default.createElement(_loginView.LoginView, {
-        onLoggedIn: function onLoggedIn(user) {
-          return _this3.onLoggedIn(user);
+        onLoggedIn: function onLoggedIn(data) {
+          return _this3.onLoggedIn(data);
         }
       });
       if (!movies) return _react.default.createElement("div", {
@@ -48441,7 +48446,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
       }, "Genres")), _react.default.createElement(_reactBootstrap.Nav.Item, null, _react.default.createElement(_reactBootstrap.Nav.Link, {
         className: "logout-button",
         target: "_blank",
-        href: "#Home"
+        onClick: this.onLoggedOut()
       }, "Logout"))))), _react.default.createElement("div", {
         className: "main-body text-center"
       }, selectedMovie ? _react.default.createElement(_movieView.MovieView, {
@@ -48566,7 +48571,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62347" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51375" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

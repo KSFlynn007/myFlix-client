@@ -52,15 +52,15 @@ export class MainView extends React.Component {
     }
 
 // when user successsfully logs in, this function updates the 'user' property in thstate to that particular user
-    onLoggedIn(authData) {
-        console.log(authData);
+    onLoggedIn(data) {
+        console.log(data);
         this.setState({
-            user: authData.user.Username
+            user: data.user.Username
         });
 
-        localStorage.setItem('token', authData.token);
-        localStorage.setItem('user', authData.Username);
-        this.getMovies(authData.token);
+        localStorage.setItem('token', data.token);
+        localStorage.setItem('user', data.user.Username);
+        this.getMovies(data.token);
     }
 
     onLoggedOut() {
@@ -97,10 +97,10 @@ export class MainView extends React.Component {
     render() {
         const { movies, selectedMovie, user, register } = this.state;
 
-        if (!register) return <RegisterView onRegister={(register) => this.onRegister(register)}/>
+        // if (!register) return <RegisterView onRegister={(register) => this.onRegister(register)}/>
 
 // if no user, LoginView is rendered. If there is a logged in user, the user details are passed as a prop to the Login View
-        if (!user) return <LoginView onLoggedIn={(user) => this.onLoggedIn(user)}/>
+        if (!user) return <LoginView onLoggedIn={(data) => this.onLoggedIn(data)}/>
 
         if (!movies) return <div className='main-view'></div>;
 
@@ -120,7 +120,7 @@ export class MainView extends React.Component {
                                     <Nav.Link target='_blank' href='#Genres'>Genres</Nav.Link>
                                 </Nav.Item>
                                 <Nav.Item>
-                                    <Nav.Link className='logout-button' target='_blank' onClick={() => this.onLoggedOut()}>Logout</Nav.Link>
+                                    <Nav.Link className='logout-button' target='_blank' onClick={this.onLoggedOut()}>Logout</Nav.Link>
                                 </Nav.Item>
                             </Nav>
                         </Navbar>
