@@ -5,6 +5,7 @@ import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
 import { LoginView } from '../login-view/login-view';
 import { RegisterView } from '../registration-view/registration-view'
+import Config from '../../config';
 
 import './main-view.scss'
 
@@ -24,7 +25,7 @@ export class MainView extends React.Component {
         super();
 //initial state is set to null
         this.state = {
-            movies: null,
+            movies: [],
             selectedMovie: null,
             user: null,
             register: null
@@ -77,7 +78,7 @@ export class MainView extends React.Component {
     }
 
     getMovies(token) {
-        axios.get(`https://m-y-f-l-i-x.herokuapp.com/movies`, {
+        axios.get(`${Config.API_URL}/movies`, {
             headers: { Authorization: `Bearer ${token}`}
         })
         .then(response => {

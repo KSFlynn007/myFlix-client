@@ -1,6 +1,8 @@
 import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
+import Config from '../../config';
+
 
 import './login-view.scss';
 
@@ -19,7 +21,7 @@ export function LoginView(props) {
         e.preventDefault();
         // sends request to server for authentication
         // entire URL is in package.json under "proxy" to get past CORS
-        axios.post(`https://m-y-f-l-i-x.herokuapp.com/login`, {
+        axios.post(`${Config.API_URL}/login`, {
           Username: username,
           Password: password
         })

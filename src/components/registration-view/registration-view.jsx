@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
+import Config from '../../config';
 
 import { Form, Button } from 'react-bootstrap';
 
@@ -21,7 +22,7 @@ export function RegisterView(props) {
         e.preventDefault();
         // sends request to server for authentication
         // entire URL is in package.json under "proxy" to get past CORS
-        axios.post(`https://m-y-f-l-i-x.herokuapp.com/users`, {
+        axios.post(`${Config.API_URL}/users`, {
           Username: username,
           Email: email,
           Password: password,

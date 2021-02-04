@@ -51064,7 +51064,20 @@ MovieView.propTypes = {
   // props object must contain onClick and it MUST be a function
   onClick: _propTypes.default.func.isRequired
 };
-},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js","./movie-view.scss":"components/movie-view/movie-view.scss"}],"components/login-view/login-view.scss":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js","./movie-view.scss":"components/movie-view/movie-view.scss"}],"config.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+// toggle between these to test local and hosted db:
+var _default = {
+  // API_URL: 'http://localhost:8080',
+  API_URL: 'https://m-y-f-l-i-x.herokuapp.com'
+};
+exports.default = _default;
+},{}],"components/login-view/login-view.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
@@ -51082,6 +51095,8 @@ var _react = _interopRequireWildcard(require("react"));
 var _propTypes = _interopRequireDefault(require("prop-types"));
 
 var _axios = _interopRequireDefault(require("axios"));
+
+var _config = _interopRequireDefault(require("../../config"));
 
 require("./login-view.scss");
 
@@ -51129,7 +51144,7 @@ function LoginView(props) {
     e.preventDefault(); // sends request to server for authentication
     // entire URL is in package.json under "proxy" to get past CORS
 
-    _axios.default.post("https://m-y-f-l-i-x.herokuapp.com/login", {
+    _axios.default.post("".concat(_config.default.API_URL, "/login"), {
       Username: username,
       Password: password
     }).then(function (response) {
@@ -51181,7 +51196,7 @@ LoginView.propTypes = {
   onLoggedIn: _propTypes.default.func.isRequired,
   onRegister: _propTypes.default.func
 };
-},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","axios":"../node_modules/axios/index.js","./login-view.scss":"components/login-view/login-view.scss","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js"}],"components/registration-view/registration-view.scss":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","axios":"../node_modules/axios/index.js","../../config":"config.js","./login-view.scss":"components/login-view/login-view.scss","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js"}],"components/registration-view/registration-view.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
@@ -51199,6 +51214,8 @@ var _react = _interopRequireWildcard(require("react"));
 var _propTypes = _interopRequireDefault(require("prop-types"));
 
 var _axios = _interopRequireDefault(require("axios"));
+
+var _config = _interopRequireDefault(require("../../config"));
 
 var _reactBootstrap = require("react-bootstrap");
 
@@ -51252,7 +51269,7 @@ function RegisterView(props) {
     e.preventDefault(); // sends request to server for authentication
     // entire URL is in package.json under "proxy" to get past CORS
 
-    _axios.default.post("https://m-y-f-l-i-x.herokuapp.com/users", {
+    _axios.default.post("".concat(_config.default.API_URL, "/users"), {
       Username: username,
       Email: email,
       Password: password,
@@ -51326,7 +51343,7 @@ RegisterView.propTypes = {
   }),
   onRegister: _propTypes.default.func
 };
-},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","axios":"../node_modules/axios/index.js","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js","./registration-view.scss":"components/registration-view/registration-view.scss"}],"components/main-view/main-view.scss":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","axios":"../node_modules/axios/index.js","../../config":"config.js","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js","./registration-view.scss":"components/registration-view/registration-view.scss"}],"components/main-view/main-view.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
@@ -51352,6 +51369,8 @@ var _movieView = require("../movie-view/movie-view");
 var _loginView = require("../login-view/login-view");
 
 var _registrationView = require("../registration-view/registration-view");
+
+var _config = _interopRequireDefault(require("../../config"));
 
 require("./main-view.scss");
 
@@ -51394,7 +51413,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
     _this = _super.call(this); //initial state is set to null
 
     _this.state = {
-      movies: null,
+      movies: [],
       selectedMovie: null,
       user: null,
       register: null
@@ -51458,7 +51477,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
     value: function getMovies(token) {
       var _this2 = this;
 
-      _axios.default.get("https://m-y-f-l-i-x.herokuapp.com/movies", {
+      _axios.default.get("".concat(_config.default.API_URL, "/movies"), {
         headers: {
           Authorization: "Bearer ".concat(token)
         }
@@ -51553,7 +51572,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
 }(_react.default.Component);
 
 exports.MainView = MainView;
-},{"react":"../node_modules/react/index.js","axios":"../node_modules/axios/index.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js","../movie-card/movie-card":"components/movie-card/movie-card.jsx","../movie-view/movie-view":"components/movie-view/movie-view.jsx","../login-view/login-view":"components/login-view/login-view.jsx","../registration-view/registration-view":"components/registration-view/registration-view.jsx","./main-view.scss":"components/main-view/main-view.scss","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js"}],"index.scss":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","axios":"../node_modules/axios/index.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js","../movie-card/movie-card":"components/movie-card/movie-card.jsx","../movie-view/movie-view":"components/movie-view/movie-view.jsx","../login-view/login-view":"components/login-view/login-view.jsx","../registration-view/registration-view":"components/registration-view/registration-view.jsx","../../config":"config.js","./main-view.scss":"components/main-view/main-view.scss","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js"}],"index.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
@@ -51647,7 +51666,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53938" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "65027" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
