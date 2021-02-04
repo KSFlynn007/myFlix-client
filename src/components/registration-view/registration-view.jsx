@@ -10,7 +10,6 @@ export function RegisterView(props) {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
   const [birthdate, setBirthdate] = useState('');
 
     const swapView = (e) => {
@@ -70,22 +69,12 @@ export function RegisterView(props) {
                     placeholder='Enter new password'
                     />
                 </Form.Group>
-                <Form.Group controlId='formBasicConfirmPassword'>
-                    <Form.Label>Confirm Password</Form.Label>
-                    <Form.Control
-                    type='password'
-                    value={confirmPassword}
-                    onChange={(e) => setConfirmPassword(e.target.value)}
-                    placeholder='Confirm your password'
-                    />
-                </Form.Group>
-                <Form.Group controlId='formBasicDate'>
+                <Form.Group controlId='formBirthday'>
                     <Form.Label>Birthdate</Form.Label>
                     <Form.Control
                     type='date'
                     value={birthdate}
                     onChange={(e) => setBirthdate(e.target.value)}
-                    placeholder='Enter your birthdate'
                     />
                 </Form.Group>
                 <Button type='button' variant='dark' onClick={handleSubmit}>Submit</Button>
@@ -98,9 +87,9 @@ export function RegisterView(props) {
 RegisterView.propTypes = {
     register: PropTypes.shape({
         username: PropTypes.string.isRequired,
+        email: PropTypes.string.isRequired,
         password: PropTypes.string.isRequired,
-        confirmPassword: PropTypes.string.isRequired,
-        birthdate: PropTypes.string.isRequired
+        birthdate: PropTypes.instanceOf(Date).isRequired
     }),
     onRegister: PropTypes.func,
 };
