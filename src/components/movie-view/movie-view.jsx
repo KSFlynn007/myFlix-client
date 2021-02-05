@@ -28,7 +28,15 @@ export class MovieView extends React.Component {
                         <Card.Text className='label-body'>Director: {movie.Director.Name}</Card.Text>
                         <Card.Text className='label-body'>Genre: {movie.Genre.Name}</Card.Text>
                     </Card.Body>
-                    <Button className='return-button' variant='dark' onClick={() => onClick(movie)}>Return to Movie List</Button>
+                    <Link to={`/`}>
+                        <Button className='return-button' variant='link'>Return to Movie List</Button>
+                    </Link>
+                    <Link to={`/directors/${movie.Director.Name}`}>
+                        <Button variant='link'>See Director Info</Button>
+                    </Link>
+                    <Link to={`/genres/${movie.Genre.Name}`}>
+                        <Button variant='link'> See Genre Info</Button>
+                    </Link>
                 </Card>
             </div>
         );

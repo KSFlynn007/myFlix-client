@@ -31,10 +31,10 @@ export function RegisterView(props) {
         .then(response => {
           const data = response.data;
           console.log(data);
-          props.onRegister(data);
+          window.open('/', '_self');
         })
-        .catch(function (error) {
-            console.log(error);
+        .catch(e => {
+            console.log('There was an error registering the user.')
         });
     };
   

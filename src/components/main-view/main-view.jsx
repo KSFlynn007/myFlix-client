@@ -26,9 +26,7 @@ export class MainView extends React.Component {
 //initial state is set to null
         this.state = {
             movies: [],
-            selectedMovie: null,
             user: null,
-            register: null
         };
         this.onLoggedOut = this.onLoggedOut.bind(this);
     }
@@ -41,13 +39,6 @@ export class MainView extends React.Component {
             });
             this.getMovies(accessToken);
         }
-    }
-
-// when movie is clicked, this function is invoked and updates the state of the 'selectedmovie' property to that movie
-    onMovieClick(movie) {
-        this.setState({
-            selectedMovie: movie
-        });
     }
 
     onRegister(registerData) {
@@ -92,69 +83,105 @@ export class MainView extends React.Component {
         });
     }
 
-// when clicked, this function sets selectedMovie state back to null, rendering the main-view page on the DOM
-    onBackButtonClick() {
-        this.setState({
-            selectedMovie: null
-        });
-    }
-
     render() {
-        const { movies, selectedMovie, user, register } = this.state;
+        const { movies, user } = this.state;
 
-        if (!register) return <RegisterView onRegister={(register) => this.onRegister(register)}/>
+        <Router>
+            <div className='main-view'>
+                    <Navbar bg='dark' variant='dark'>
+                        <Nav className='justify-content-center'>
+                            <Nav.Item>
+                                <Nav.Link target='_blank' href='#Home'>Home</Nav.Link>
+                            </Nav.Item>
+                            <Nav.Item>
+                                <Nav.Link target='_blank' href='#Directors'>Directors</Nav.Link>
+                            </Nav.Item>
+                            <Nav.Item>
+                                <Nav.Link target='_blank' href='#Genres'>Genres</Nav.Link>
+                            </Nav.Item>
+                            <Nav.Item>
+                                <Nav.Link className='logout-button' target='_blank' onClick={this.onLoggedOut}>Logout</Nav.Link>
+                            </Nav.Item>
+                        </Nav>
+                    </Navbar>
+                <Route exact path='/' 
+                render={() => {
+                    if (!user) return <LoginView onLoggedIn={(data) => this.onLoggedIn(data)}/>;
+                    return movies.map(m => <MovieCard key={m._id} movie={m}/>)
+                }}/>
 
-// if no user, LoginView is rendered. If there is a logged in user, the user details are passed as a prop to the Login View
-        if (!user) return <LoginView onLoggedIn={(data) => this.onLoggedIn(data)}/>
+                <Route exact path='/register' 
+                render={() => <RegistrationView />}/>
 
-        if (!movies) return <div className='main-view'></div>;
+                <Route exact path='/movies/:movieId' 
+                render={({match}) => <MovieView movie={movies.find(m => m._id === match.params.movieId)}/>}/>
 
-        return (
-            <React.Fragment>
-                <div className='main-view'>
-                    <header>
-                        <Navbar bg='dark' variant='dark'>
-                            <Nav className='justify-content-center'>
-                                <Nav.Item>
-                                    <Nav.Link target='_blank' href='#Home'>Home</Nav.Link>
-                                </Nav.Item>
-                                <Nav.Item>
-                                    <Nav.Link target='_blank' href='#Directors'>Directors</Nav.Link>
-                                </Nav.Item>
-                                <Nav.Item>
-                                    <Nav.Link target='_blank' href='#Genres'>Genres</Nav.Link>
-                                </Nav.Item>
-                                <Nav.Item>
-                                    <Nav.Link className='logout-button' target='_blank' onClick={this.onLoggedOut}>Logout</Nav.Link>
-                                </Nav.Item>
-                            </Nav>
-                        </Navbar>
-                    </header>
-                <div className='main-body text-center'>
-                    {selectedMovie ? (
-                    <MovieView
-                        movie={selectedMovie}
-                        onClick={() => this.onBackButtonClick()}
-                    />
-                    ) : (
-                    <Container>
-                        <Row>
-                        {movies.map((movie) => (
-                            <Col xs={12} sm={6} md={4} key={movie._id}>
-                            <MovieCard
-                                key={movie._id}
-                                movie={movie}
-                                onClick={(movie) => this.onMovieClick(movie)}
-                            />
-                            </Col>
-                        ))}
-                        </Row>
-                    </Container>
-                    )}
-                </div>
-                <div className='test'></div>
-                </div>
-            </React.Fragment>
-            );
+                <Route exact path='/genres/:name' 
+                render={({match}) => {
+                    if(!movies) return <div className='main-view'/>;
+                    return <GenreView genre={movies.find(m => m.Genre.Name === match.params.name).Genre}/>
+                }}/>
+
+                <Route exact path='/directors/:name' 
+                render={({match}) => {
+                    if(!movies) return <div className='main-view'/>;
+                    return <DirectorView director={movies.find(m => m.Director.Name === match.params.name).Director} />
+                }}/>
+
+            </div>
+        </Router>
     }
 }
+
+
+
+        // if (!register) return <RegisterView onRegister={(register) => this.onRegister(register)}/>
+
+
+        // return (
+        //     <React.Fragment>
+        //         <div className='main-view'>
+        //             <header>
+        //                 <Navbar bg='dark' variant='dark'>
+        //                     <Nav className='justify-content-center'>
+        //                         <Nav.Item>
+        //                             <Nav.Link target='_blank' href='#Home'>Home</Nav.Link>
+        //                         </Nav.Item>
+        //                         <Nav.Item>
+        //                             <Nav.Link target='_blank' href='#Directors'>Directors</Nav.Link>
+        //                         </Nav.Item>
+        //                         <Nav.Item>
+        //                             <Nav.Link target='_blank' href='#Genres'>Genres</Nav.Link>
+        //                         </Nav.Item>
+        //                         <Nav.Item>
+        //                             <Nav.Link className='logout-button' target='_blank' onClick={this.onLoggedOut}>Logout</Nav.Link>
+        //                         </Nav.Item>
+        //                     </Nav>
+        //                 </Navbar>
+        //             </header>
+        //         <div className='main-body text-center'>
+        //             {selectedMovie ? (
+        //             <MovieView
+        //                 movie={selectedMovie}
+        //                 onClick={() => this.onBackButtonClick()}
+        //             />
+        //             ) : (
+        //             <Container>
+        //                 <Row>
+        //                 {movies.map((movie) => (
+        //                     <Col xs={12} sm={6} md={4} key={movie._id}>
+        //                     <MovieCard
+        //                         key={movie._id}
+        //                         movie={movie}
+        //                         onClick={(movie) => this.onMovieClick(movie)}
+        //                     />
+        //                     </Col>
+        //                 ))}
+        //                 </Row>
+        //             </Container>
+        //             )}
+        //         </div>
+        //         <div className='test'></div>
+        //         </div>
+        //     </React.Fragment>
+        //     );
