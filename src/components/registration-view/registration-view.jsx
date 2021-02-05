@@ -11,7 +11,7 @@ export function RegisterView(props) {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [birthdate, setBirthdate] = useState('');
+  const [birthday, setBirthday] = useState('');
 
     const swapView = (e) => {
         e.preventDefault();
@@ -26,7 +26,7 @@ export function RegisterView(props) {
           Username: username,
           Email: email,
           Password: password,
-          Birthdate: birthdate
+          Birthday: birthday
         })
         .then(response => {
           const data = response.data;
@@ -71,11 +71,11 @@ export function RegisterView(props) {
                     />
                 </Form.Group>
                 <Form.Group controlId='formBirthday'>
-                    <Form.Label>Birthdate</Form.Label>
+                    <Form.Label>Birthday</Form.Label>
                     <Form.Control
                     type='date'
-                    value={birthdate}
-                    onChange={(e) => setBirthdate(e.target.value)}
+                    value={birthday}
+                    onChange={(e) => setBirthday(e.target.value)}
                     />
                 </Form.Group>
                 <Button type='button' variant='dark' onClick={handleSubmit}>Submit</Button>
@@ -90,7 +90,7 @@ RegisterView.propTypes = {
         username: PropTypes.string.isRequired,
         email: PropTypes.string.isRequired,
         password: PropTypes.string.isRequired,
-        birthdate: PropTypes.instanceOf(Date).isRequired
+        birthday: PropTypes.string.isRequired
     }),
     onRegister: PropTypes.func,
 };

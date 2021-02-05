@@ -51057,7 +51057,7 @@ MovieView.propTypes = {
     Director: _propTypes.default.shape({
       Name: _propTypes.default.string,
       Bio: _propTypes.default.string,
-      Birthdate: _propTypes.default.string
+      Birthday: _propTypes.default.string
     }),
     Featured: _propTypes.default.bool
   }).isRequired,
@@ -51257,8 +51257,8 @@ function RegisterView(props) {
 
   var _useState7 = (0, _react.useState)(''),
       _useState8 = _slicedToArray(_useState7, 2),
-      birthdate = _useState8[0],
-      setBirthdate = _useState8[1];
+      birthday = _useState8[0],
+      setBirthday = _useState8[1];
 
   var swapView = function swapView(e) {
     e.preventDefault();
@@ -51273,7 +51273,7 @@ function RegisterView(props) {
       Username: username,
       Email: email,
       Password: password,
-      Birthdate: birthdate
+      Birthday: birthday
     }).then(function (response) {
       var data = response.data;
       console.log(data);
@@ -51316,11 +51316,11 @@ function RegisterView(props) {
     placeholder: "Enter new password"
   })), _react.default.createElement(_reactBootstrap.Form.Group, {
     controlId: "formBirthday"
-  }, _react.default.createElement(_reactBootstrap.Form.Label, null, "Birthdate"), _react.default.createElement(_reactBootstrap.Form.Control, {
+  }, _react.default.createElement(_reactBootstrap.Form.Label, null, "Birthday"), _react.default.createElement(_reactBootstrap.Form.Control, {
     type: "date",
-    value: birthdate,
+    value: birthday,
     onChange: function onChange(e) {
-      return setBirthdate(e.target.value);
+      return setBirthday(e.target.value);
     }
   })), _react.default.createElement(_reactBootstrap.Button, {
     type: "button",
@@ -51339,7 +51339,7 @@ RegisterView.propTypes = {
     username: _propTypes.default.string.isRequired,
     email: _propTypes.default.string.isRequired,
     password: _propTypes.default.string.isRequired,
-    birthdate: _propTypes.default.instanceOf(Date).isRequired
+    birthday: _propTypes.default.string.isRequired
   }),
   onRegister: _propTypes.default.func
 };
@@ -51507,12 +51507,8 @@ var MainView = /*#__PURE__*/function (_React$Component) {
           movies = _this$state.movies,
           selectedMovie = _this$state.selectedMovie,
           user = _this$state.user,
-          register = _this$state.register;
-      if (!register) return _react.default.createElement(_registrationView.RegisterView, {
-        onRegister: function onRegister(register) {
-          return _this3.onRegister(register);
-        }
-      }); // if no user, LoginView is rendered. If there is a logged in user, the user details are passed as a prop to the Login View
+          register = _this$state.register; // if (!register) return <RegisterView onRegister={(register) => this.onRegister(register)}/>
+      // if no user, LoginView is rendered. If there is a logged in user, the user details are passed as a prop to the Login View
 
       if (!user) return _react.default.createElement(_loginView.LoginView, {
         onLoggedIn: function onLoggedIn(data) {
