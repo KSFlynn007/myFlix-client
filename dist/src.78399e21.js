@@ -51507,8 +51507,12 @@ var MainView = /*#__PURE__*/function (_React$Component) {
           movies = _this$state.movies,
           selectedMovie = _this$state.selectedMovie,
           user = _this$state.user,
-          register = _this$state.register; // if (!register) return <RegisterView onRegister={(register) => this.onRegister(register)}/>
-      // if no user, LoginView is rendered. If there is a logged in user, the user details are passed as a prop to the Login View
+          register = _this$state.register;
+      if (!register) return _react.default.createElement(_registrationView.RegisterView, {
+        onRegister: function onRegister(register) {
+          return _this3.onRegister(register);
+        }
+      }); // if no user, LoginView is rendered. If there is a logged in user, the user details are passed as a prop to the Login View
 
       if (!user) return _react.default.createElement(_loginView.LoginView, {
         onLoggedIn: function onLoggedIn(data) {
@@ -51662,7 +51666,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "65027" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59649" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
