@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button, Card } from 'react-bootstrap';
+import { Button, Card, Container, Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 import './movie-card.scss';
@@ -10,16 +10,22 @@ export class MovieCard extends React.Component {
         const { movie } = this.props;
 
         return (
-            <Card className='movie-card' border='info'>
-                <Card.Img className='movie-img' variant='top' src={ movie.ImageURL } />
-                <Card.Body>
-                    <Card.Title>{movie.Title}</Card.Title>
-                    <Card.Subtitle className='text-muted'>{movie.Year}</Card.Subtitle>
-                    <Link to={`/movies/${movie._id}`}>
-                        <Button variant='info' className='more-button'>See Details</Button>
-                    </Link>
-                </Card.Body>
-            </Card>
+            <Container className='wrapper container-fluid'>
+                <Row>
+                    <Col className='col-3'/>
+                    <Card className='movie-card' border='info'>
+                        <Card.Img className='movie-img' variant='top' src={ movie.ImageURL } />
+                        <Card.Body>
+                            <Card.Title>{movie.Title}</Card.Title>
+                            <Card.Subtitle className='text-muted'>{movie.Year}</Card.Subtitle>
+                            <Link to={`/movies/${movie._id}`}>
+                                <Button variant='info' className='more-button'>See Details</Button>
+                            </Link>
+                        </Card.Body>
+                    </Card>
+                </Row>
+            </Container>
+
         );
     }
 }
