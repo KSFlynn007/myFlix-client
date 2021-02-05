@@ -5,6 +5,7 @@ import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
 import { LoginView } from '../login-view/login-view';
 import { RegisterView } from '../registration-view/registration-view'
+import { Link } from 'react-router-dom';
 import Config from '../../config';
 
 import './main-view.scss'
@@ -26,6 +27,7 @@ export class MainView extends React.Component {
 //initial state is set to null
         this.state = {
             movies: [],
+            selectedMovie: null,
             user: null,
         };
         this.onLoggedOut = this.onLoggedOut.bind(this);
@@ -39,12 +41,6 @@ export class MainView extends React.Component {
             });
             this.getMovies(accessToken);
         }
-    }
-
-    onRegister(registerData) {
-        this.setState({
-            register: registerData
-        });
     }
 
 // when user successsfully logs in, this function updates the 'user' property in the state to that particular user
@@ -86,6 +82,7 @@ export class MainView extends React.Component {
     render() {
         const { movies, user } = this.state;
 
+        <div>
         <Router>
             <div className='main-view'>
                     <Navbar bg='dark' variant='dark'>
@@ -110,10 +107,10 @@ export class MainView extends React.Component {
                     return movies.map(m => <MovieCard key={m._id} movie={m}/>)
                 }}/>
 
-                <Route exact path='/register' 
+                <Route path='/register' 
                 render={() => <RegistrationView />}/>
 
-                <Route exact path='/movies/:movieId' 
+                <Route path='/movies/:movieId' 
                 render={({match}) => <MovieView movie={movies.find(m => m._id === match.params.movieId)}/>}/>
 
                 <Route exact path='/genres/:name' 
@@ -127,13 +124,13 @@ export class MainView extends React.Component {
                     if(!movies) return <div className='main-view'/>;
                     return <DirectorView director={movies.find(m => m.Director.Name === match.params.name).Director} />
                 }}/>
-
             </div>
         </Router>
+        </div>
     }
 }
 
-
+// PARTS OF OLD RETURN STATEMENT BELOW:
 
         // if (!register) return <RegisterView onRegister={(register) => this.onRegister(register)}/>
 

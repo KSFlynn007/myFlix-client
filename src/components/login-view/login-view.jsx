@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 import Config from '../../config';
 
-
 import './login-view.scss';
 
 import { Form, Button} from 'react-bootstrap';

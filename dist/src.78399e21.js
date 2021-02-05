@@ -50902,7 +50902,11 @@ var MovieCard = /*#__PURE__*/function (_React$Component) {
     key: "render",
     value: function render() {
       var movie = this.props.movie;
-      return _react.default.createElement(_reactBootstrap.Card, {
+      return _react.default.createElement(_reactBootstrap.Container, {
+        className: "wrapper container-fluid"
+      }, _react.default.createElement(_reactBootstrap.Row, null, _react.default.createElement(_reactBootstrap.Col, {
+        className: "col-3"
+      }), _react.default.createElement(_reactBootstrap.Card, {
         className: "movie-card",
         border: "info"
       }, _react.default.createElement(_reactBootstrap.Card.Img, {
@@ -50916,7 +50920,7 @@ var MovieCard = /*#__PURE__*/function (_React$Component) {
       }, _react.default.createElement(_reactBootstrap.Button, {
         variant: "info",
         className: "more-button"
-      }, "See Details"))));
+      }, "See Details"))))));
     }
   }]);
 
@@ -51271,7 +51275,7 @@ function RegisterView(props) {
     window.open('/login', '_self');
   };
 
-  var handleSubmit = function handleSubmit(e) {
+  var handleRegister = function handleRegister(e) {
     e.preventDefault(); // sends request to server for authentication
     // entire URL is in package.json under "proxy" to get past CORS
 
@@ -51331,7 +51335,7 @@ function RegisterView(props) {
   })), _react.default.createElement(_reactBootstrap.Button, {
     type: "button",
     variant: "dark",
-    onClick: handleSubmit
+    onClick: handleRegister
   }, "Submit"), _react.default.createElement(_reactBootstrap.Button, {
     className: "swap-button",
     type: "button",
@@ -51420,6 +51424,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
 
     _this.state = {
       movies: [],
+      selectedMovie: null,
       user: null
     };
     _this.onLoggedOut = _this.onLoggedOut.bind(_assertThisInitialized(_this));
@@ -51437,13 +51442,6 @@ var MainView = /*#__PURE__*/function (_React$Component) {
         });
         this.getMovies(accessToken);
       }
-    }
-  }, {
-    key: "onRegister",
-    value: function onRegister(registerData) {
-      this.setState({
-        register: registerData
-      });
     } // when user successsfully logs in, this function updates the 'user' property in the state to that particular user
 
   }, {
@@ -51495,7 +51493,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
           movies = _this$state.movies,
           user = _this$state.user;
 
-      _react.default.createElement(_reactRouterDom.BrowserRouter, null, _react.default.createElement("div", {
+      _react.default.createElement("div", null, _react.default.createElement(_reactRouterDom.BrowserRouter, null, _react.default.createElement("div", {
         className: "main-view"
       }, _react.default.createElement(_reactBootstrap.Navbar, {
         bg: "dark",
@@ -51532,13 +51530,11 @@ var MainView = /*#__PURE__*/function (_React$Component) {
           });
         }
       }), _react.default.createElement(_reactRouterDom.Route, {
-        exact: true,
         path: "/register",
         render: function render() {
           return _react.default.createElement(RegistrationView, null);
         }
       }), _react.default.createElement(_reactRouterDom.Route, {
-        exact: true,
         path: "/movies/:movieId",
         render: function render(_ref) {
           var match = _ref.match;
@@ -51576,12 +51572,13 @@ var MainView = /*#__PURE__*/function (_React$Component) {
             }).Director
           });
         }
-      })));
+      }))));
     }
   }]);
 
   return MainView;
-}(_react.default.Component); // if (!register) return <RegisterView onRegister={(register) => this.onRegister(register)}/>
+}(_react.default.Component); // PARTS OF OLD RETURN STATEMENT BELOW:
+// if (!register) return <RegisterView onRegister={(register) => this.onRegister(register)}/>
 // return (
 //     <React.Fragment>
 //         <div className='main-view'>
