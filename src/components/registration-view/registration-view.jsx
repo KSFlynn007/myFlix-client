@@ -18,7 +18,7 @@ export function RegisterView(props) {
         window.open('/login', '_self')
     }
   
-    const handleSubmit = (e) => {
+    const handleRegister = (e) => {
         e.preventDefault();
         // sends request to server for authentication
         // entire URL is in package.json under "proxy" to get past CORS
@@ -78,7 +78,7 @@ export function RegisterView(props) {
                     onChange={(e) => setBirthday(e.target.value)}
                     />
                 </Form.Group>
-                <Button type='button' variant='dark' onClick={handleSubmit}>Submit</Button>
+                <Button type='button' variant='dark' onClick={handleRegister}>Submit</Button>
                 <Button className='swap-button' type='button' variant='info' onClick={swapView}>Already registered?</Button>
             </Form>
         </React.Fragment>
