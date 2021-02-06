@@ -130,6 +130,27 @@ export class MainView extends React.Component {
     }
 }
 
+MainView.PropTypes = {
+  movie: PropTypes.arrayOf({
+    _id: PropTypes.string.isRequired,
+    Title: PropTypes.string.isRequired,
+    Description: PropTypes.string.isRequired,
+    Year: PropTypes.number.isRequired,
+    ImageUrl: PropTypes.string.isRequired,
+    Genre: PropTypes.shape({
+      Name: PropTypes.string.isRequired,
+      Description: PropTypes.string.isRequired,
+    }),
+    Director: PropTypes.shape({
+      Name: PropTypes.string.isRequired,
+      Bio: PropTypes.string.isRequired,
+      Birthdate: PropTypes.instanceOf(Date)
+    }),
+    Featured: PropTypes.bool,
+  }),
+  user: PropTypes.string
+}
+
 // PARTS OF OLD RETURN STATEMENT BELOW:
 
         // if (!register) return <RegisterView onRegister={(register) => this.onRegister(register)}/>
