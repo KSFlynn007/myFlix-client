@@ -1,3 +1,27 @@
 .main-body {
   padding: 20px;
 }
+
+.navLinkHome {
+  font-size: 22px;
+}
+
+.navLink,
+.navLinkHome {
+  color: #5bc0de;
+  padding: 20px 0px;
+  margin: 10px;
+  align-content: center;
+  justify-items: center;
+}
+
+.navLink:hover,
+.navLinkHome:hover {
+  font-size: 22px;
+  text-decoration: none;
+  color: #cfdbdf;
+}
+
+.userNav {
+  justify-content: right;
+}
