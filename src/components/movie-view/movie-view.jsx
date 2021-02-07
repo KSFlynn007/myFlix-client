@@ -1,5 +1,6 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import propTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 import {Card, Button} from 'react-bootstrap';
 
@@ -14,7 +15,7 @@ export class MovieView extends React.Component {
     }
 
     render (){
-        const { movie, onClick } = this.props;
+        const { movie } = this.props;
 
         if (!movie) return null;
 
@@ -28,16 +29,22 @@ export class MovieView extends React.Component {
                         <Card.Text className='label-body'>Director: {movie.Director.Name}</Card.Text>
                         <Card.Text className='label-body'>Genre: {movie.Genre.Name}</Card.Text>
                     </Card.Body>
-                    <Link to={`/`}>
-                        <Button className='return-button' variant='link'>Return to Movie List</Button>
-                    </Link>
+                </Card>
+                <Card.Footer>
                     <Link to={`/directors/${movie.Director.Name}`}>
-                        <Button variant='link'>See Director Info</Button>
+                        <Button className='directorButton' variant='info'>See Director Info</Button>
                     </Link>
                     <Link to={`/genres/${movie.Genre.Name}`}>
-                        <Button variant='link'> See Genre Info</Button>
+                        <Button className='genreButton' variant='info'> See Genre Info</Button>
                     </Link>
-                </Card>
+    {/* NEED TO FLESH OUT FAVORITE BUTTON BELOW, NO LINK YET */}
+                    <Link to={`/users/favorites/${movie.Genre.Name}`}>
+                        <Button className='addFavButton' variant='success'> Add Movie to Favorites</Button>
+                    </Link>
+                    <Link to={`/`}>
+                        <Button className='returnButton' variant='dark'>Return to Movie List</Button>
+                    </Link>
+                </Card.Footer>
             </div>
         );
     }
@@ -45,23 +52,21 @@ export class MovieView extends React.Component {
 
 MovieView.propTypes = {
     // shape({...}) means it expects an object
-    movie: PropTypes.shape({
+    movie: propTypes.shape({
         // movie prop may contain Title, and IF it does, it must be a string
-        Title: PropTypes.string.isRequired,
-        Description: PropTypes.string,
-        Year: PropTypes.number,
-        ImageURL: PropTypes.string.isRequired,
-        Genre: PropTypes.shape({
-            Name: PropTypes.string,
-           Biography: PropTypes.string 
+        Title: propTypes.string.isRequired,
+        Description: propTypes.string,
+        Year: propTypes.number,
+        ImageURL: propTypes.string.isRequired,
+        Genre: propTypes.shape({
+            Name: propTypes.string,
+           Biography: propTypes.string 
         }),
-        Director: PropTypes.shape({
-            Name: PropTypes.string,
-            Bio: PropTypes.string,
-            Birthday: PropTypes.string
+        Director: propTypes.shape({
+            Name: propTypes.string,
+            Bio: propTypes.string,
+            Birthday: propTypes.string
         }),
-        Featured: PropTypes.bool
-    }).isRequired,
-    // props object must contain onClick and it MUST be a function
-    onClick: PropTypes.func.isRequired
+        Featured: propTypes.bool
+    })
 };
