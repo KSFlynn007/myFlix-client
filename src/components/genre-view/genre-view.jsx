@@ -3,9 +3,7 @@ import propTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import {
     Container,
-    Col,
     Card,
-    Row,
     Button
 } from 'react-bootstrap';
 
@@ -19,27 +17,22 @@ export class GenreView extends React.Component {
     }
 
     render() {
-        const { movies, genre } = this.props;
+        const { genre, movie } = this.props;
 
         if (!genre) return null;
 
         return(
-            <Container className='wrapper container-fluid'>
-                <Row>
-                    <Col className='col-3'/>
-                    <Col>
-                        <Card>
-                            <Card.Body>
-                                <Card.Title>{genre.Genre.Name}</Card.Title>
-                                <Card.Text>{genre.Genre.Description}</Card.Text>
-                            </Card.Body>
-                        </Card>
-                    </Col>
-                </Row>
-            </Container>
-        )
-
-        
+            <div className='genre-view'>
+                <Container>
+                    <Card className='genre-card'>
+                        <Card.Body>
+                            <Card.Title>{movie.Genre.Name}</Card.Title>
+                            <Card.Text>{movie.Genre.Description}</Card.Text>
+                        </Card.Body>
+                    </Card>
+                </Container>
+            </div>
+        )        
     }
 }
 
@@ -49,5 +42,5 @@ GenreView.propTypes = {
             Name: propTypes.string.isRequired,
             Description: propTypes.string.isRequired,
         }
-    })
+    }).isRequired
 }
