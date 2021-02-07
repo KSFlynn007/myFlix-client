@@ -32,13 +32,13 @@ export class MovieView extends React.Component {
                 </Card>
                 <Card.Footer>
                     <Link to={`/directors/${movie.Director.Name}`}>
-                        <Button className='directorButton' variant='info'>See Director Info</Button>
+                        <Button className='directorButton' variant='info'>{movie.Director.Name} Info</Button>
                     </Link>
                     <Link to={`/genres/${movie.Genre.Name}`}>
-                        <Button className='genreButton' variant='info'> See Genre Info</Button>
+                        <Button className='genreButton' variant='info'>{movie.Genre.Name} Genre Info</Button>
                     </Link>
     {/* NEED TO FLESH OUT FAVORITE BUTTON BELOW, NO LINK YET */}
-                    <Link to={`/users/favorites/${movie.Genre.Name}`}>
+                    <Link to={`/users/favorites/`}>
                         <Button className='addFavButton' variant='success'> Add Movie to Favorites</Button>
                     </Link>
                     <Link to={`/`}>
