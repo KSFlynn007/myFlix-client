@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import propTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import {
     Container,
@@ -19,6 +19,8 @@ export class GenreView extends React.Component {
     }
 
     render() {
+        const { movies, genre } = this.props;
+
         if (!genre) return null;
 
         return(
@@ -42,10 +44,10 @@ export class GenreView extends React.Component {
 }
 
 GenreView.propTypes = {
-    Movie: PropTypes.shape({
+    Movie: propTypes.shape({
         Genre: {
-            Name: PropTypes.string.isRequired,
-            Description: PropTypes.string.isRequired,
+            Name: propTypes.string.isRequired,
+            Description: propTypes.string.isRequired,
         }
     })
 }
