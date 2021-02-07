@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
+import propTypes from 'prop-types';
 import {
     Card,
     Button,
@@ -34,11 +34,11 @@ export class DirectorView extends React.Component {
 }
 
 DirectorView.propTypes = {
-    Movie: PropTypes.shape({
+    Movie: propTypes.shape({
         Director: {
-            Name: PropTypes.string.isRequired,
-            Bio: PropTypes.string.isRequired,
-            Birth: PropTypes.instanceOf(date)
+            Name: propTypes.string.isRequired,
+            Bio: propTypes.string.isRequired,
+            Birth: propTypes.instanceOf(Date)
         }
     })
 }
