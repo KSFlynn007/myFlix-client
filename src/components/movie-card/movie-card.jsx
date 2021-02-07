@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import propTypes from 'prop-types';
 import { Button, Card, Container, Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
@@ -13,7 +13,7 @@ export class MovieCard extends React.Component {
             <Container className='wrapper container-fluid'>
                 <Row>
                     <Col className='col-3'/>
-                    <Card className='movie-card' border='info'>
+                    <Card className='movie-card' border='info' style={{ width: '18rem' }}>
                         <Card.Img className='movie-img' variant='top' src={ movie.ImageURL } />
                         <Card.Body>
                             <Card.Title>{movie.Title}</Card.Title>
@@ -32,23 +32,21 @@ export class MovieCard extends React.Component {
 
 MovieCard.propTypes = {
     // shape({...}) means it expects an object
-    movie: PropTypes.shape({
+    movie: propTypes.shape({
         // movie prop may contain Title, and IF it does, it must be a string
-        Title: PropTypes.string.isRequired,
-        Description: PropTypes.string,
-        Year: PropTypes.number.isRequired,
-        ImageURL: PropTypes.string.isRequired,
-        Genre: PropTypes.shape({
-            Name: PropTypes.string,
-           Biography: PropTypes.string 
+        Title: propTypes.string.isRequired,
+        Description: propTypes.string,
+        Year: propTypes.number.isRequired,
+        ImageURL: propTypes.string.isRequired,
+        Genre: propTypes.shape({
+            Name: propTypes.string,
+           Biography: propTypes.string 
         }),
-        Director: PropTypes.shape({
-            Name: PropTypes.string,
-            Bio: PropTypes.string,
-            Birthdate: PropTypes.string
+        Director: propTypes.shape({
+            Name: propTypes.string,
+            Bio: propTypes.string,
+            Birthdate: propTypes.string
         }),
-        Featured: PropTypes.bool
-    }).isRequired,
-    // props object must contain onClick and it MUST be a function
-    onClick: PropTypes.func.isRequired
+        Featured: propTypes.bool
+    }).isRequired
 };
