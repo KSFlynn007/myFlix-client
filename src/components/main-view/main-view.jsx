@@ -16,7 +16,8 @@ import './main-view.scss'
 
 import {
     Navbar,
-    Nav
+    Nav,
+    Col
 } from 'react-bootstrap';
 
 
@@ -111,13 +112,19 @@ export class MainView extends React.Component {
                 <Route exact path='/' 
                 render={() => {
                     if (!user) return <LoginView onLoggedIn={(data) => this.onLoggedIn(data)}/>;
-                    return movies.map(m => <MovieCard key={m._id} movie={m}/>)
+                    return movies.map(m => 
+                    <Col md={4}>
+                        <MovieCard key={m._id} movie={m}/>
+                    </Col>)                
                 }}/>
 
                 <Route path='/login'
                 render={() => {
                     if (!user) return <LoginView onLoggedIn={(data) => this.onLoggedIn(data)}/>;
-                    return movies.map(m => <MovieCard key={m._id} movie={m}/>)
+                    return movies.map(m => 
+                    <Col md={4}>
+                        <MovieCard key={m._id} movie={m}/>
+                    </Col>)
                 }}/>
 
                 <Route path='/register'

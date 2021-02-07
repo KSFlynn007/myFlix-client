@@ -51076,13 +51076,7 @@ var MovieCard = /*#__PURE__*/function (_React$Component) {
     key: "render",
     value: function render() {
       var movie = this.props.movie;
-      return _react.default.createElement(_reactBootstrap.Container, {
-        className: "wrapper container-fluid"
-      }, _react.default.createElement(_reactBootstrap.Row, null, _react.default.createElement(_reactBootstrap.Col, {
-        xs: 12,
-        sm: 6,
-        md: 4
-      }, _react.default.createElement(_reactBootstrap.Card, {
+      return _react.default.createElement(_reactBootstrap.Col, null, _react.default.createElement(_reactBootstrap.Card, {
         className: "movie-card",
         border: "info",
         style: {
@@ -51099,7 +51093,7 @@ var MovieCard = /*#__PURE__*/function (_React$Component) {
       }, _react.default.createElement(_reactBootstrap.Button, {
         variant: "info",
         className: "more-button"
-      }, "See Details")))))));
+      }, "See Details")))));
     }
   }]);
 
@@ -51721,10 +51715,12 @@ var MainView = /*#__PURE__*/function (_React$Component) {
             }
           });
           return movies.map(function (m) {
-            return _react.default.createElement(_movieCard.MovieCard, {
+            return _react.default.createElement(_reactBootstrap.Col, {
+              md: 4
+            }, _react.default.createElement(_movieCard.MovieCard, {
               key: m._id,
               movie: m
-            });
+            }));
           });
         }
       }), _react.default.createElement(_reactRouterDom.Route, {
@@ -51736,10 +51732,12 @@ var MainView = /*#__PURE__*/function (_React$Component) {
             }
           });
           return movies.map(function (m) {
-            return _react.default.createElement(_movieCard.MovieCard, {
+            return _react.default.createElement(_reactBootstrap.Col, {
+              md: 4
+            }, _react.default.createElement(_movieCard.MovieCard, {
               key: m._id,
               movie: m
-            });
+            }));
           });
         }
       }), _react.default.createElement(_reactRouterDom.Route, {

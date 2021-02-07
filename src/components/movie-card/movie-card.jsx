@@ -10,21 +10,18 @@ export class MovieCard extends React.Component {
         const { movie } = this.props;
 
         return (
-            <Container className='wrapper container-fluid'>
-                <Row>
-                    <Col className='col-3'/>
-                    <Card className='movie-card' border='info' style={{ width: '18rem' }}>
-                        <Card.Img className='movie-img' variant='top' src={ movie.ImageURL } />
-                        <Card.Body>
-                            <Card.Title>{movie.Title}</Card.Title>
-                            <Card.Subtitle className='text-muted'>{movie.Year}</Card.Subtitle>
-                            <Link to={`/movies/${movie._id}`}>
-                                <Button variant='info' className='more-button'>See Details</Button>
-                            </Link>
-                        </Card.Body>
-                    </Card>
-                </Row>
-            </Container>
+            <Col>
+            <Card className='movie-card' border='info' style={{ width: '18rem' }}>
+                <Card.Img className='movie-img' variant='top' src={ movie.ImageURL } />
+                <Card.Body>
+                    <Card.Title>{movie.Title}</Card.Title>
+                    <Card.Subtitle className='text-muted'>{movie.Year}</Card.Subtitle>
+                    <Link to={`/movies/${movie._id}`}>
+                        <Button variant='info' className='more-button'>See Details</Button>
+                    </Link>
+                </Card.Body>
+            </Card>
+            </Col>
 
         );
     }
