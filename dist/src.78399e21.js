@@ -50905,15 +50905,18 @@ var DirectorView = /*#__PURE__*/function (_React$Component) {
   _createClass(DirectorView, [{
     key: "render",
     value: function render() {
-      var _this$props = this.props,
-          director = _this$props.director,
-          movie = _this$props.movie;
+      var director = this.props.director;
       if (!director) return null;
       return _react.default.createElement("div", {
         className: "director-view"
       }, _react.default.createElement(_reactBootstrap.Container, null, _react.default.createElement(_reactBootstrap.Card, {
         className: "director-card"
-      }, _react.default.createElement(_reactBootstrap.Card.Body, null, _react.default.createElement(_reactBootstrap.Card.Title, null, movie.Director.Name)))));
+      }, _react.default.createElement(_reactBootstrap.Card.Body, null, _react.default.createElement(_reactBootstrap.Card.Title, null, director.Name), _react.default.createElement(_reactBootstrap.Card.Text, null, director.Bio), _react.default.createElement(_reactBootstrap.Card.Text, null, director.Birthday))), _react.default.createElement(_reactBootstrap.Card.Footer, null, _react.default.createElement(_reactRouterDom.Link, {
+        to: "/"
+      }, _react.default.createElement(_reactBootstrap.Button, {
+        className: "returnButton",
+        variant: "dark"
+      }, "Return to Movie List")))));
     }
   }]);
 
@@ -50922,13 +50925,11 @@ var DirectorView = /*#__PURE__*/function (_React$Component) {
 
 exports.DirectorView = DirectorView;
 DirectorView.propTypes = {
-  Movie: _propTypes.default.shape({
-    Director: {
-      Name: _propTypes.default.string.isRequired,
-      Bio: _propTypes.default.string.isRequired,
-      Birth: _propTypes.default.instanceOf(Date)
-    }
-  })
+  director: _propTypes.default.shape({
+    Name: _propTypes.default.string.isRequired,
+    Bio: _propTypes.default.string.isRequired,
+    Birthday: _propTypes.default.instanceOf(Date)
+  }).isRequired
 };
 },{"react":"../node_modules/react/index.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js","prop-types":"../node_modules/prop-types/index.js","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js","./director-view.scss":"components/director-view/director-view.scss"}],"components/genre-view/genre-view.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
@@ -50995,15 +50996,18 @@ var GenreView = /*#__PURE__*/function (_React$Component) {
   _createClass(GenreView, [{
     key: "render",
     value: function render() {
-      var _this$props = this.props,
-          genre = _this$props.genre,
-          movie = _this$props.movie;
+      var genre = this.props.genre;
       if (!genre) return null;
       return _react.default.createElement("div", {
         className: "genre-view"
       }, _react.default.createElement(_reactBootstrap.Container, null, _react.default.createElement(_reactBootstrap.Card, {
         className: "genre-card"
-      }, _react.default.createElement(_reactBootstrap.Card.Body, null, _react.default.createElement(_reactBootstrap.Card.Title, null, movie.Genre.Name), _react.default.createElement(_reactBootstrap.Card.Text, null, movie.Genre.Description)))));
+      }, _react.default.createElement(_reactBootstrap.Card.Body, null, _react.default.createElement(_reactBootstrap.Card.Title, null, genre.Name), _react.default.createElement(_reactBootstrap.Card.Text, null, genre.Description))), _react.default.createElement(_reactBootstrap.Card.Footer, null, _react.default.createElement(_reactRouterDom.Link, {
+        to: "/"
+      }, _react.default.createElement(_reactBootstrap.Button, {
+        className: "returnButton",
+        variant: "dark"
+      }, "Return to Movie List")))));
     }
   }]);
 
@@ -51012,11 +51016,9 @@ var GenreView = /*#__PURE__*/function (_React$Component) {
 
 exports.GenreView = GenreView;
 GenreView.propTypes = {
-  Movie: _propTypes.default.shape({
-    Genre: {
-      Name: _propTypes.default.string.isRequired,
-      Description: _propTypes.default.string.isRequired
-    }
+  genre: _propTypes.default.shape({
+    Name: _propTypes.default.string.isRequired,
+    Description: _propTypes.default.string.isRequired
   }).isRequired
 };
 },{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js","./genre-view.scss":"components/genre-view/genre-view.scss"}],"components/movie-card/movie-card.scss":[function(require,module,exports) {
@@ -51250,7 +51252,7 @@ MovieView.propTypes = {
     Director: _propTypes.default.shape({
       Name: _propTypes.default.string,
       Bio: _propTypes.default.string,
-      Birthday: _propTypes.default.string
+      Birthday: _propTypes.default.instanceOf(Date)
     }),
     Featured: _propTypes.default.bool
   })
@@ -51702,7 +51704,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
       }, "Directors")), _react.default.createElement(_reactBootstrap.Nav.Item, null, _react.default.createElement(_reactBootstrap.Nav.Link, {
         className: "navLink",
         as: _reactRouterDom.Link,
-        to: '/genres/',
+        to: '/genres',
         target: "_self"
       }, "Genres")), _react.default.createElement(_reactBootstrap.Nav.Item, null, _react.default.createElement(_reactBootstrap.Nav.Link, {
         className: "navLink",
@@ -51819,7 +51821,7 @@ MainView.propTypes = {
     Director: _propTypes.default.shape({
       Name: _propTypes.default.string.isRequired,
       Bio: _propTypes.default.string.isRequired,
-      Birthdate: _propTypes.default.instanceOf(Date)
+      Birthday: _propTypes.default.instanceOf(Date)
     }),
     Featured: _propTypes.default.bool
   }),

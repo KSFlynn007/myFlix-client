@@ -96,7 +96,7 @@ export class MainView extends React.Component {
                                 <Nav.Link className='navLink' as={Link} to={'/directors'} target='_self'>Directors</Nav.Link>
                             </Nav.Item>
                             <Nav.Item>
-                                <Nav.Link className='navLink' as={Link} to={'/genres/'} target='_self'>Genres</Nav.Link>
+                                <Nav.Link className='navLink' as={Link} to={'/genres'} target='_self'>Genres</Nav.Link>
                             </Nav.Item>
                             <Nav.Item>
                                 <Nav.Link className='navLink' as={Link} to={'/login'} target='_self' onClick={this.onLoggedOut}>Log Out</Nav.Link>
@@ -167,7 +167,7 @@ MainView.propTypes = {
     Director: propTypes.shape({
       Name: propTypes.string.isRequired,
       Bio: propTypes.string.isRequired,
-      Birthdate: propTypes.instanceOf(Date)
+      Birthday: propTypes.instanceOf(Date)
     }),
     Featured: propTypes.bool,
   }),

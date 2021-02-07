@@ -19,7 +19,7 @@ export class DirectorView extends React.Component {
     }
 
     render() {
-        const {director, movie} = this.props;
+        const {director} = this.props;
 
         if (!director) return null;
 
@@ -28,9 +28,16 @@ export class DirectorView extends React.Component {
                 <Container>
                     <Card className='director-card'>
                         <Card.Body>
-                            <Card.Title>{movie.Director.Name}</Card.Title>
+                            <Card.Title>{director.Name}</Card.Title>
+                            <Card.Text>{director.Bio}</Card.Text>
+                            <Card.Text>{director.Birthday}</Card.Text>
                         </Card.Body>
                     </Card>
+                    <Card.Footer>
+                        <Link to={`/`}>
+                            <Button className='returnButton' variant='dark'>Return to Movie List</Button>
+                        </Link>
+                    </Card.Footer>
                 </Container>
             </div>
         )
@@ -38,11 +45,9 @@ export class DirectorView extends React.Component {
 }
 
 DirectorView.propTypes = {
-    Movie: propTypes.shape({
-        Director: {
-            Name: propTypes.string.isRequired,
-            Bio: propTypes.string.isRequired,
-            Birth: propTypes.instanceOf(Date)
-        }
-    })
+    director: propTypes.shape({
+        Name: propTypes.string.isRequired,
+        Bio: propTypes.string.isRequired,
+        Birthday: propTypes.instanceOf(Date),
+    }).isRequired,
 }
