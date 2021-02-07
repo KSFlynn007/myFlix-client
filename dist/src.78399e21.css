@@ -39,6 +39,10 @@
   display: inline;
   margin: 20px 10px;
 }
+
+Link:hover {
+  text-decoration: none;
+}
 .login-form {
   margin: 20px;
   padding: 30px;
@@ -66,15 +70,6 @@
 
 .navLinkHome {
   font-size: 22px;
-}
-
-.navLink,
-.navLinkHome {
-  color: #5bc0de;
-  padding: 20px 0px;
-  margin: 10px;
-  align-content: center;
-  justify-items: center;
 }
 
 .navLink:hover,

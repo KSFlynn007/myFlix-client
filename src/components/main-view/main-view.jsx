@@ -16,8 +16,7 @@ import './main-view.scss'
 
 import {
     Navbar,
-    Nav,
-    Col
+    Nav
 } from 'react-bootstrap';
 
 
@@ -91,19 +90,19 @@ export class MainView extends React.Component {
                     <Navbar expand onToggle='sm' bg='dark' variant='dark' sticky='top'>
                         <Nav>
                             <Nav.Item>
-                                <Link className='navLinkHome' to={'/'} target='_self'>myFlix Home</Link>
+                                <Nav.Link className='navLinkHome' as={Link} to={'/'} target='_self'>myFlix Home</Nav.Link>
                             </Nav.Item>
                             <Nav.Item>
-                                <Link className='navLink' to={'/directors'} target='_self'>Directors</Link>
+                                <Nav.Link className='navLink' as={Link} to={'/directors'} target='_self'>Directors</Nav.Link>
                             </Nav.Item>
                             <Nav.Item>
-                                <Link className='navLink' to={'/genres'} target='_self'>Genres</Link>
+                                <Nav.Link className='navLink' as={Link} to={'/genres/'} target='_self'>Genres</Nav.Link>
                             </Nav.Item>
                             <Nav.Item>
-                                <Link className='navLink' to={'/login'} target='_self' onClick={this.onLoggedOut}>Log Out</Link>
+                                <Nav.Link className='navLink' as={Link} to={'/login'} target='_self' onClick={this.onLoggedOut}>Log Out</Nav.Link>
                             </Nav.Item>
                             <Nav.Item>
-                                <Link className='navLink' to={'/users'} target='_self'>My Account</Link>
+                                <Nav.Link className='navLink' as={Link} to={'/users'} target='_self'>My Account</Nav.Link>
                             </Nav.Item>
                         </Nav>
                     </Navbar>
@@ -112,19 +111,13 @@ export class MainView extends React.Component {
                 <Route exact path='/' 
                 render={() => {
                     if (!user) return <LoginView onLoggedIn={(data) => this.onLoggedIn(data)}/>;
-                    return movies.map(m => 
-                    <Col md={4}>
-                        <MovieCard key={m._id} movie={m}/>
-                    </Col>)                
+                    return movies.map(m => <MovieCard key={m._id} movie={m}/>)
                 }}/>
 
                 <Route path='/login'
                 render={() => {
                     if (!user) return <LoginView onLoggedIn={(data) => this.onLoggedIn(data)}/>;
-                    return movies.map(m => 
-                    <Col md={4}>
-                        <MovieCard key={m._id} movie={m}/>
-                    </Col>)
+                    return movies.map(m => <MovieCard key={m._id} movie={m}/>)
                 }}/>
 
                 <Route path='/register'
@@ -133,17 +126,24 @@ export class MainView extends React.Component {
                 <Route path='/movies/:movieId' 
                 render={({match}) => { return <MovieView movie={movies.find(m => m._id === match.params.movieId)}/>}}/>
 
-                <Route exact path='/genres/:name' 
+                <Route path='/genres/:name' 
                 render={({match}) => {
                     if(!movies) return <div className='main-view'/>;
-                    return <GenreView genre={movies.find(m => m.Genre.Name === match.params.name).Genre}/>
+                    return <GenreView genre={movies.find((m) => m.Genre.Name === match.params.name).Genre}/>
                 }}/>
 
-                <Route exact path='/directors/:name' 
+                <Route path='/genres'
+                render={() => {return <GenreView />}}/>
+
+                <Route path='/directors/:name' 
                 render={({match}) => {
                     if(!movies) return <div className='main-view'/>;
                     return <DirectorView director={movies.find(m => m.Director.Name === match.params.name).Director} />
                 }}/>
+
+                <Route path='/directors'
+                render={() => {return <DirectorView />}}/>
+
             </div>
         </Router>
         </div>    

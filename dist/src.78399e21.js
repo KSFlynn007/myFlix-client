@@ -50905,10 +50905,15 @@ var DirectorView = /*#__PURE__*/function (_React$Component) {
   _createClass(DirectorView, [{
     key: "render",
     value: function render() {
+      var _this$props = this.props,
+          director = _this$props.director,
+          movie = _this$props.movie;
       if (!director) return null;
-      return _react.default.createElement(_reactBootstrap.Container, null, _react.default.createElement(_reactBootstrap.Row, null, _react.default.createElement(_reactBootstrap.Col, {
-        className: "col-3"
-      }, "...")));
+      return _react.default.createElement("div", {
+        className: "director-view"
+      }, _react.default.createElement(_reactBootstrap.Container, null, _react.default.createElement(_reactBootstrap.Card, {
+        className: "director-card"
+      }, _react.default.createElement(_reactBootstrap.Card.Body, null, _react.default.createElement(_reactBootstrap.Card.Title, null, movie.Director.Name)))));
     }
   }]);
 
@@ -50991,14 +50996,14 @@ var GenreView = /*#__PURE__*/function (_React$Component) {
     key: "render",
     value: function render() {
       var _this$props = this.props,
-          movies = _this$props.movies,
-          genre = _this$props.genre;
+          genre = _this$props.genre,
+          movie = _this$props.movie;
       if (!genre) return null;
-      return _react.default.createElement(_reactBootstrap.Container, {
-        className: "wrapper container-fluid"
-      }, _react.default.createElement(_reactBootstrap.Row, null, _react.default.createElement(_reactBootstrap.Col, {
-        className: "col-3"
-      }), _react.default.createElement(_reactBootstrap.Col, null, _react.default.createElement(_reactBootstrap.Card, null, _react.default.createElement(_reactBootstrap.Card.Body, null, _react.default.createElement(_reactBootstrap.Card.Title, null, genre.Genre.Name), _react.default.createElement(_reactBootstrap.Card.Text, null, genre.Genre.Description))))));
+      return _react.default.createElement("div", {
+        className: "genre-view"
+      }, _react.default.createElement(_reactBootstrap.Container, null, _react.default.createElement(_reactBootstrap.Card, {
+        className: "genre-card"
+      }, _react.default.createElement(_reactBootstrap.Card.Body, null, _react.default.createElement(_reactBootstrap.Card.Title, null, movie.Genre.Name), _react.default.createElement(_reactBootstrap.Card.Text, null, movie.Genre.Description)))));
     }
   }]);
 
@@ -51012,7 +51017,7 @@ GenreView.propTypes = {
       Name: _propTypes.default.string.isRequired,
       Description: _propTypes.default.string.isRequired
     }
-  })
+  }).isRequired
 };
 },{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js","./genre-view.scss":"components/genre-view/genre-view.scss"}],"components/movie-card/movie-card.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
@@ -51207,13 +51212,13 @@ var MovieView = /*#__PURE__*/function (_React$Component) {
       }, _react.default.createElement(_reactBootstrap.Button, {
         className: "directorButton",
         variant: "info"
-      }, "See Director Info")), _react.default.createElement(_reactRouterDom.Link, {
+      }, movie.Director.Name, " Info")), _react.default.createElement(_reactRouterDom.Link, {
         to: "/genres/".concat(movie.Genre.Name)
       }, _react.default.createElement(_reactBootstrap.Button, {
         className: "genreButton",
         variant: "info"
-      }, " See Genre Info")), _react.default.createElement(_reactRouterDom.Link, {
-        to: "/users/favorites/".concat(movie.Genre.Name)
+      }, movie.Genre.Name, " Genre Info")), _react.default.createElement(_reactRouterDom.Link, {
+        to: "/users/favorites/"
       }, _react.default.createElement(_reactBootstrap.Button, {
         className: "addFavButton",
         variant: "success"
@@ -51684,25 +51689,30 @@ var MainView = /*#__PURE__*/function (_React$Component) {
         bg: "dark",
         variant: "dark",
         sticky: "top"
-      }, _react.default.createElement(_reactBootstrap.Nav, null, _react.default.createElement(_reactBootstrap.Nav.Item, null, _react.default.createElement(_reactRouterDom.Link, {
+      }, _react.default.createElement(_reactBootstrap.Nav, null, _react.default.createElement(_reactBootstrap.Nav.Item, null, _react.default.createElement(_reactBootstrap.Nav.Link, {
         className: "navLinkHome",
+        as: _reactRouterDom.Link,
         to: '/',
         target: "_self"
-      }, "myFlix Home")), _react.default.createElement(_reactBootstrap.Nav.Item, null, _react.default.createElement(_reactRouterDom.Link, {
+      }, "myFlix Home")), _react.default.createElement(_reactBootstrap.Nav.Item, null, _react.default.createElement(_reactBootstrap.Nav.Link, {
         className: "navLink",
+        as: _reactRouterDom.Link,
         to: '/directors',
         target: "_self"
-      }, "Directors")), _react.default.createElement(_reactBootstrap.Nav.Item, null, _react.default.createElement(_reactRouterDom.Link, {
+      }, "Directors")), _react.default.createElement(_reactBootstrap.Nav.Item, null, _react.default.createElement(_reactBootstrap.Nav.Link, {
         className: "navLink",
-        to: '/genres',
+        as: _reactRouterDom.Link,
+        to: '/genres/',
         target: "_self"
-      }, "Genres")), _react.default.createElement(_reactBootstrap.Nav.Item, null, _react.default.createElement(_reactRouterDom.Link, {
+      }, "Genres")), _react.default.createElement(_reactBootstrap.Nav.Item, null, _react.default.createElement(_reactBootstrap.Nav.Link, {
         className: "navLink",
+        as: _reactRouterDom.Link,
         to: '/login',
         target: "_self",
         onClick: this.onLoggedOut
-      }, "Log Out")), _react.default.createElement(_reactBootstrap.Nav.Item, null, _react.default.createElement(_reactRouterDom.Link, {
+      }, "Log Out")), _react.default.createElement(_reactBootstrap.Nav.Item, null, _react.default.createElement(_reactBootstrap.Nav.Link, {
         className: "navLink",
+        as: _reactRouterDom.Link,
         to: '/users',
         target: "_self"
       }, "My Account")))), _react.default.createElement(_reactRouterDom.Route, {
@@ -51715,12 +51725,10 @@ var MainView = /*#__PURE__*/function (_React$Component) {
             }
           });
           return movies.map(function (m) {
-            return _react.default.createElement(_reactBootstrap.Col, {
-              md: 4
-            }, _react.default.createElement(_movieCard.MovieCard, {
+            return _react.default.createElement(_movieCard.MovieCard, {
               key: m._id,
               movie: m
-            }));
+            });
           });
         }
       }), _react.default.createElement(_reactRouterDom.Route, {
@@ -51732,12 +51740,10 @@ var MainView = /*#__PURE__*/function (_React$Component) {
             }
           });
           return movies.map(function (m) {
-            return _react.default.createElement(_reactBootstrap.Col, {
-              md: 4
-            }, _react.default.createElement(_movieCard.MovieCard, {
+            return _react.default.createElement(_movieCard.MovieCard, {
               key: m._id,
               movie: m
-            }));
+            });
           });
         }
       }), _react.default.createElement(_reactRouterDom.Route, {
@@ -51756,7 +51762,6 @@ var MainView = /*#__PURE__*/function (_React$Component) {
           });
         }
       }), _react.default.createElement(_reactRouterDom.Route, {
-        exact: true,
         path: "/genres/:name",
         render: function render(_ref2) {
           var match = _ref2.match;
@@ -51770,7 +51775,11 @@ var MainView = /*#__PURE__*/function (_React$Component) {
           });
         }
       }), _react.default.createElement(_reactRouterDom.Route, {
-        exact: true,
+        path: "/genres",
+        render: function render() {
+          return _react.default.createElement(_genreView.GenreView, null);
+        }
+      }), _react.default.createElement(_reactRouterDom.Route, {
         path: "/directors/:name",
         render: function render(_ref3) {
           var match = _ref3.match;
@@ -51782,6 +51791,11 @@ var MainView = /*#__PURE__*/function (_React$Component) {
               return m.Director.Name === match.params.name;
             }).Director
           });
+        }
+      }), _react.default.createElement(_reactRouterDom.Route, {
+        path: "/directors",
+        render: function render() {
+          return _react.default.createElement(_directorView.DirectorView, null);
         }
       }))));
     }
