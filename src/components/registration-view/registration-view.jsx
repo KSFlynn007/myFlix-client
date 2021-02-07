@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import PropTypes from 'prop-types';
+import propTypes from 'prop-types';
 import axios from 'axios';
 import Config from '../../config';
 
@@ -86,11 +86,11 @@ export function RegisterView(props) {
 }
 
 RegisterView.propTypes = {
-    register: PropTypes.shape({
-        username: PropTypes.string.isRequired,
-        email: PropTypes.string.isRequired,
-        password: PropTypes.string.isRequired,
-        birthday: PropTypes.instanceOf(Date).isRequired
+    register: propTypes.shape({
+        username: propTypes.string.isRequired,
+        email: propTypes.string.isRequired,
+        password: propTypes.string.isRequired,
+        birthday: propTypes.instanceOf(Date).isRequired
     }),
-    onRegister: PropTypes.func,
+    onRegister: propTypes.func,
 };
