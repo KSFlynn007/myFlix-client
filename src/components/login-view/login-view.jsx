@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import PropTypes from 'prop-types';
+import propTypes from 'prop-types';
 import axios from 'axios';
 import Config from '../../config';
 
@@ -66,10 +66,10 @@ export function LoginView(props) {
 }
 
 LoginView.propTypes = {
-    user: PropTypes.shape({
-        username: PropTypes.string.isRequired,
-        password: PropTypes.string.isRequired
+    user: propTypes.shape({
+        username: propTypes.string.isRequired,
+        password: propTypes.string.isRequired
     }),
-    onLoggedIn: PropTypes.func.isRequired,
-    onRegister: PropTypes.func
+    onLoggedIn: propTypes.func.isRequired,
+    onRegister: propTypes.func
 };
