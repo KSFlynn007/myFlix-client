@@ -1,6 +1,6 @@
 import React from 'react';
 import propTypes from 'prop-types';
-import { Button, Card, Container, Row, Col } from 'react-bootstrap';
+import { Button, Card, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 import './movie-card.scss';
@@ -10,7 +10,7 @@ export class MovieCard extends React.Component {
         const { movie } = this.props;
 
         return (
-            <Col>
+            <Col md={4}>
             <Card className='movie-card' border='info' style={{ width: '18rem' }}>
                 <Card.Img className='movie-img' variant='top' src={ movie.ImageURL } />
                 <Card.Body>
@@ -42,7 +42,7 @@ MovieCard.propTypes = {
         Director: propTypes.shape({
             Name: propTypes.string,
             Bio: propTypes.string,
-            Birthdate: propTypes.string
+            Birthday: propTypes.instanceOf(Date)
         }),
         Featured: propTypes.bool
     }).isRequired

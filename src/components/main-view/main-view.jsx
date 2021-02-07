@@ -90,19 +90,19 @@ export class MainView extends React.Component {
                     <Navbar expand onToggle='sm' bg='dark' variant='dark' sticky='top'>
                         <Nav>
                             <Nav.Item>
-                                <Nav.Link className='navLinkHome' as={Link} to={'/'} target='_self'>myFlix Home</Nav.Link>
+                                <Nav.Link className='navLinkHome' as={Link} to={`/`} target='_self'>myFlix Home</Nav.Link>
                             </Nav.Item>
                             <Nav.Item>
-                                <Nav.Link className='navLink' as={Link} to={'/directors'} target='_self'>Directors</Nav.Link>
+                                <Nav.Link className='navLink' as={Link} to={`/directors`} target='_self'>Directors</Nav.Link>
                             </Nav.Item>
                             <Nav.Item>
-                                <Nav.Link className='navLink' as={Link} to={'/genres'} target='_self'>Genres</Nav.Link>
+                                <Nav.Link className='navLink' as={Link} to={`/genres`} target='_self'>Genres</Nav.Link>
                             </Nav.Item>
                             <Nav.Item>
-                                <Nav.Link className='navLink' as={Link} to={'/login'} target='_self' onClick={this.onLoggedOut}>Log Out</Nav.Link>
+                                <Nav.Link className='navLink' as={Link} to={`/login`} target='_self' onClick={this.onLoggedOut}>Log Out</Nav.Link>
                             </Nav.Item>
                             <Nav.Item>
-                                <Nav.Link className='navLink' as={Link} to={'/users'} target='_self'>My Account</Nav.Link>
+                                <Nav.Link className='navLink' as={Link} to={`/users/${user}`} target='_self'>Profile</Nav.Link>
                             </Nav.Item>
                         </Nav>
                     </Navbar>
@@ -126,6 +126,15 @@ export class MainView extends React.Component {
                 <Route path='/movies/:movieId' 
                 render={({match}) => { return <MovieView movie={movies.find(m => m._id === match.params.movieId)}/>}}/>
 
+                <Route path='/directors/:name' 
+                render={({match}) => {
+                    if(!movies) return <div className='main-view'/>;
+                    return <DirectorView director={movies.find(m => m.Director.Name === match.params.name).Director} />
+                }}/>
+
+                <Route path='/directors'
+                render={() => {return <DirectorView />}}/>
+
                 <Route path='/genres/:name' 
                 render={({match}) => {
                     if(!movies) return <div className='main-view'/>;
@@ -135,14 +144,8 @@ export class MainView extends React.Component {
                 <Route path='/genres'
                 render={() => {return <GenreView />}}/>
 
-                <Route path='/directors/:name' 
-                render={({match}) => {
-                    if(!movies) return <div className='main-view'/>;
-                    return <DirectorView director={movies.find(m => m.Director.Name === match.params.name).Director} />
-                }}/>
-
-                <Route path='/directors'
-                render={() => {return <DirectorView />}}/>
+                <Route path='users/:username'
+                render={() => {return <ProfileView />}}/>
 
             </div>
         </Router>
@@ -154,7 +157,7 @@ export class MainView extends React.Component {
 }
 
 MainView.propTypes = {
-  movie: propTypes.arrayOf({
+  movie: propTypes.shape({
     _id: propTypes.string.isRequired,
     Title: propTypes.string.isRequired,
     Description: propTypes.string.isRequired,

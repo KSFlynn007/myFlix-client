@@ -29,8 +29,8 @@ export class DirectorView extends React.Component {
                     <Card className='director-card'>
                         <Card.Body>
                             <Card.Title>{director.Name}</Card.Title>
-                            <Card.Text>{director.Bio}</Card.Text>
-                            <Card.Text>{director.Birthday}</Card.Text>
+                            <Card.Subtitle className='text-muted'>{director.Birthday}</Card.Subtitle>
+                            <Card.Text className='director-bio'>{director.Bio}</Card.Text>
                         </Card.Body>
                     </Card>
                     <Card.Footer>
@@ -49,5 +49,5 @@ DirectorView.propTypes = {
         Name: propTypes.string.isRequired,
         Bio: propTypes.string.isRequired,
         Birthday: propTypes.instanceOf(Date),
-    }).isRequired,
+    })
 }
