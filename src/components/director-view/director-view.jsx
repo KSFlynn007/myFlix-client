@@ -19,16 +19,20 @@ export class DirectorView extends React.Component {
     }
 
     render() {
+        const {director, movie} = this.props;
+
         if (!director) return null;
 
         return (
-            <Container>
-                <Row>
-                    <Col className='col-3'>
-                        ...
-                    </Col>
-                </Row>
-            </Container>
+            <div className='director-view'>
+                <Container>
+                    <Card className='director-card'>
+                        <Card.Body>
+                            <Card.Title>{movie.Director.Name}</Card.Title>
+                        </Card.Body>
+                    </Card>
+                </Container>
+            </div>
         )
     }
 }
