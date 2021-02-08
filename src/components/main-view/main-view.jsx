@@ -16,7 +16,8 @@ import './main-view.scss'
 
 import {
     Navbar,
-    Nav
+    Nav, 
+    Row,
 } from 'react-bootstrap';
 
 
@@ -70,9 +71,15 @@ export class MainView extends React.Component {
             headers: { Authorization: `Bearer ${token}`}
         })
         .then(response => {
+            let movies = response.data.map(movie => {
+                let tempObject = Object.assign(movie)
+                tempObject.Director.Birthday = new Date(movie.Director.Birthday)
+                return tempObject
+            });
+            console.log(movies)
             // Assigning result to state
             this.setState({
-                movies: response.data
+                movies
             });
         })
         .catch(function(error) {
@@ -92,12 +99,12 @@ export class MainView extends React.Component {
                             <Nav.Item>
                                 <Nav.Link className='navLinkHome' as={Link} to={`/`} target='_self'>myFlix Home</Nav.Link>
                             </Nav.Item>
-                            <Nav.Item>
+                            {/* <Nav.Item>
                                 <Nav.Link className='navLink' as={Link} to={`/directors`} target='_self'>Directors</Nav.Link>
                             </Nav.Item>
                             <Nav.Item>
                                 <Nav.Link className='navLink' as={Link} to={`/genres`} target='_self'>Genres</Nav.Link>
-                            </Nav.Item>
+                            </Nav.Item> */}
                             <Nav.Item>
                                 <Nav.Link className='navLink' as={Link} to={`/login`} target='_self' onClick={this.onLoggedOut}>Log Out</Nav.Link>
                             </Nav.Item>
@@ -107,18 +114,17 @@ export class MainView extends React.Component {
                         </Nav>
                     </Navbar>
 
-
-                <Route exact path='/' 
+                <Route path='/'
                 render={() => {
                     if (!user) return <LoginView onLoggedIn={(data) => this.onLoggedIn(data)}/>;
-                    return movies.map(m => <MovieCard key={m._id} movie={m}/>)
-                }}/>
+                    return <Row className='movieCard-row'>{movies.map((m) => <MovieCard key={m._id} movie={m} />)}</Row>
+                }}
+                />
 
                 <Route path='/login'
                 render={() => {
                     if (!user) return <LoginView onLoggedIn={(data) => this.onLoggedIn(data)}/>;
-                    return movies.map(m => <MovieCard key={m._id} movie={m}/>)
-                }}/>
+                    return movies.map(m => <MovieCard key={m._id} movie={m}/>)}}/>
 
                 <Route path='/register'
                 render={() => { return <RegisterView />}} />
@@ -128,7 +134,7 @@ export class MainView extends React.Component {
 
                 <Route path='/directors/:name' 
                 render={({match}) => {
-                    if(!movies) return <div className='main-view'/>;
+                    if(!movies.length) return <div className='main-view'/>;
                     return <DirectorView director={movies.find(m => m.Director.Name === match.params.name).Director} />
                 }}/>
 
@@ -137,7 +143,7 @@ export class MainView extends React.Component {
 
                 <Route path='/genres/:name' 
                 render={({match}) => {
-                    if(!movies) return <div className='main-view'/>;
+                    if(!movies.length) return <div className='main-view'/>;
                     return <GenreView genre={movies.find((m) => m.Genre.Name === match.params.name).Genre}/>
                 }}/>
 
@@ -145,7 +151,10 @@ export class MainView extends React.Component {
                 render={() => {return <GenreView />}}/>
 
                 <Route path='users/:username'
-                render={() => {return <ProfileView />}}/>
+                render={() => {
+                    if (!user) return <LoginView onLoggedIn={(data) => this.onLoggedIn(data)} />;
+                    if (movies.length === 0) return;
+                    return <ProfileView movies={movies}/>}}/>
 
             </div>
         </Router>
