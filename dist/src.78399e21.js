@@ -51685,11 +51685,12 @@ var MainView = /*#__PURE__*/function (_React$Component) {
           var tempObject = Object.assign(movie);
           tempObject.Director.Birthday = new Date(movie.Director.Birthday);
           return tempObject;
-        });
-        console.log(movies); // Assigning result to state
+        }); // Assigning result to state
 
         _this2.setState({
-          movies: movies
+          // old setState before above data.map was:
+          // movies: response.data
+          movies: response.data
         });
       }).catch(function (error) {
         console.log(error);
@@ -51728,7 +51729,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
         to: "/users/".concat(user),
         target: "_self"
       }, "Profile")))), _react.default.createElement(_reactRouterDom.Route, {
-        path: "/",
+        path: ['/', '/login'],
         render: function render() {
           if (!user) return _react.default.createElement(_loginView.LoginView, {
             onLoggedIn: function onLoggedIn(data) {
@@ -51743,21 +51744,6 @@ var MainView = /*#__PURE__*/function (_React$Component) {
               movie: m
             });
           }));
-        }
-      }), _react.default.createElement(_reactRouterDom.Route, {
-        path: "/login",
-        render: function render() {
-          if (!user) return _react.default.createElement(_loginView.LoginView, {
-            onLoggedIn: function onLoggedIn(data) {
-              return _this3.onLoggedIn(data);
-            }
-          });
-          return movies.map(function (m) {
-            return _react.default.createElement(_movieCard.MovieCard, {
-              key: m._id,
-              movie: m
-            });
-          });
         }
       }), _react.default.createElement(_reactRouterDom.Route, {
         path: "/register",
