@@ -51550,7 +51550,337 @@ RegisterView.propTypes = {
   }),
   onRegister: _propTypes.default.func
 };
-},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","axios":"../node_modules/axios/index.js","../../config":"config.js","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js","./registration-view.scss":"components/registration-view/registration-view.scss"}],"components/main-view/main-view.scss":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","axios":"../node_modules/axios/index.js","../../config":"config.js","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js","./registration-view.scss":"components/registration-view/registration-view.scss"}],"components/profile-view/profile-view.scss":[function(require,module,exports) {
+var reloadCSS = require('_css_loader');
+
+module.hot.dispose(reloadCSS);
+module.hot.accept(reloadCSS);
+},{"_css_loader":"../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"components/profile-view/profile-view.jsx":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.ProfileView = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _propTypes = _interopRequireDefault(require("prop-types"));
+
+var _axios = _interopRequireDefault(require("axios"));
+
+var _reactRouterDom = require("react-router-dom");
+
+require("./profile-view.scss");
+
+var _Form = _interopRequireDefault(require("react-bootstrap/Form"));
+
+var _Button = _interopRequireDefault(require("react-bootstrap/Button"));
+
+var _Container = _interopRequireDefault(require("react-bootstrap/Container"));
+
+var _Card = _interopRequireDefault(require("react-bootstrap/Card"));
+
+var _CardDeck = _interopRequireDefault(require("react-bootstrap/CardDeck"));
+
+var _reactBootstrap = require("react-bootstrap");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+var ProfileView = /*#__PURE__*/function (_React$Component) {
+  _inherits(ProfileView, _React$Component);
+
+  var _super = _createSuper(ProfileView);
+
+  function ProfileView() {
+    var _this;
+
+    _classCallCheck(this, ProfileView);
+
+    _this = _super.call(this);
+    _this.Username = null, _this.Password = null, _this.Email = null, _this.Birthday = null;
+    _this.state = {
+      Username: null,
+      Password: null,
+      Email: null,
+      Birthday: null,
+      FavoriteMovies: [],
+      validated: null
+    };
+    return _this;
+  }
+
+  _createClass(ProfileView, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var accessToken = localStorage.getItem('token');
+
+      if (accessToken !== null) {
+        this.getUser(accessToken);
+      }
+    }
+  }, {
+    key: "getUser",
+    value: function getUser(token) {
+      var _this2 = this;
+
+      var username = localStorage.getItem('user');
+
+      _axios.default.get("".concat(Config.API_URL, "/").concat(username), {
+        headers: {
+          Authorization: "Bearer ".concat(token)
+        }
+      }).then(function (response) {
+        _this2.setState({
+          Username: response.data.Username,
+          Password: response.data.Password,
+          Email: response.data.Email,
+          Birthday: response.data.Birthday,
+          FavoriteMovies: response.data.FavoriteMovies
+        });
+      }).catch(function (error) {
+        console.log(error);
+      });
+    }
+  }, {
+    key: "handleRemoveFavorite",
+    value: function handleRemoveFavorite(e, movie) {
+      var _this3 = this;
+
+      e.preventDefault();
+      var username = localStorage.getItem('user');
+      var token = localStorage.getItem('token');
+
+      _axios.default.delete("".concat(Config.API_URL, "/").concat(username, "/movies/").concat(movie), {
+        headers: {
+          Authorization: "Bearer ".concat(token)
+        }
+      }).then(function () {
+        alert('Movie removed from favorites');
+
+        _this3.componentDidMount(); // window.open('_self');
+
+      }).catch(function (error) {
+        console.log(error);
+      });
+    }
+  }, {
+    key: "handleUpdate",
+    value: function handleUpdate(e, newUsername, newPassword, newEmail, newBirthday) {
+      var _this4 = this;
+
+      this.setState({
+        validated: null
+      });
+      var form = e.currentTarget;
+
+      if (form.checkValidity() === false) {
+        e.preventDefault();
+        e.stopPropagation();
+        this.setState({
+          validated: true
+        });
+        return;
+      }
+
+      e.preventDefault();
+      var token = localStorage.getItem('token');
+      var username = localStorage.getItem('user');
+      (0, _axios.default)({
+        method: 'put',
+        url: "".concat(Config.API_URL, "/").concat(username),
+        headers: {
+          Authorization: "Bearer ".concat(token)
+        },
+        data: {
+          Username: newUsername ? newUsername : this.state.Username,
+          Password: newPassword ? newPassword : this.state.Password,
+          Email: newEmail ? newEmail : this.state.Email,
+          Birthday: newBirthday ? newBirthday : this.state.Birthday
+        }
+      }).then(function (response) {
+        alert('Saved Changes');
+
+        _this4.setState({
+          Username: response.data.Username,
+          Password: response.data.Password,
+          Email: response.data.Email,
+          Birthday: response.data.Birthday
+        });
+
+        localStorage.setItem('user', _this4.state.Username);
+        window.open("/users/".concat(username), '_self');
+      }).catch(function (error) {
+        console.log(error);
+      });
+    }
+  }, {
+    key: "setUsername",
+    value: function setUsername(input) {
+      this.Username = input;
+    }
+  }, {
+    key: "setPassword",
+    value: function setPassword(input) {
+      this.Password = input;
+    }
+  }, {
+    key: "setEmail",
+    value: function setEmail(input) {
+      this.Email = input;
+    }
+  }, {
+    key: "setBirthday",
+    value: function setBirthday(input) {
+      this.Birthday = input;
+    }
+  }, {
+    key: "handleDeregister",
+    value: function handleDeregister(e) {
+      e.preventDefault();
+      var token = localStorage.getItem('token');
+      var username = localStorage.getItem('user');
+
+      _axios.default.delete("".concat(Config.API_URL, "/").concat(username), {
+        headers: {
+          Authorization: "Bearer ".concat(token)
+        }
+      }).then(function () {
+        localStorage.removeItem('user');
+        localStorage.removeItem('token');
+        alert('Your account has been deleted');
+        window.open("/", '_self');
+      }).catch(function (e) {
+        console.log(e);
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this$state = this.state,
+          FavoriteMovies = _this$state.FavoriteMovies,
+          validated = _this$state.validated;
+      var username = localStorage.getItem('user');
+      var movies = this.props.movies;
+      return _react.default.createElement("h1", null, "Testing"); // return (
+      //   <Container className="profile-view">
+      //     <Tabs defaultActiveKey="profile" transition={false} className="profile-tabs">
+      //       <Tab className="tab-item" eventKey="profile" title="Profile">
+      //         <Card className="profile-card">
+      //           <h1 className="profile-title">{username}'s Favorite Movies</h1>
+      //           <Card.Body>
+      //             {FavoriteMovies.length === 0 && <div className="card-content">You have no favorite movies.</div>}
+      //             <div className="favorites-container">
+      //               {FavoriteMovies.length > 0 &&
+      //                 movies.map((movie) => {
+      //                   if (movie._id === FavoriteMovies.find((favMovie) => favMovie === movie._id)) {
+      //                     return (
+      //                       <CardDeck className="movie-card-deck">
+      //                         <Card className="favorites-item card-content" style={{ width: '16rem', flex: 1 }} key={movie._id}>
+      //                           <Card.Img variant="top" src={movie.ImagePath} />
+      //                           <Card.Body className="movie-card-body">
+      //                             <Card.Title className="movie-card-title">{movie.Title}</Card.Title>
+      //                             <Button size="sm" block className="profile-button remove-favorite" onClick={(e) => this.handleRemoveFavorite(e, movie._id)}>
+      //                               Remove
+      // 							</Button>
+      //                           </Card.Body>
+      //                         </Card>
+      //                       </CardDeck>
+      //                     );
+      //                   }
+      //                 })}
+      //             </div>
+      //           </Card.Body>
+      //         </Card>
+      //       </Tab>
+      //       <Tab className="tab-item" eventKey="update" title="Update">
+      //         <Card className="update-card">
+      //           <h1 className="profile-title">Update Profile</h1>
+      //           <Card.Body>
+      //             <Form noValidate validated={validated} className="update-form" onSubmit={(e) => this.handleUpdate(e, this.Username, this.Password, this.Email, this.Birthday)}>
+      //               <Form.Group controlId="formBasicUsername">
+      //                 <Form.Label className="form-label">Username</Form.Label>
+      //                 <Form.Control type="text" placeholder="Change Username" onChange={(e) => this.setUsername(e.target.value)} pattern="[a-zA-Z0-9]{6,}" />
+      //                 <Form.Control.Feedback type="invalid">Please enter a valid username with at least 6 alphanumeric characters.</Form.Control.Feedback>
+      //               </Form.Group>
+      //               <Form.Group controlId="formBasicPassword">
+      //                 <Form.Label className="form-label">
+      //                   Password<span className="required">*</span>
+      //                 </Form.Label>
+      //                 <Form.Control type="password" placeholder="Current or New Password" onChange={(e) => this.setPassword(e.target.value)} pattern=".{6,}" required />
+      //                 <Form.Control.Feedback type="invalid">Please enter a valid password with at least 6 characters.</Form.Control.Feedback>
+      //               </Form.Group>
+      //               <Form.Group controlId="formBasicEmail">
+      //                 <Form.Label className="form-label">Email</Form.Label>
+      //                 <Form.Control type="email" placeholder="Change Email" onChange={(e) => this.setEmail(e.target.value)} />
+      //                 <Form.Control.Feedback type="invalid">Please enter a valid email address.</Form.Control.Feedback>
+      //               </Form.Group>
+      //               <Form.Group controlId="formBasicBirthday">
+      //                 <Form.Label className="form-label">Birthday</Form.Label>
+      //                 <Form.Control type="date" placeholder="Change Birthday" onChange={(e) => this.setBirthday(e.target.value)} />
+      //                 <Form.Control.Feedback type="invalid">Please enter a valid birthday.</Form.Control.Feedback>
+      //               </Form.Group>
+      //               <Button className="button" type="submit" block>
+      //                 Update
+      // 								</Button>
+      //             </Form>
+      //           </Card.Body>
+      //         </Card>
+      //       </Tab>
+      //       <Tab className="tab-item" eventKey="delete" title="Delete Profile">
+      //         <Card className="update-card">
+      //           <h1 className="profile-title">Delete Your Profile</h1>
+      //           <Card.Body>
+      //             <Button className="button" block onClick={(e) => this.handleDeregister(e)}>
+      //               Click Here If You're Sure You Want To Delete Your Profile
+      // 							</Button>
+      //           </Card.Body>
+      //         </Card>
+      //       </Tab>
+      //     </Tabs>
+      //   </Container>
+      // );
+    }
+  }]);
+
+  return ProfileView;
+}(_react.default.Component);
+
+exports.ProfileView = ProfileView;
+ProfileView.propTypes = {
+  user: _propTypes.default.shape({
+    FavoriteMovies: _propTypes.default.arrayOf(_propTypes.default.shape({
+      _id: _propTypes.default.string.isRequired,
+      Title: _propTypes.default.string.isRequired
+    })),
+    Username: _propTypes.default.string.isRequired,
+    Email: _propTypes.default.string.isRequired,
+    Birthday: _propTypes.default.instanceOf(Date)
+  })
+};
+},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","axios":"../node_modules/axios/index.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js","./profile-view.scss":"components/profile-view/profile-view.scss","react-bootstrap/Form":"../node_modules/react-bootstrap/esm/Form.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","react-bootstrap/Container":"../node_modules/react-bootstrap/esm/Container.js","react-bootstrap/Card":"../node_modules/react-bootstrap/esm/Card.js","react-bootstrap/CardDeck":"../node_modules/react-bootstrap/esm/CardDeck.js","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js"}],"components/main-view/main-view.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
@@ -51582,6 +51912,8 @@ var _movieView = require("../movie-view/movie-view");
 var _loginView = require("../login-view/login-view");
 
 var _registrationView = require("../registration-view/registration-view");
+
+var _profileView = require("../profile-view/profile-view");
 
 var _config = _interopRequireDefault(require("../../config"));
 
@@ -51798,6 +52130,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
           return _react.default.createElement(_genreView.GenreView, null);
         }
       }), _react.default.createElement(_reactRouterDom.Route, {
+        exact: true,
         path: "users/:username",
         render: function render() {
           if (!user) return _react.default.createElement(_loginView.LoginView, {
@@ -51806,7 +52139,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
             }
           });
           if (movies.length === 0) return;
-          return _react.default.createElement(ProfileView, {
+          return _react.default.createElement(_profileView.ProfileView, {
             movies: movies
           });
         }
@@ -51838,7 +52171,7 @@ MainView.propTypes = {
   }),
   user: _propTypes.default.string
 };
-},{"react":"../node_modules/react/index.js","axios":"../node_modules/axios/index.js","prop-types":"../node_modules/prop-types/index.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js","../director-view/director-view":"components/director-view/director-view.jsx","../genre-view/genre-view":"components/genre-view/genre-view.jsx","../movie-card/movie-card":"components/movie-card/movie-card.jsx","../movie-view/movie-view":"components/movie-view/movie-view.jsx","../login-view/login-view":"components/login-view/login-view.jsx","../registration-view/registration-view":"components/registration-view/registration-view.jsx","../../config":"config.js","./main-view.scss":"components/main-view/main-view.scss","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js"}],"index.scss":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","axios":"../node_modules/axios/index.js","prop-types":"../node_modules/prop-types/index.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js","../director-view/director-view":"components/director-view/director-view.jsx","../genre-view/genre-view":"components/genre-view/genre-view.jsx","../movie-card/movie-card":"components/movie-card/movie-card.jsx","../movie-view/movie-view":"components/movie-view/movie-view.jsx","../login-view/login-view":"components/login-view/login-view.jsx","../registration-view/registration-view":"components/registration-view/registration-view.jsx","../profile-view/profile-view":"components/profile-view/profile-view.jsx","../../config":"config.js","./main-view.scss":"components/main-view/main-view.scss","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js"}],"index.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
