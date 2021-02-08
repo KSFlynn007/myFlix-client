@@ -1,6 +1,13 @@
+.movieCard-col {
+  margin-top: 10px;
+}
+
 .movie-card {
-  margin: 10px 0px;
   text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
 }
 
 .movie-img {
