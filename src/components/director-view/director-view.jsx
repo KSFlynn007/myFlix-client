@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import propTypes from 'prop-types';
+import Config from '../../config';
 import {
     Card,
     Button,
@@ -18,6 +19,10 @@ export class DirectorView extends React.Component {
         this.state = {};
     }
 
+    formatDate = (date) => {
+        return `${Config.MONTHS[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`;
+    }
+
     render() {
         const {director} = this.props;
 
@@ -29,7 +34,7 @@ export class DirectorView extends React.Component {
                     <Card className='director-card'>
                         <Card.Body>
                             <Card.Title>{director.Name}</Card.Title>
-                            <Card.Subtitle className='text-muted'>{director.Birthday}</Card.Subtitle>
+                            <Card.Subtitle className='text-muted'>{this.formatDate(director.Birthday)}</Card.Subtitle>
                             <Card.Text className='director-bio'>{director.Bio}</Card.Text>
                         </Card.Body>
                     </Card>
