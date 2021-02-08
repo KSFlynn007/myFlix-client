@@ -76,10 +76,11 @@ export class MainView extends React.Component {
                 tempObject.Director.Birthday = new Date(movie.Director.Birthday)
                 return tempObject
             });
-            console.log(movies)
             // Assigning result to state
             this.setState({
-                movies
+                // old setState before above data.map was:
+                // movies: response.data
+                movies: response.data
             });
         })
         .catch(function(error) {
@@ -99,12 +100,6 @@ export class MainView extends React.Component {
                             <Nav.Item>
                                 <Nav.Link className='navLinkHome' as={Link} to={`/`} target='_self'>myFlix Home</Nav.Link>
                             </Nav.Item>
-                            {/* <Nav.Item>
-                                <Nav.Link className='navLink' as={Link} to={`/directors`} target='_self'>Directors</Nav.Link>
-                            </Nav.Item>
-                            <Nav.Item>
-                                <Nav.Link className='navLink' as={Link} to={`/genres`} target='_self'>Genres</Nav.Link>
-                            </Nav.Item> */}
                             <Nav.Item>
                                 <Nav.Link className='navLink' as={Link} to={`/login`} target='_self' onClick={this.onLoggedOut}>Log Out</Nav.Link>
                             </Nav.Item>
@@ -114,17 +109,12 @@ export class MainView extends React.Component {
                         </Nav>
                     </Navbar>
 
-                <Route path='/'
+                <Route path={['/', '/login']}
                 render={() => {
                     if (!user) return <LoginView onLoggedIn={(data) => this.onLoggedIn(data)}/>;
                     return <Row className='movieCard-row'>{movies.map((m) => <MovieCard key={m._id} movie={m} />)}</Row>
                 }}
                 />
-
-                <Route path='/login'
-                render={() => {
-                    if (!user) return <LoginView onLoggedIn={(data) => this.onLoggedIn(data)}/>;
-                    return movies.map(m => <MovieCard key={m._id} movie={m}/>)}}/>
 
                 <Route path='/register'
                 render={() => { return <RegisterView />}} />
