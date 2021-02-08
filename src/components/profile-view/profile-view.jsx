@@ -159,86 +159,90 @@ export class ProfileView extends React.Component {
     const username = localStorage.getItem('user');
     const { movies } = this.props;
 
-    return (
-      <Container className="profile-view">
-        <Tabs defaultActiveKey="profile" transition={false} className="profile-tabs">
-          <Tab className="tab-item" eventKey="profile" title="Profile">
-            <Card className="profile-card">
-              <h1 className="profile-title">{username}'s Favorite Movies</h1>
-              <Card.Body>
-                {FavoriteMovies.length === 0 && <div className="card-content">You have no favorite movies.</div>}
+    return(
+        <h1>Testing</h1>
+    )
 
-                <div className="favorites-container">
-                  {FavoriteMovies.length > 0 &&
-                    movies.map((movie) => {
-                      if (movie._id === FavoriteMovies.find((favMovie) => favMovie === movie._id)) {
-                        return (
-                          <CardDeck className="movie-card-deck">
-                            <Card className="favorites-item card-content" style={{ width: '16rem', flex: 1 }} key={movie._id}>
-                              <Card.Img variant="top" src={movie.ImagePath} />
-                              <Card.Body className="movie-card-body">
-                                <Card.Title className="movie-card-title">{movie.Title}</Card.Title>
-                                <Button size="sm" block className="profile-button remove-favorite" onClick={(e) => this.handleRemoveFavorite(e, movie._id)}>
-                                  Remove
-																</Button>
-                              </Card.Body>
-                            </Card>
-                          </CardDeck>
-                        );
-                      }
-                    })}
-                </div>
-              </Card.Body>
-            </Card>
-          </Tab>
-          <Tab className="tab-item" eventKey="update" title="Update">
-            <Card className="update-card">
-              <h1 className="profile-title">Update Profile</h1>
-              <Card.Body>
-                <Form noValidate validated={validated} className="update-form" onSubmit={(e) => this.handleUpdate(e, this.Username, this.Password, this.Email, this.Birthday)}>
-                  <Form.Group controlId="formBasicUsername">
-                    <Form.Label className="form-label">Username</Form.Label>
-                    <Form.Control type="text" placeholder="Change Username" onChange={(e) => this.setUsername(e.target.value)} pattern="[a-zA-Z0-9]{6,}" />
-                    <Form.Control.Feedback type="invalid">Please enter a valid username with at least 6 alphanumeric characters.</Form.Control.Feedback>
-                  </Form.Group>
-                  <Form.Group controlId="formBasicPassword">
-                    <Form.Label className="form-label">
-                      Password<span className="required">*</span>
-                    </Form.Label>
-                    <Form.Control type="password" placeholder="Current or New Password" onChange={(e) => this.setPassword(e.target.value)} pattern=".{6,}" required />
-                    <Form.Control.Feedback type="invalid">Please enter a valid password with at least 6 characters.</Form.Control.Feedback>
-                  </Form.Group>
-                  <Form.Group controlId="formBasicEmail">
-                    <Form.Label className="form-label">Email</Form.Label>
-                    <Form.Control type="email" placeholder="Change Email" onChange={(e) => this.setEmail(e.target.value)} />
-                    <Form.Control.Feedback type="invalid">Please enter a valid email address.</Form.Control.Feedback>
-                  </Form.Group>
-                  <Form.Group controlId="formBasicBirthday">
-                    <Form.Label className="form-label">Birthday</Form.Label>
-                    <Form.Control type="date" placeholder="Change Birthday" onChange={(e) => this.setBirthday(e.target.value)} />
-                    <Form.Control.Feedback type="invalid">Please enter a valid birthday.</Form.Control.Feedback>
-                  </Form.Group>
-                  <Button className="button" type="submit" block>
-                    Update
-									</Button>
-                </Form>
-              </Card.Body>
-            </Card>
-          </Tab>
+    // return (
+    //   <Container className="profile-view">
+    //     <Tabs defaultActiveKey="profile" transition={false} className="profile-tabs">
+    //       <Tab className="tab-item" eventKey="profile" title="Profile">
+    //         <Card className="profile-card">
+    //           <h1 className="profile-title">{username}'s Favorite Movies</h1>
+    //           <Card.Body>
+    //             {FavoriteMovies.length === 0 && <div className="card-content">You have no favorite movies.</div>}
 
-          <Tab className="tab-item" eventKey="delete" title="Delete Profile">
-            <Card className="update-card">
-              <h1 className="profile-title">Delete Your Profile</h1>
-              <Card.Body>
-                <Button className="button" block onClick={(e) => this.handleDeregister(e)}>
-                  Click Here If You're Sure You Want To Delete Your Profile
-								</Button>
-              </Card.Body>
-            </Card>
-          </Tab>
-        </Tabs>
-      </Container>
-    );
+    //             <div className="favorites-container">
+    //               {FavoriteMovies.length > 0 &&
+    //                 movies.map((movie) => {
+    //                   if (movie._id === FavoriteMovies.find((favMovie) => favMovie === movie._id)) {
+    //                     return (
+    //                       <CardDeck className="movie-card-deck">
+    //                         <Card className="favorites-item card-content" style={{ width: '16rem', flex: 1 }} key={movie._id}>
+    //                           <Card.Img variant="top" src={movie.ImagePath} />
+    //                           <Card.Body className="movie-card-body">
+    //                             <Card.Title className="movie-card-title">{movie.Title}</Card.Title>
+    //                             <Button size="sm" block className="profile-button remove-favorite" onClick={(e) => this.handleRemoveFavorite(e, movie._id)}>
+    //                               Remove
+	// 							</Button>
+    //                           </Card.Body>
+    //                         </Card>
+    //                       </CardDeck>
+    //                     );
+    //                   }
+    //                 })}
+    //             </div>
+    //           </Card.Body>
+    //         </Card>
+    //       </Tab>
+    //       <Tab className="tab-item" eventKey="update" title="Update">
+    //         <Card className="update-card">
+    //           <h1 className="profile-title">Update Profile</h1>
+    //           <Card.Body>
+    //             <Form noValidate validated={validated} className="update-form" onSubmit={(e) => this.handleUpdate(e, this.Username, this.Password, this.Email, this.Birthday)}>
+    //               <Form.Group controlId="formBasicUsername">
+    //                 <Form.Label className="form-label">Username</Form.Label>
+    //                 <Form.Control type="text" placeholder="Change Username" onChange={(e) => this.setUsername(e.target.value)} pattern="[a-zA-Z0-9]{6,}" />
+    //                 <Form.Control.Feedback type="invalid">Please enter a valid username with at least 6 alphanumeric characters.</Form.Control.Feedback>
+    //               </Form.Group>
+    //               <Form.Group controlId="formBasicPassword">
+    //                 <Form.Label className="form-label">
+    //                   Password<span className="required">*</span>
+    //                 </Form.Label>
+    //                 <Form.Control type="password" placeholder="Current or New Password" onChange={(e) => this.setPassword(e.target.value)} pattern=".{6,}" required />
+    //                 <Form.Control.Feedback type="invalid">Please enter a valid password with at least 6 characters.</Form.Control.Feedback>
+    //               </Form.Group>
+    //               <Form.Group controlId="formBasicEmail">
+    //                 <Form.Label className="form-label">Email</Form.Label>
+    //                 <Form.Control type="email" placeholder="Change Email" onChange={(e) => this.setEmail(e.target.value)} />
+    //                 <Form.Control.Feedback type="invalid">Please enter a valid email address.</Form.Control.Feedback>
+    //               </Form.Group>
+    //               <Form.Group controlId="formBasicBirthday">
+    //                 <Form.Label className="form-label">Birthday</Form.Label>
+    //                 <Form.Control type="date" placeholder="Change Birthday" onChange={(e) => this.setBirthday(e.target.value)} />
+    //                 <Form.Control.Feedback type="invalid">Please enter a valid birthday.</Form.Control.Feedback>
+    //               </Form.Group>
+    //               <Button className="button" type="submit" block>
+    //                 Update
+	// 								</Button>
+    //             </Form>
+    //           </Card.Body>
+    //         </Card>
+    //       </Tab>
+
+    //       <Tab className="tab-item" eventKey="delete" title="Delete Profile">
+    //         <Card className="update-card">
+    //           <h1 className="profile-title">Delete Your Profile</h1>
+    //           <Card.Body>
+    //             <Button className="button" block onClick={(e) => this.handleDeregister(e)}>
+    //               Click Here If You're Sure You Want To Delete Your Profile
+	// 							</Button>
+    //           </Card.Body>
+    //         </Card>
+    //       </Tab>
+    //     </Tabs>
+    //   </Container>
+    // );
   }
 }
 
