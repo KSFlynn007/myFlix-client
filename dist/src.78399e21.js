@@ -51729,6 +51729,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
         to: "/users/".concat(user),
         target: "_self"
       }, "Profile")))), _react.default.createElement(_reactRouterDom.Route, {
+        exact: true,
         path: ['/', '/login'],
         render: function render() {
           if (!user) return _react.default.createElement(_loginView.LoginView, {

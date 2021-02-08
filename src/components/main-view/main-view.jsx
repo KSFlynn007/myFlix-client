@@ -109,13 +109,13 @@ export class MainView extends React.Component {
                         </Nav>
                     </Navbar>
 
-                <Route path={['/', '/login']}
+                <Route exact path={['/', '/login']}
                 render={() => {
                     if (!user) return <LoginView onLoggedIn={(data) => this.onLoggedIn(data)}/>;
                     return <Row className='movieCard-row'>{movies.map((m) => <MovieCard key={m._id} movie={m} />)}</Row>
                 }}
                 />
-
+                
                 <Route path='/register'
                 render={() => { return <RegisterView />}} />
 
