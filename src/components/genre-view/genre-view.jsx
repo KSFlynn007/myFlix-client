@@ -1,10 +1,13 @@
 import React from 'react';
 import propTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import {MovieCard} from '../movie-card/movie-card';
+
 import {
     Container,
     Card,
-    Button
+    Button,
+    ListGroup
 } from 'react-bootstrap';
 
 import './genre-view.scss';
@@ -17,7 +20,7 @@ export class GenreView extends React.Component {
     }
 
     render() {
-        const { genre } = this.props;
+        const { genre, movies } = this.props;
 
         if (!genre) return null;
 
@@ -26,8 +29,22 @@ export class GenreView extends React.Component {
                 <Container>
                     <Card className='genre-card'>
                         <Card.Body>
-                            <Card.Title>{genre.Name}</Card.Title>
-                            <Card.Text>{genre.Description}</Card.Text>
+                            <Card.Title>{genre.Genre.Name}</Card.Title>
+                            <Card.Text>{genre.Genre.Description}</Card.Text>
+                        </Card.Body>
+                    </Card>
+                    <Card className='genres-moreMovies'>
+                        <Card.Body>
+                            <Card.Title>Other {genre.Genre.Name} Movies:</Card.Title>
+                            <ListGroup>
+                                <div className='genre-view-movies-flex'>
+                                    {movies.map((movie) => {
+                                        if(movie.Genre.Name === genre.Genre.Name) {
+                                            return (<MovieCard key={movie._id} movie={movie}/>)
+                                        }
+                                    })}
+                                </div>
+                            </ListGroup>
                         </Card.Body>
                     </Card>
                     <Card.Footer>
@@ -42,8 +59,10 @@ export class GenreView extends React.Component {
 }
 
 GenreView.propTypes = {
-    genre: propTypes.shape({
-        Name: propTypes.string.isRequired,
-        Description: propTypes.string.isRequired
+    movie: propTypes.shape({
+        Genre: propTypes.shape({
+            Name: propTypes.string.isRequired,
+            Description: propTypes.string.isRequired,
+        })
     })
-}
+};

@@ -2,12 +2,13 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import propTypes from 'prop-types';
 import Config from '../../config';
+import {MovieCard} from '../movie-card/movie-card';
+
 import {
     Card,
     Button,
-    Row,
-    Col,
-    Container
+    Container,
+    ListGroup,
 } from 'react-bootstrap';
 
 import './director-view.scss';
@@ -24,7 +25,7 @@ export class DirectorView extends React.Component {
     }
 
     render() {
-        const {director} = this.props;
+        const {director, movies} = this.props;
 
         if (!director) return null;
 
@@ -33,9 +34,23 @@ export class DirectorView extends React.Component {
                 <Container>
                     <Card className='director-card'>
                         <Card.Body>
-                            <Card.Title>{director.Name}</Card.Title>
-                            <Card.Subtitle className='text-muted'>{this.formatDate(director.Birthday)}</Card.Subtitle>
-                            <Card.Text className='director-bio'>{director.Bio}</Card.Text>
+                            <Card.Title>{director.Director.Name}</Card.Title>
+                            <Card.Subtitle className='text-muted'>{this.formatDate(director.Director.Birthday)}</Card.Subtitle>
+                            <Card.Text className='director-bio'>{director.Director.Bio}</Card.Text>
+                        </Card.Body>
+                    </Card>
+                    <Card className='director-moreMovies'>
+                        <Card.Body>
+                            <Card.Title>Movies by {director.Director.Name}:</Card.Title>
+                            <ListGroup>
+                                <div className='director-view-movies-flex'>
+                                    {movies.map((movie) => {
+                                        if(movie.Director.Name === director.Director.Name) {
+                                            return (<MovieCard key={movie._id} movie={movie}/>)
+                                        }
+                                    })}
+                                </div>
+                            </ListGroup>
                         </Card.Body>
                     </Card>
                     <Card.Footer>
@@ -50,9 +65,11 @@ export class DirectorView extends React.Component {
 }
 
 DirectorView.propTypes = {
-    director: propTypes.shape({
-        Name: propTypes.string.isRequired,
-        Bio: propTypes.string.isRequired,
-        Birthday: propTypes.instanceOf(Date),
+    movie: propTypes.shape({
+        Director: propTypes.shape({
+            Name: propTypes.string.isRequired,
+            Bio: propTypes.string.isRequired,
+            Birthday: propTypes.instanceOf(Date)
+        })
     })
-}
+};
