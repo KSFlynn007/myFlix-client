@@ -15,15 +15,18 @@ export class MovieView extends React.Component {
 
         this.state = {
         };
-    }
+    };
 
-    // FILL IN LATER
-    addFavorite() {
-        axios.put(`${Config.API_URL}/users/${user}:FavoriteMovies`, {
+    addFavorite = (e) => {
+        e.preventDefault();
+        const token = localStorage.getItem('token');
+        const user = localStorage.getItem('user');
+
+        axios.post(`${Config.API_URL}/users/${user}/FavoriteMovies/${this.props.movie._id}`, {}, {
             headers: { Authorization: `Bearer ${token}`}
         })
         .then(response => {
-            const data = response.data
+            alert(`${this.props.movie.Title} added to Favorites List`)
         })
         .catch (function (error) {
             console.log(error);
@@ -53,9 +56,8 @@ export class MovieView extends React.Component {
                     <Link to={`/genres/${movie.Genre.Name}`}>
                         <Button className='genreButton' variant='info'>{movie.Genre.Name} Genre Info</Button>
                     </Link>
-    {/* NEED TO FLESH OUT FAVORITE BUTTON BELOW, NO LINK YET */}
-                    <Link to={`/users/${user}`}>
-                        <Button className='addFavButton' variant='success'> Add Movie to Favorites</Button>
+                    <Link to={``}>
+                        <Button className='addFavButton' variant='success' onClick={this.addFavorite}> Add Movie to Favorites</Button>
                     </Link>
                     <Link to={`/`}>
                         <Button className='returnButton' variant='dark'>Return to Movie List</Button>
