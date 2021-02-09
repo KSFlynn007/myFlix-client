@@ -50,6 +50,7 @@ export function RegisterView(props) {
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
                     placeholder='Enter username'
+                    pattern='[a-zA-Z0-9]{5,}'
                     />
                     <Form.Control.Feedback type="invalid">Please enter a valid username with at least 5 alphanumeric characters.</Form.Control.Feedback>
                 </Form.Group>
@@ -60,6 +61,7 @@ export function RegisterView(props) {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder='Enter email'
+                    pattern='.{5,}'
                     />
                     <Form.Control.Feedback type="invalid">Please enter a valid email address.</Form.Control.Feedback>
                 </Form.Group>
