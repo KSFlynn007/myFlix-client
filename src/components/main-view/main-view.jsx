@@ -6,11 +6,11 @@ import { Link } from 'react-router-dom';
 
 import { DirectorView } from '../director-view/director-view';
 import { GenreView } from '../genre-view/genre-view';
+import { LoginView } from '../login-view/login-view';
 import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
-import { LoginView } from '../login-view/login-view';
-import { RegisterView } from '../registration-view/registration-view'
 import { ProfileView } from '../profile-view/profile-view'
+import { RegisterView } from '../registration-view/registration-view'
 import Config from '../../config';
 
 import './main-view.scss'
@@ -141,7 +141,7 @@ export class MainView extends React.Component {
                 <Route path='/genres'
                 render={() => {return <GenreView />}}/>
 
-                <Route exact path='users/:username'
+                <Route exact path='/users/:username'
                 render={() => {
                     if (!user) return <LoginView onLoggedIn={(data) => this.onLoggedIn(data)} />;
                     if (movies.length === 0) return;
