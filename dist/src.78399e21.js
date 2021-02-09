@@ -51336,25 +51336,28 @@ var MovieView = /*#__PURE__*/function (_React$Component) {
     _classCallCheck(this, MovieView);
 
     _this = _super.call(this);
-    _this.state = {};
-    return _this;
-  } // FILL IN LATER
 
+    _this.addFavorite = function (e) {
+      e.preventDefault();
+      var token = localStorage.getItem('token');
+      var user = localStorage.getItem('user');
 
-  _createClass(MovieView, [{
-    key: "addFavorite",
-    value: function addFavorite() {
-      _axios.default.put("".concat(_config.default.API_URL, "/users/").concat(user, ":FavoriteMovies"), {
+      _axios.default.post("".concat(_config.default.API_URL, "/users/").concat(user, "/FavoriteMovies/").concat(_this.props.movie._id), {}, {
         headers: {
           Authorization: "Bearer ".concat(token)
         }
       }).then(function (response) {
-        var data = response.data;
+        alert("".concat(_this.props.movie.Title, " added to Favorites List"));
       }).catch(function (error) {
         console.log(error);
       });
-    }
-  }, {
+    };
+
+    _this.state = {};
+    return _this;
+  }
+
+  _createClass(MovieView, [{
     key: "render",
     value: function render() {
       var _this$props = this.props,
@@ -51386,10 +51389,11 @@ var MovieView = /*#__PURE__*/function (_React$Component) {
         className: "genreButton",
         variant: "info"
       }, movie.Genre.Name, " Genre Info")), _react.default.createElement(_reactRouterDom.Link, {
-        to: "/users/".concat(user)
+        to: ""
       }, _react.default.createElement(_reactBootstrap.Button, {
         className: "addFavButton",
-        variant: "success"
+        variant: "success",
+        onClick: this.addFavorite
       }, " Add Movie to Favorites")), _react.default.createElement(_reactRouterDom.Link, {
         to: "/"
       }, _react.default.createElement(_reactBootstrap.Button, {
@@ -51541,7 +51545,7 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
       var username = localStorage.getItem('user');
       var token = localStorage.getItem('token');
 
-      _axios.default.delete("".concat(_config.default.API_URL, "/").concat(username, "/movies/").concat(movie), {
+      _axios.default.delete("".concat(_config.default.API_URL, "/users/").concat(username, "/FavoriteMovies/").concat(movie), {
         headers: {
           Authorization: "Bearer ".concat(token)
         }
@@ -51652,6 +51656,7 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
           FavoriteMovies = _this$state.FavoriteMovies,
           validated = _this$state.validated;
       var username = localStorage.getItem('user');
+      var token = localStorage.getItem('token');
       var movies = this.props.movies;
       return _react.default.createElement(_reactBootstrap.Container, {
         className: "profile-view"
@@ -51664,51 +51669,60 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
         eventKey: "profile",
         title: "Profile"
       }, _react.default.createElement(_reactBootstrap.Card, {
-        className: "profile-card"
+        className: "profile-card",
+        border: "info"
       }, _react.default.createElement(_reactBootstrap.Card.Title, {
         className: "profile-title"
       }, username, "'s Favorite Movies"), _react.default.createElement(_reactBootstrap.Card.Body, null, FavoriteMovies.length === 0 && _react.default.createElement("div", {
         className: "card-content"
-      }, "You have no favorite movies!"), _react.default.createElement("div", {
+      }, "You don't have any favorite movies yet!"), _react.default.createElement("div", {
         className: "favorites-container"
       }, FavoriteMovies.length > 0 && movies.map(function (movie) {
         if (movie._id === FavoriteMovies.find(function (favMovie) {
           return favMovie === movie._id;
         })) {
-          return _react.default.createElement(_reactBootstrap.CardDeck, {
+          return _react.default.createElement("div", {
+            key: movie._id
+          }, _react.default.createElement(_reactBootstrap.CardDeck, {
             className: "movie-card-deck"
           }, _react.default.createElement(_reactBootstrap.Card, {
             className: "favorites-item card-content",
             style: {
               width: '16rem',
               flex: 1
-            },
-            key: movie._id
-          }, _react.default.createElement(_reactBootstrap.Card.Img, {
-            variant: "top",
-            src: movie.ImagePath
-          }), _react.default.createElement(_reactBootstrap.Card.Body, {
+            }
+          }, _react.default.createElement(_reactBootstrap.Card.Body, {
             className: "movie-card-body"
           }, _react.default.createElement(_reactBootstrap.Card.Title, {
             className: "movie-card-title"
-          }, movie.Title), _react.default.createElement(_reactBootstrap.Button, {
+          }, movie.Title), _react.default.createElement(_reactBootstrap.Card.Title, {
+            className: "text-muted"
+          }, movie.Year), _react.default.createElement(_reactBootstrap.Button, {
+            size: "sm",
+            className: "profile-button view-movie",
+            variant: "info",
+            as: _reactRouterDom.Link,
+            to: "/movies/".concat(movie._id),
+            target: "_self"
+          }, "View Movie"), _react.default.createElement(_reactBootstrap.Button, {
             size: "sm",
             className: "profile-button remove-favorite",
-            variant: "info",
+            variant: "danger",
             onClick: function onClick(e) {
               return _this5.handleRemoveFavorite(e, movie._id);
             }
-          }, "Remove"))));
+          }, "Remove")))));
         }
       }))))), _react.default.createElement(_reactBootstrap.Tab, {
         className: "tab-item",
         eventKey: "update",
         title: "Update"
       }, _react.default.createElement(_reactBootstrap.Card, {
-        className: "update-card"
-      }, _react.default.createElement(_reactBootstrap.Card.Title, {
+        className: "update-card",
+        border: "info"
+      }, _react.default.createElement(_reactBootstrap.Card.Body, null, _react.default.createElement(_reactBootstrap.Card.Title, {
         className: "profile-title"
-      }, "Update Profile"), _react.default.createElement(_reactBootstrap.Card.Subtitle, null, "If you are not updating a certain field (ex; email), just leave that box empty!"), _react.default.createElement(_reactBootstrap.Card.Body, null, _react.default.createElement(_reactBootstrap.Form, {
+      }, "Update Profile"), _react.default.createElement(_reactBootstrap.Card.Subtitle, null, "If you are not updating a certain field (ex; email), then leave that field empty. If you are not updating your password, please enter your old password for verification."), _react.default.createElement(_reactBootstrap.Form, {
         noValidate: true,
         validated: validated,
         className: "update-form",
@@ -51724,20 +51738,23 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
         placeholder: "Change Username",
         onChange: function onChange(e) {
           return _this5.setUsername(e.target.value);
-        }
+        },
+        pattern: "[a-zA-Z0-9]{5,}"
       }), _react.default.createElement(_reactBootstrap.Form.Control.Feedback, {
         type: "invalid"
       }, "Please enter a valid username with at least 6 alphanumeric characters.")), _react.default.createElement(_reactBootstrap.Form.Group, {
         controlId: "formBasicPassword"
       }, _react.default.createElement(_reactBootstrap.Form.Label, {
         className: "form-label"
-      }, "Password"), _react.default.createElement(_reactBootstrap.Form.Control, {
+      }, "Password ", _react.default.createElement("span", {
+        className: "required"
+      }, "*")), _react.default.createElement(_reactBootstrap.Form.Control, {
         type: "password",
         placeholder: "Current or New Password",
         onChange: function onChange(e) {
           return _this5.setPassword(e.target.value);
         },
-        required: true
+        pattern: ".{5,}"
       }), _react.default.createElement(_reactBootstrap.Form.Control.Feedback, {
         type: "invalid"
       }, "Please enter a valid password with at least 6 characters.")), _react.default.createElement(_reactBootstrap.Form.Group, {
@@ -51773,7 +51790,8 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
         eventKey: "delete",
         title: "Delete Profile"
       }, _react.default.createElement(_reactBootstrap.Card, {
-        className: "update-card"
+        className: "update-card",
+        border: "danger"
       }, _react.default.createElement(_reactBootstrap.Card.Title, {
         className: "profile-title"
       }, "Delete Your Profile"), _react.default.createElement(_reactBootstrap.Card.Subtitle, {
@@ -51902,7 +51920,8 @@ function RegisterView(props) {
     onChange: function onChange(e) {
       return setUsername(e.target.value);
     },
-    placeholder: "Enter username"
+    placeholder: "Enter username",
+    pattern: "[a-zA-Z0-9]{5,}"
   }), _react.default.createElement(_reactBootstrap.Form.Control.Feedback, {
     type: "invalid"
   }, "Please enter a valid username with at least 5 alphanumeric characters.")), _react.default.createElement(_reactBootstrap.Form.Group, {
@@ -51913,7 +51932,8 @@ function RegisterView(props) {
     onChange: function onChange(e) {
       return setEmail(e.target.value);
     },
-    placeholder: "Enter email"
+    placeholder: "Enter email",
+    pattern: ".{5,}"
   }), _react.default.createElement(_reactBootstrap.Form.Control.Feedback, {
     type: "invalid"
   }, "Please enter a valid email address.")), _react.default.createElement(_reactBootstrap.Form.Group, {
@@ -52062,7 +52082,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "onLoggedIn",
     value: function onLoggedIn(data) {
-      console.log(data.user.Username);
+      console.log(data.user);
       this.setState({
         user: data.user.Username
       });
@@ -52130,15 +52150,15 @@ var MainView = /*#__PURE__*/function (_React$Component) {
       }, "myFlix Home")), _react.default.createElement(_reactBootstrap.Nav.Item, null, _react.default.createElement(_reactBootstrap.Nav.Link, {
         className: "navLink",
         as: _reactRouterDom.Link,
+        to: "/users/".concat(user),
+        target: "_self"
+      }, "Profile")), _react.default.createElement(_reactBootstrap.Nav.Item, null, _react.default.createElement(_reactBootstrap.Nav.Link, {
+        className: "navLink",
+        as: _reactRouterDom.Link,
         to: "/login",
         target: "_self",
         onClick: this.onLoggedOut
-      }, "Log Out")), _react.default.createElement(_reactBootstrap.Nav.Item, null, _react.default.createElement(_reactBootstrap.Nav.Link, {
-        className: "navLink",
-        as: _reactRouterDom.Link,
-        to: "/users/".concat(user),
-        target: "_self"
-      }, "Profile")))), _react.default.createElement(_reactRouterDom.Route, {
+      }, "Log Out")))), _react.default.createElement(_reactRouterDom.Route, {
         exact: true,
         path: ['/', '/login'],
         render: function render() {
@@ -52343,7 +52363,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53574" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50070" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

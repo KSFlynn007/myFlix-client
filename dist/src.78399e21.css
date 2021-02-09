@@ -77,6 +77,15 @@ Link:hover {
   font-size: 30px;
   padding: 5px;
 }
+
+.remove-favorite,
+.view-movie {
+  margin: 0 10px;
+}
+
+.card-content {
+  margin: 0 auto;
+}
 .register-form {
   margin: 20px;
   padding: 30px;

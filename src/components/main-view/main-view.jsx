@@ -48,7 +48,7 @@ export class MainView extends React.Component {
 
 // when user successsfully logs in, this function updates the 'user' property in the state to that particular user
     onLoggedIn(data) {
-        console.log(data.user.Username);
+        console.log(data.user);
         this.setState({
             user: data.user.Username
         });
@@ -102,10 +102,10 @@ export class MainView extends React.Component {
                                 <Nav.Link className='navLinkHome' as={Link} to={`/`} target='_self'>myFlix Home</Nav.Link>
                             </Nav.Item>
                             <Nav.Item>
-                                <Nav.Link className='navLink' as={Link} to={`/login`} target='_self' onClick={this.onLoggedOut}>Log Out</Nav.Link>
+                                <Nav.Link className='navLink' as={Link} to={`/users/${user}`} target='_self'>Profile</Nav.Link>
                             </Nav.Item>
                             <Nav.Item>
-                                <Nav.Link className='navLink' as={Link} to={`/users/${user}`} target='_self'>Profile</Nav.Link>
+                                <Nav.Link className='navLink' as={Link} to={`/login`} target='_self' onClick={this.onLoggedOut}>Log Out</Nav.Link>
                             </Nav.Item>
                         </Nav>
                     </Navbar>
