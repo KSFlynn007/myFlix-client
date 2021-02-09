@@ -13,7 +13,7 @@ export function LoginView(props) {
 
     const swapView = (e) => {
         e.preventDefault();
-        window.open('/register', '_self')
+        window.location.pathname = `/register`
     }
 
     const handleSubmit = (e) => {

@@ -15,7 +15,7 @@ export function RegisterView(props) {
 
     const swapView = (e) => {
         e.preventDefault();
-        window.open('/login', '_self')
+        window.location.pathname = `/login`
     }
   
     const handleRegister = (e) => {
@@ -31,7 +31,7 @@ export function RegisterView(props) {
         .then(response => {
           const data = response.data;
           console.log(data);
-          window.open('/', '_self');
+          window.location.pathname = `/`
         })
         .catch(e => {
             console.log('There was an error registering the user.')

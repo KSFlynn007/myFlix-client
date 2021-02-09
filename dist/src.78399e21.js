@@ -51249,7 +51249,7 @@ function LoginView(props) {
 
   var swapView = function swapView(e) {
     e.preventDefault();
-    window.open('/register', '_self');
+    window.location.pathname = "/register";
   };
 
   var handleSubmit = function handleSubmit(e) {
@@ -51586,8 +51586,7 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
       }).then(function () {
         alert('Movie removed from favorites');
 
-        _this3.componentDidMount(); // window.open('_self');
-
+        _this3.componentDidMount();
       }).catch(function (error) {
         console.log(error);
       });
@@ -51636,7 +51635,7 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
 
         alert('Changes have been saved!');
         localStorage.setItem('user', _this4.state.Username);
-        window.open("/users/".concat(username), '_self'); // console.log(response.data);
+        window.location.pathname = "/users/".concat(username); // console.log(response.data);
       }).catch(function (error) {
         console.log(error);
       });
@@ -51676,7 +51675,7 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
         localStorage.removeItem('user');
         localStorage.removeItem('token');
         alert('Your account has been deleted');
-        window.open("/", '_self');
+        window.location.pathname = "/";
       }).catch(function (e) {
         console.log(e);
       });
@@ -51921,7 +51920,7 @@ function RegisterView(props) {
 
   var swapView = function swapView(e) {
     e.preventDefault();
-    window.open('/login', '_self');
+    window.location.pathname = "/login";
   };
 
   var handleRegister = function handleRegister(e) {
@@ -51936,7 +51935,7 @@ function RegisterView(props) {
     }).then(function (response) {
       var data = response.data;
       console.log(data);
-      window.open('/', '_self');
+      window.location.pathname = "/";
     }).catch(function (e) {
       console.log('There was an error registering the user.');
     });

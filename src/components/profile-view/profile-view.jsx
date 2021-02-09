@@ -71,7 +71,6 @@ export class ProfileView extends React.Component {
       .then(() => {
         alert('Movie removed from favorites');
         this.componentDidMount();
-        // window.open('_self');
       })
       .catch(function (error) {
         console.log(error);
@@ -117,7 +116,7 @@ export class ProfileView extends React.Component {
         });
         alert('Changes have been saved!');
         localStorage.setItem('user', this.state.Username);
-        window.open(`/users/${username}`, '_self');
+        window.location.pathname = `/users/${username}`
         // console.log(response.data);
 
       })
@@ -156,7 +155,7 @@ export class ProfileView extends React.Component {
         localStorage.removeItem('user');
         localStorage.removeItem('token');
         alert('Your account has been deleted');
-        window.open(`/`, '_self');
+        window.location.pathname = `/`
       })
       .catch((e) => {
         console.log(e);
