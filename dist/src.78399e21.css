@@ -8,6 +8,14 @@
 .genre-view {
   margin: 30px;
 }
+.login-form {
+  margin: 20px;
+  padding: 30px;
+}
+
+.login-header {
+  text-align: center;
+}
 .movieCard-col {
   margin: 10px 0px;
 }
@@ -60,13 +68,14 @@
 Link:hover {
   text-decoration: none;
 }
-.login-form {
-  margin: 20px;
-  padding: 30px;
+.profile-view {
+  margin: 20px auto;
+  text-align: center;
 }
 
-.login-header {
-  text-align: center;
+.profile-title {
+  font-size: 30px;
+  padding: 5px;
 }
 .register-form {
   margin: 20px;
