@@ -5,17 +5,33 @@ import { Link } from 'react-router-dom';
 import {Card, Button} from 'react-bootstrap';
 
 import './movie-view.scss';
+import axios from 'axios';
+import Config from '../../config'
 
 export class MovieView extends React.Component {
 
     constructor () {
         super();
 
-        this.state = {};
+        this.state = {
+        };
     }
 
+    // FILL IN LATER
+    addFavorite() {
+        axios.put(`${Config.API_URL}/users/${user}:FavoriteMovies`, {
+            headers: { Authorization: `Bearer ${token}`}
+        })
+        .then(response => {
+            const data = response.data
+        })
+        .catch (function (error) {
+            console.log(error);
+        });
+    };
+
     render (){
-        const { movie } = this.props;
+        const { movie, user } = this.props;
 
         if (!movie) return null;
 
@@ -38,7 +54,7 @@ export class MovieView extends React.Component {
                         <Button className='genreButton' variant='info'>{movie.Genre.Name} Genre Info</Button>
                     </Link>
     {/* NEED TO FLESH OUT FAVORITE BUTTON BELOW, NO LINK YET */}
-                    <Link to={`/users/favorites/`}>
+                    <Link to={`/users/${user}`}>
                         <Button className='addFavButton' variant='success'> Add Movie to Favorites</Button>
                     </Link>
                     <Link to={`/`}>
@@ -68,5 +84,8 @@ MovieView.propTypes = {
             Birthday: propTypes.instanceOf(Date),
         }),
         Featured: propTypes.bool
+    }),
+    user: propTypes.shape({
+        Username: propTypes.string
     })
 };
