@@ -42,7 +42,7 @@ export class DirectorView extends React.Component {
                     <Card className='director-moreMovies'>
                         <Card.Body>
                             <Card.Title>Movies by {director.Director.Name}:</Card.Title>
-                            <ListGroup>
+                            <ListGroup className='director-MovieCard'>
                                 <div className='director-view-movies-flex'>
                                     {movies.map((movie) => {
                                         if(movie.Director.Name === director.Director.Name) {

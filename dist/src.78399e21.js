@@ -51051,7 +51051,9 @@ var DirectorView = /*#__PURE__*/function (_React$Component) {
         className: "director-bio"
       }, director.Director.Bio))), _react.default.createElement(_reactBootstrap.Card, {
         className: "director-moreMovies"
-      }, _react.default.createElement(_reactBootstrap.Card.Body, null, _react.default.createElement(_reactBootstrap.Card.Title, null, "Movies by ", director.Director.Name, ":"), _react.default.createElement(_reactBootstrap.ListGroup, null, _react.default.createElement("div", {
+      }, _react.default.createElement(_reactBootstrap.Card.Body, null, _react.default.createElement(_reactBootstrap.Card.Title, null, "Movies by ", director.Director.Name, ":"), _react.default.createElement(_reactBootstrap.ListGroup, {
+        className: "director-MovieCard"
+      }, _react.default.createElement("div", {
         className: "director-view-movies-flex"
       }, movies.map(function (movie) {
         if (movie.Director.Name === director.Director.Name) {

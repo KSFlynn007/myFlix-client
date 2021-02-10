@@ -6,6 +6,8 @@
   margin: 10px 0px;
 }
 
-.director-view-movies-flex {
-  display: flex;
+@media all and (min-width: 768px) {
+  .director-view-movies-flex {
+    display: flex;
+  }
 }

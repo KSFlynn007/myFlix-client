@@ -25,15 +25,19 @@
   margin: 10px 0px;
 }
 
-.director-view-movies-flex {
-  display: flex;
+@media all and (min-width: 768px) {
+  .director-view-movies-flex {
+    display: flex;
+  }
 }
 .genre-view {
   margin: 30px;
 }
 
-.genre-view-movies-flex {
-  display: flex;
+@media all and (min-width: 768px) {
+  .genre-view-movies-flex {
+    display: flex;
+  }
 }
 .login-form {
   margin: 20px;
