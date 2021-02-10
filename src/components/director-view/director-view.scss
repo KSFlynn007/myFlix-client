@@ -1,0 +1,13 @@
+.director-view {
+  margin: 30px;
+}
+
+.director-bio {
+  margin: 10px 0px;
+}
+
+@media all and (min-width: 768px) {
+  .director-view-movies-flex {
+    display: flex;
+  }
+}

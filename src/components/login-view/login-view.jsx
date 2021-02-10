@@ -1,5 +1,7 @@
 import React, {useState} from 'react';
-import PropTypes from 'prop-types';
+import propTypes from 'prop-types';
+import axios from 'axios';
+import Config from '../../config';
 
 import './login-view.scss';
 
@@ -9,11 +11,25 @@ export function LoginView(props) {
     const [ username, setUsername ] = useState('');
     const [ password, setPassword ] = useState('');
 
+    const swapView = (e) => {
+        e.preventDefault();
+        window.location.pathname = `/register`
+    }
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(username, password);
-        // send a request to server for authentication, then calls props.onLoggedIn(username)
-        props.onLoggedIn(username);
+        // sends request to server for authentication
+        axios.post(`${Config.API_URL}/login`, {
+          Username: username,
+          Password: password
+        })
+        .then(response => {
+          const data = response.data;
+          props.onLoggedIn(data);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
     };
 
   return (
@@ -42,16 +58,17 @@ export function LoginView(props) {
         <Button onClick={handleSubmit} variant='dark' type='submit'>
           Submit
         </Button>
+        <Button className='swap-button' type='button' variant='info' onClick={swapView}>Not Registered?</Button>
       </Form>
     </React.Fragment>
   );
 }
 
 LoginView.propTypes = {
-    user: PropTypes.shape({
-        username: PropTypes.string.isRequired,
-        pasword: PropTypes.string.isRequired
+    user: propTypes.shape({
+        username: propTypes.string.isRequired,
+        password: propTypes.string.isRequired
     }),
-    onLoggedIn: PropTypes.func.isRequired,
-    onRegister: PropTypes.func
+    onLoggedIn: propTypes.func.isRequired,
+    onRegister: propTypes.func
 };

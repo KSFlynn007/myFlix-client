@@ -1,5 +1,13 @@
-.movie-card {
+.movieCard-col {
   margin: 10px 0px;
+}
+
+.movie-card {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
 }
 
 .movie-img {
@@ -9,8 +17,39 @@
 .more-button {
   margin-top: 10px;
 }
+.director-view {
+  margin: 30px;
+}
+
+.director-bio {
+  margin: 10px 0px;
+}
+
+@media all and (min-width: 768px) {
+  .director-view-movies-flex {
+    display: flex;
+  }
+}
+.genre-view {
+  margin: 30px;
+}
+
+@media all and (min-width: 768px) {
+  .genre-view-movies-flex {
+    display: flex;
+  }
+}
+.login-form {
+  margin: 20px;
+  padding: 30px;
+}
+
+.login-header {
+  text-align: center;
+}
 .movie-view {
-  margin: 0px 50px;
+  margin: 40px;
+  text-align: center;
 }
 
 .movie-poster {
@@ -26,17 +65,51 @@
   font-size: 16px;
 }
 
-.return-button {
-  margin: auto;
-  margin-bottom: 20px;
-}
-.login-form {
-  margin: 20px;
-  padding: 30px;
+.returnButton {
+  display: block;
+  margin: 20px auto;
 }
 
-.login-header {
+.directorButton,
+.genreButton,
+.addFavButton {
+  display: inline;
+  margin: 20px 10px;
+}
+
+Link:hover {
+  text-decoration: none;
+}
+.profile-view {
+  margin: 20px auto;
   text-align: center;
+}
+
+.profile-title {
+  font-size: 30px;
+  padding: 20px;
+}
+
+.card-content {
+  margin: 0 auto;
+  margin-bottom: 15px;
+}
+
+.movie-card-title {
+  margin-top: 15px;
+}
+
+.fav-subtitle {
+  font-size: 16px;
+}
+
+.remove-favorite,
+.view-movie {
+  margin: 0 10px;
+}
+
+.update-form {
+  margin-top: 10px;
 }
 .register-form {
   margin: 20px;
@@ -46,8 +119,33 @@
 .register-header {
   text-align: center;
 }
+
+.swap-button {
+  display: block;
+  margin: 20px auto 0px;
+}
 .main-body {
   padding: 20px;
+}
+
+.navLinkHome {
+  font-size: 22px;
+}
+
+.navLink:hover,
+.navLinkHome:hover {
+  font-size: 22px;
+  text-decoration: none;
+  color: #cfdbdf;
+}
+
+.userNav {
+  justify-content: right;
+}
+
+.movieCard-row {
+  width: 100%;
+  margin: 0 auto;
 }
 .my-flix {
   color: steelblue;
