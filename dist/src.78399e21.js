@@ -51394,9 +51394,7 @@ var MovieView = /*#__PURE__*/function (_React$Component) {
   _createClass(MovieView, [{
     key: "render",
     value: function render() {
-      var _this$props = this.props,
-          movie = _this$props.movie,
-          user = _this$props.user;
+      var movie = this.props.movie;
       if (!movie) return null;
       return _react.default.createElement("div", {
         className: "movie-view"
@@ -51584,7 +51582,7 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
           Authorization: "Bearer ".concat(token)
         }
       }).then(function () {
-        alert('Movie removed from favorites');
+        alert('Movie was removed from your Favorites List.');
 
         _this3.componentDidMount();
       }).catch(function (error) {
@@ -51689,7 +51687,6 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
           FavoriteMovies = _this$state.FavoriteMovies,
           validated = _this$state.validated;
       var username = localStorage.getItem('user');
-      var token = localStorage.getItem('token');
       var movies = this.props.movies;
       return _react.default.createElement(_reactBootstrap.Container, {
         className: "profile-view"
@@ -51775,7 +51772,7 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
         pattern: "[a-zA-Z0-9]{5,}"
       }), _react.default.createElement(_reactBootstrap.Form.Control.Feedback, {
         type: "invalid"
-      }, "Please enter a valid username with at least 6 alphanumeric characters.")), _react.default.createElement(_reactBootstrap.Form.Group, {
+      }, "Please enter a valid username with at least 5 alphanumeric characters.")), _react.default.createElement(_reactBootstrap.Form.Group, {
         controlId: "formBasicPassword"
       }, _react.default.createElement(_reactBootstrap.Form.Label, {
         className: "form-label"
@@ -51787,10 +51784,11 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
         onChange: function onChange(e) {
           return _this5.setPassword(e.target.value);
         },
-        pattern: ".{5,}"
+        pattern: ".{5,}",
+        required: true
       }), _react.default.createElement(_reactBootstrap.Form.Control.Feedback, {
         type: "invalid"
-      }, "Please enter a valid password with at least 6 characters.")), _react.default.createElement(_reactBootstrap.Form.Group, {
+      }, "Please enter a valid password with at least 5 characters.")), _react.default.createElement(_reactBootstrap.Form.Group, {
         controlId: "formBasicEmail"
       }, _react.default.createElement(_reactBootstrap.Form.Label, {
         className: "form-label"
@@ -51815,7 +51813,7 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
       }), _react.default.createElement(_reactBootstrap.Form.Control.Feedback, {
         type: "invalid"
       }, "Please enter a valid birthday.")), _react.default.createElement(_reactBootstrap.Button, {
-        className: "button",
+        className: "update-profile-button",
         type: "submit",
         variant: "info"
       }, "Update"))))), _react.default.createElement(_reactBootstrap.Tab, {
@@ -52388,7 +52386,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50070" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59634" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

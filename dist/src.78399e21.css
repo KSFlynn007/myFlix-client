@@ -91,6 +91,10 @@ Link:hover {
   margin: 0 10px;
 }
 
+.update-form {
+  margin-top: 10px;
+}
+
 .card-content {
   margin: 0 auto;
 }

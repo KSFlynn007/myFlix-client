@@ -61,15 +61,15 @@ export class ProfileView extends React.Component {
 
   handleRemoveFavorite(e, movie) {
     e.preventDefault();
-
     const username = localStorage.getItem('user');
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('token'); 
+    
     axios
       .delete(`${Config.API_URL}/users/${username}/FavoriteMovies/${movie}`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then(() => {
-        alert('Movie removed from favorites');
+        alert('Movie was removed from your Favorites List.');
         this.componentDidMount();
       })
       .catch(function (error) {
@@ -165,7 +165,6 @@ export class ProfileView extends React.Component {
   render() {
     const { FavoriteMovies, validated } = this.state;
     const username = localStorage.getItem('user');
-    const token = localStorage.getItem('token');
     const { movies } = this.props;
 
     return (
@@ -221,14 +220,14 @@ export class ProfileView extends React.Component {
                   <Form.Group controlId='formBasicUsername'>
                     <Form.Label className='form-label'>Username</Form.Label>
                     <Form.Control type='text' placeholder='Change Username' onChange={(e) => this.setUsername(e.target.value)} pattern='[a-zA-Z0-9]{5,}'/>
-                    <Form.Control.Feedback type='invalid'>Please enter a valid username with at least 6 alphanumeric characters.</Form.Control.Feedback>
+                    <Form.Control.Feedback type='invalid'>Please enter a valid username with at least 5 alphanumeric characters.</Form.Control.Feedback>
                   </Form.Group>
                   <Form.Group controlId='formBasicPassword'>
                     <Form.Label className='form-label'>
                       Password <span className='required'>*</span>
                     </Form.Label>
-                    <Form.Control type='password' placeholder='Current or New Password' onChange={(e) => this.setPassword(e.target.value)} pattern='.{5,}'/>
-                    <Form.Control.Feedback type='invalid'>Please enter a valid password with at least 6 characters.</Form.Control.Feedback>
+                    <Form.Control type='password' placeholder='Current or New Password' onChange={(e) => this.setPassword(e.target.value)} pattern='.{5,}' required/>
+                    <Form.Control.Feedback type='invalid'>Please enter a valid password with at least 5 characters.</Form.Control.Feedback>
                   </Form.Group>
                   <Form.Group controlId='formBasicEmail'>
                     <Form.Label className='form-label'>Email</Form.Label>
@@ -240,7 +239,7 @@ export class ProfileView extends React.Component {
                     <Form.Control type='date' placeholder='Change Birthday' onChange={(e) => this.setBirthday(e.target.value)} />
                     <Form.Control.Feedback type='invalid'>Please enter a valid birthday.</Form.Control.Feedback>
                   </Form.Group>
-                  <Button className='button' type='submit' variant='info'>
+                  <Button className='update-profile-button' type='submit' variant='info'>
                     Update
                   </Button>
                 </Form>
