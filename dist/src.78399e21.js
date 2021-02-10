@@ -35663,7 +35663,7 @@ exports.default = void 0;
 // toggle between these to test local and hosted db:
 var _default = {
   // API_URL: 'http://localhost:8080',
-  API_URL: 'https://m-y-f-l-i-x.herokuapp.com',
+  API_URL: "https://m-y-f-l-i-x.herokuapp.com",
   MONTHS: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
 };
 exports.default = _default;
@@ -51256,7 +51256,6 @@ function LoginView(props) {
 
   var handleSubmit = function handleSubmit(e) {
     e.preventDefault(); // sends request to server for authentication
-    // entire URL is in package.json under "proxy" to get past CORS
 
     _axios.default.post("".concat(_config.default.API_URL, "/login"), {
       Username: username,

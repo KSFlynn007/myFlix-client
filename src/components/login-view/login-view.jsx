@@ -19,7 +19,6 @@ export function LoginView(props) {
     const handleSubmit = (e) => {
         e.preventDefault();
         // sends request to server for authentication
-        // entire URL is in package.json under "proxy" to get past CORS
         axios.post(`${Config.API_URL}/login`, {
           Username: username,
           Password: password
