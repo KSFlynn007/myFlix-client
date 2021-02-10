@@ -174,8 +174,7 @@ export class ProfileView extends React.Component {
 
           <Tab className='tab-item' eventKey='profile' title='Profile'>
             <Card className='profile-card' border='info'>
-              <Card.Title className='profile-title'>{username}'s Favorite Movies</Card.Title>
-              <Card.Body>
+                <Card.Title className='profile-title'>{username}'s Favorite Movies</Card.Title>
                 {FavoriteMovies.length === 0 && <div className='card-content'>You don't have any favorite movies yet!</div>}
 
                 <div className='favorites-container'>
@@ -184,38 +183,35 @@ export class ProfileView extends React.Component {
                       if (movie._id === FavoriteMovies.find((favMovie) => favMovie === movie._id)) {
                         return (
                           <div key={movie._id}>
-                          <CardDeck className='movie-card-deck'>
                             <Card className='favorites-item card-content' style={{ width: '16rem', flex: 1 }}>
                               {/* <Card.Img>{movie.ImageURL}</Card.Img> */}
+                              <Card.Title className='movie-card-title'>{movie.Title}</Card.Title>
+                              <Card.Title className='text-muted fav-subtitle'>{movie.Year}</Card.Title>
                               <Card.Body className='movie-card-body'>
-                                <Card.Title className='movie-card-title'>{movie.Title}</Card.Title>
-                                <Card.Title className='text-muted'>{movie.Year}</Card.Title>
                                 <Button size='sm' className='profile-button view-movie' variant='info' as={Link} to={`/movies/${movie._id}`} target='_self'>
                                   View Movie
                                 </Button>
                                 <Button size='sm' className='profile-button remove-favorite' variant='danger' onClick={(e) => this.handleRemoveFavorite(e, movie._id)}>
                                   Remove
 							                	</Button>
-                                </Card.Body>
+                              </Card.Body>
                             </Card>
-                          </CardDeck>
                           </div>
                         );
                       }
                     })}
                 </div>
-              </Card.Body>
             </Card>
           </Tab>
 
 
           <Tab className='tab-item' eventKey='update' title='Update'>
             <Card className='update-card' border='info'>
-              <Card.Body>
                 <Card.Title className='profile-title'>Update Profile</Card.Title>
                 <Card.Subtitle>If you are not updating a certain field (ex; email), then leave that field empty.
                   If you are not updating your password, please enter your old password for verification.
                 </Card.Subtitle>
+                <Card.Body>
                 <Form noValidate validated={validated} className='update-form' onSubmit={(e) => this.handleUpdate(e, this.Username, this.Password, this.Email, this.Birthday)}>
                   <Form.Group controlId='formBasicUsername'>
                     <Form.Label className='form-label'>Username</Form.Label>
@@ -226,7 +222,7 @@ export class ProfileView extends React.Component {
                     <Form.Label className='form-label'>
                       Password <span className='required'>*</span>
                     </Form.Label>
-                    <Form.Control type='password' placeholder='Current or New Password' onChange={(e) => this.setPassword(e.target.value)} pattern='.{5,}' required/>
+                    <Form.Control type='password' placeholder='Current or New Password' onChange={(e) => this.setPassword(e.target.value)} pattern='.{5,}'/>
                     <Form.Control.Feedback type='invalid'>Please enter a valid password with at least 5 characters.</Form.Control.Feedback>
                   </Form.Group>
                   <Form.Group controlId='formBasicEmail'>
@@ -255,7 +251,7 @@ export class ProfileView extends React.Component {
               <Card.Body>
                 <Button className='button' variant='danger' onClick={(e) => this.handleDeregister(e)}>
                     Click Here If You're Sure!
-				</Button>
+				        </Button>
               </Card.Body>
             </Card>
           </Tab>

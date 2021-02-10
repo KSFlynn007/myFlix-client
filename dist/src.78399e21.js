@@ -51703,7 +51703,7 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
         border: "info"
       }, _react.default.createElement(_reactBootstrap.Card.Title, {
         className: "profile-title"
-      }, username, "'s Favorite Movies"), _react.default.createElement(_reactBootstrap.Card.Body, null, FavoriteMovies.length === 0 && _react.default.createElement("div", {
+      }, username, "'s Favorite Movies"), FavoriteMovies.length === 0 && _react.default.createElement("div", {
         className: "card-content"
       }, "You don't have any favorite movies yet!"), _react.default.createElement("div", {
         className: "favorites-container"
@@ -51713,21 +51713,19 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
         })) {
           return _react.default.createElement("div", {
             key: movie._id
-          }, _react.default.createElement(_reactBootstrap.CardDeck, {
-            className: "movie-card-deck"
           }, _react.default.createElement(_reactBootstrap.Card, {
             className: "favorites-item card-content",
             style: {
               width: '16rem',
               flex: 1
             }
-          }, _react.default.createElement(_reactBootstrap.Card.Body, {
-            className: "movie-card-body"
           }, _react.default.createElement(_reactBootstrap.Card.Title, {
             className: "movie-card-title"
           }, movie.Title), _react.default.createElement(_reactBootstrap.Card.Title, {
-            className: "text-muted"
-          }, movie.Year), _react.default.createElement(_reactBootstrap.Button, {
+            className: "text-muted fav-subtitle"
+          }, movie.Year), _react.default.createElement(_reactBootstrap.Card.Body, {
+            className: "movie-card-body"
+          }, _react.default.createElement(_reactBootstrap.Button, {
             size: "sm",
             className: "profile-button view-movie",
             variant: "info",
@@ -51741,18 +51739,18 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
             onClick: function onClick(e) {
               return _this5.handleRemoveFavorite(e, movie._id);
             }
-          }, "Remove")))));
+          }, "Remove"))));
         }
-      }))))), _react.default.createElement(_reactBootstrap.Tab, {
+      })))), _react.default.createElement(_reactBootstrap.Tab, {
         className: "tab-item",
         eventKey: "update",
         title: "Update"
       }, _react.default.createElement(_reactBootstrap.Card, {
         className: "update-card",
         border: "info"
-      }, _react.default.createElement(_reactBootstrap.Card.Body, null, _react.default.createElement(_reactBootstrap.Card.Title, {
+      }, _react.default.createElement(_reactBootstrap.Card.Title, {
         className: "profile-title"
-      }, "Update Profile"), _react.default.createElement(_reactBootstrap.Card.Subtitle, null, "If you are not updating a certain field (ex; email), then leave that field empty. If you are not updating your password, please enter your old password for verification."), _react.default.createElement(_reactBootstrap.Form, {
+      }, "Update Profile"), _react.default.createElement(_reactBootstrap.Card.Subtitle, null, "If you are not updating a certain field (ex; email), then leave that field empty. If you are not updating your password, please enter your old password for verification."), _react.default.createElement(_reactBootstrap.Card.Body, null, _react.default.createElement(_reactBootstrap.Form, {
         noValidate: true,
         validated: validated,
         className: "update-form",
@@ -51784,8 +51782,7 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
         onChange: function onChange(e) {
           return _this5.setPassword(e.target.value);
         },
-        pattern: ".{5,}",
-        required: true
+        pattern: ".{5,}"
       }), _react.default.createElement(_reactBootstrap.Form.Control.Feedback, {
         type: "invalid"
       }, "Please enter a valid password with at least 5 characters.")), _react.default.createElement(_reactBootstrap.Form.Group, {

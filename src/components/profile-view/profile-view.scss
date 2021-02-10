@@ -5,7 +5,20 @@
 
 .profile-title {
   font-size: 30px;
-  padding: 5px;
+  padding: 20px;
+}
+
+.card-content {
+  margin: 0 auto;
+  margin-bottom: 15px;
+}
+
+.movie-card-title {
+  margin-top: 15px;
+}
+
+.fav-subtitle {
+  font-size: 16px;
 }
 
 .remove-favorite,
@@ -15,8 +28,4 @@
 
 .update-form {
   margin-top: 10px;
-}
-
-.card-content {
-  margin: 0 auto;
 }
