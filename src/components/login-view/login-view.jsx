@@ -35,7 +35,7 @@ export function LoginView(props) {
   return (
     <React.Fragment>
       <Form className='login-form'>
-        <h1 className='login-header'>Login Here:</h1>
+        <h1 className='login-header'>Login:</h1>
         <Form.Group controlId='formBasicEmail'>
           <Form.Label>Username</Form.Label>
           <Form.Control
