@@ -9,8 +9,9 @@ import { GenreView } from '../genre-view/genre-view';
 import { LoginView } from '../login-view/login-view';
 import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
-import { ProfileView } from '../profile-view/profile-view'
-import { RegisterView } from '../registration-view/registration-view'
+import { ProfileView } from '../profile-view/profile-view';
+import { RegisterView } from '../registration-view/registration-view';
+import ScrollToTop from '../scroll-to-top/scroll-to-top';
 import Config from '../../config';
 
 import './main-view.scss'
@@ -88,13 +89,14 @@ export class MainView extends React.Component {
             console.log(error);
         });
     }
-
+    
     render() {
         const { movies, user } = this.state;
         
         return(
         <div>
         <Router>
+            <ScrollToTop />
             <div className='main-view'>
                     <Navbar expand onToggle='sm' bg='dark' variant='dark' sticky='top'>
                         <Nav>
@@ -110,38 +112,38 @@ export class MainView extends React.Component {
                         </Nav>
                     </Navbar>
                 <Switch>
-                <Route exact path={['/', '/login']}
-                render={() => {
-                    if (!user) return <LoginView onLoggedIn={(data) => this.onLoggedIn(data)}/>;
-                    return <Row className='movieCard-row'>{movies.map((m) => <MovieCard key={m._id} movie={m} />)}</Row>
-                }}
-                />
-                
-                <Route path='/register'
-                render={() => { return <RegisterView />}} />
+                    <Route exact path={['/', '/login']}
+                    render={() => {
+                        if (!user) return <LoginView onLoggedIn={(data) => this.onLoggedIn(data)}/>;
+                        return <Row className='movieCard-row'>{movies.map((m) => <MovieCard key={m._id} movie={m} />)}</Row>
+                    }}
+                    />
+                    
+                    <Route path='/register'
+                    render={() => { return <RegisterView />}} />
 
-                <Route path='/movies/:movieId' 
-                render={({match}) => { return <MovieView movie={movies.find(m => m._id === match.params.movieId)}/>}}/>
+                    <Route path='/movies/:movieId' 
+                    render={({match}) => { return <MovieView movie={movies.find(m => m._id === match.params.movieId)}/>}}/>
 
-                <Route path='/directors/:name' 
-                render={({match}) => {
-                    if(!movies.length) return <div className='main-view'/>;
-                    return <DirectorView director={movies.find((m) => m.Director.Name === match.params.name)} movies={movies} />
-                }}/>
+                    <Route path='/directors/:name' 
+                    render={({match}) => {
+                        if(!movies.length) return <div className='main-view'/>;
+                        return <DirectorView director={movies.find((m) => m.Director.Name === match.params.name)} movies={movies} />
+                    }}/>
 
-                <Route path='/genres/:name' 
-                render={({match}) => {
-                    if(!movies.length) return <div className='main-view'/>;
-                    return <GenreView genre={movies.find((m) => m.Genre.Name === match.params.name)} movies={movies}/>
-                }}/>
+                    <Route path='/genres/:name' 
+                    render={({match}) => {
+                        if(!movies.length) return <div className='main-view'/>;
+                        return <GenreView genre={movies.find((m) => m.Genre.Name === match.params.name)} movies={movies}/>
+                    }}/>
 
-                <Route exact path='/users/:username'
-                render={() => {
-                    if (!user) return <LoginView onLoggedIn={(data) => this.onLoggedIn(data)} />;
-                    if (movies.length === 0) return;
-                    return <ProfileView movies={movies}/>}}/>
-                
-                </Switch>
+                    <Route exact path='/users/:username'
+                    render={() => {
+                        if (!user) return <LoginView onLoggedIn={(data) => this.onLoggedIn(data)} />;
+                        if (movies.length === 0) return;
+                        return <ProfileView movies={movies}/>}}/>
+                    
+                    </Switch>
             </div>
         </Router>
         </div>    
