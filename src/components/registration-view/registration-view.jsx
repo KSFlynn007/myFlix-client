@@ -40,7 +40,7 @@ export function RegisterView(props) {
   
 
     return(
-        <React.Fragment>
+        <div>
             <Form className='register-form'>
                 <h1 className='register-header'>Welcome to myFlix Registration!</h1>
                 <Form.Group controlId='formBasicText'>
@@ -52,6 +52,7 @@ export function RegisterView(props) {
                     placeholder='Enter username'
                     pattern='[a-zA-Z0-9]{5,}'
                     />
+                    <Form.Text className='text-muted'>Username must be at least 5 alphanumeric characters.</Form.Text>
                     <Form.Control.Feedback type="invalid">Please enter a valid username with at least 5 alphanumeric characters.</Form.Control.Feedback>
                 </Form.Group>
                 <Form.Group controlId='formBasicEmail'>
@@ -63,6 +64,7 @@ export function RegisterView(props) {
                     placeholder='Enter email'
                     pattern='.{5,}'
                     />
+                    <Form.Text className='text-muted'>Must be a valid email.</Form.Text>
                     <Form.Control.Feedback type="invalid">Please enter a valid email address.</Form.Control.Feedback>
                 </Form.Group>
                 <Form.Group controlId='formBasicPassword'>
@@ -87,7 +89,7 @@ export function RegisterView(props) {
                 <Button type='button' variant='dark' onClick={handleRegister}>Submit</Button>
                 <Button className='swap-button' type='button' variant='info' onClick={swapView}>Already registered?</Button>
             </Form>
-        </React.Fragment>
+        </div>
     );
 }
 

@@ -12,7 +12,6 @@ import {
     Button,
     Container,
     Card,
-    CardDeck,
     Tab,
     Tabs
 } from 'react-bootstrap'
