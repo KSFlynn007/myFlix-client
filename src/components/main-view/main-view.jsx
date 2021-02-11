@@ -1,8 +1,12 @@
 import React from 'react';
 import axios from 'axios';
-import propTypes from 'prop-types';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
+
+import { setMovies } from '../../actions/actions';
+
+// not written yet:
+// import MoviesList from '../movies-list/movies-list';
 
 import { DirectorView } from '../director-view/director-view';
 import { GenreView } from '../genre-view/genre-view';
@@ -24,16 +28,16 @@ import {
 } from 'react-bootstrap';
 
 
-export class MainView extends React.Component {
+class MainView extends React.Component {
     constructor() {
         super();
 //initial state is set to null
         this.state = {
-            movies: [],
-            selectedMovie: null,
             user: null,
-            genre: [],
-            director: []
+            // movies: [],
+            // selectedMovie: null,
+            // genre: [],
+            // director: []
         };
         this.onLoggedOut = this.onLoggedOut.bind(this);
     }
@@ -74,17 +78,13 @@ export class MainView extends React.Component {
             headers: { Authorization: `Bearer ${token}`}
         })
         .then(response => {
+            // how to I include this .map method to the Birthday Date propType without the movie return statement?
             let movies = response.data.map(movie => {
                 let tempObject = Object.assign(movie)
                 tempObject.Director.Birthday = new Date(movie.Director.Birthday)
                 return tempObject
             });
-            // Assigning result to state
-            this.setState({
-                // old setState before above data.map was:
-                // movies: response.data
-                movies
-            });
+            this.props.setMovies(response.data);
         })
         .catch(function(error) {
             console.log(error);
@@ -92,7 +92,8 @@ export class MainView extends React.Component {
     }
     
     render() {
-        const { movies, user } = this.state;
+        let {movies} = this.props;
+        let {user} = this.state;
         
         return(
         <div>
@@ -153,29 +154,12 @@ export class MainView extends React.Component {
             </div>
         </Router>
         </div>    
-        )
-
-        
+        );
     }
 }
 
-MainView.propTypes = {
-  movie: propTypes.shape({
-    _id: propTypes.string.isRequired,
-    Title: propTypes.string.isRequired,
-    Description: propTypes.string.isRequired,
-    Year: propTypes.number.isRequired,
-    ImageUrl: propTypes.string.isRequired,
-    Genre: propTypes.shape({
-      Name: propTypes.string.isRequired,
-      Description: propTypes.string.isRequired,
-    }),
-    Director: propTypes.shape({
-      Name: propTypes.string.isRequired,
-      Bio: propTypes.string.isRequired,
-      Birthday: propTypes.instanceOf(Date)
-    }),
-    Featured: propTypes.bool,
-  }),
-  user: propTypes.string
+let mapStateToProps = state => {
+    return { movies: state.movies }
 }
+
+export default connect(mapStateToProps, {setMovies} )(MainView);
