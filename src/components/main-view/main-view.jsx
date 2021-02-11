@@ -9,6 +9,7 @@ import { GenreView } from '../genre-view/genre-view';
 import { LoginView } from '../login-view/login-view';
 import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
+import Navigation from '../navigation/navigation';
 import { ProfileView } from '../profile-view/profile-view';
 import { RegisterView } from '../registration-view/registration-view';
 import ScrollToTop from '../scroll-to-top/scroll-to-top';
@@ -82,7 +83,7 @@ export class MainView extends React.Component {
             this.setState({
                 // old setState before above data.map was:
                 // movies: response.data
-                movies: response.data
+                movies
             });
         })
         .catch(function(error) {
@@ -111,6 +112,8 @@ export class MainView extends React.Component {
                             </Nav.Item>
                         </Nav>
                     </Navbar>
+                    {/* Future use of Navigation component, need to pass {users} and {onLoggedOut} functions, and need to render with only some Routes below? */}
+                    {/* <Navigation /> */}
                 <Switch>
                     <Route exact path={['/', '/login']}
                     render={() => {
@@ -118,6 +121,9 @@ export class MainView extends React.Component {
                         return <Row className='movieCard-row'>{movies.map((m) => <MovieCard key={m._id} movie={m} />)}</Row>
                     }}
                     />
+
+                    <Route exact path='/nav'
+                    render={() => {return <Navigation />}}/>
                     
                     <Route path='/register'
                     render={() => { return <RegisterView />}} />
