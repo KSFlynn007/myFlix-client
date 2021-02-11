@@ -52187,7 +52187,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
         to: "/login",
         target: "_self",
         onClick: this.onLoggedOut
-      }, "Log Out")))), _react.default.createElement(_reactRouterDom.Route, {
+      }, "Log Out")))), _react.default.createElement(_reactRouterDom.Switch, null, _react.default.createElement(_reactRouterDom.Route, {
         exact: true,
         path: ['/', '/login'],
         render: function render() {
@@ -52262,7 +52262,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
             movies: movies
           });
         }
-      }))));
+      })))));
     }
   }]);
 
@@ -52384,7 +52384,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57714" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63655" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

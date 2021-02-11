@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import propTypes from 'prop-types';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
 import { DirectorView } from '../director-view/director-view';
@@ -109,7 +109,7 @@ export class MainView extends React.Component {
                             </Nav.Item>
                         </Nav>
                     </Navbar>
-
+                <Switch>
                 <Route exact path={['/', '/login']}
                 render={() => {
                     if (!user) return <LoginView onLoggedIn={(data) => this.onLoggedIn(data)}/>;
@@ -140,7 +140,8 @@ export class MainView extends React.Component {
                     if (!user) return <LoginView onLoggedIn={(data) => this.onLoggedIn(data)} />;
                     if (movies.length === 0) return;
                     return <ProfileView movies={movies}/>}}/>
-
+                
+                </Switch>
             </div>
         </Router>
         </div>    
