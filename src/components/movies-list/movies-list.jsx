@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import VisibilityFilterInput from '../visibility-filter-input/visiibility-filter-input';
 import {MovieCard} from '../movie-card/movie-card';
+import VisibilityFilterInput from '../visibility-filter-input/visibility-filter-input';
 
 const mapStateToProps = state => {
     const {visibilityFilter} = state;
@@ -14,7 +14,7 @@ function MoviesList(props) {
     let filteredMovies = movies;
 
     if (visibilityFilter !== '') {
-        filteredMovies = movies.filter(m => m.Title.includes(visibilityFilter));
+        filteredMovies = movies.filter((m) => m.Title.toLocaleLowerCase().includes(visibilityFilter.toLocaleLowerCase()));
     }
 
     if (!movies) return <div className='main-view' />;

@@ -17,6 +17,7 @@ import Navigation from '../navigation/navigation';
 import { ProfileView } from '../profile-view/profile-view';
 import { RegisterView } from '../registration-view/registration-view';
 import ScrollToTop from '../scroll-to-top/scroll-to-top';
+import VisibilityFilterInput from '../visibility-filter-input/visibility-filter-input';
 import Config from '../../config';
 
 import './main-view.scss'
@@ -25,6 +26,7 @@ import {
     Navbar,
     Nav, 
     Row,
+    Form
 } from 'react-bootstrap';
 
 
@@ -74,13 +76,13 @@ class MainView extends React.Component {
             headers: { Authorization: `Bearer ${token}`}
         })
         .then(response => {
-            // how to I include this .map method to the Birthday Date propType without the movie return statement?
             let movies = response.data.map(movie => {
                 let tempObject = Object.assign(movie)
                 tempObject.Director.Birthday = new Date(movie.Director.Birthday)
                 return tempObject
             });
-            this.props.setMovies(response.data);
+            // edited response.data above with .map method, returning movies now:
+            this.props.setMovies(movies);
         })
         .catch(function(error) {
             console.log(error);
@@ -88,7 +90,7 @@ class MainView extends React.Component {
     }
     
     render() {
-        let {movies} = this.props;
+        let {movies, visibilityFilter} = this.props;
         let {user} = this.state;
         
         return(
@@ -108,6 +110,9 @@ class MainView extends React.Component {
                                 <Nav.Link className='navLink' as={Link} to={`/login`} target='_self' onClick={this.onLoggedOut}>Log Out</Nav.Link>
                             </Nav.Item>
                         </Nav>
+                        <Form inline>
+                            <VisibilityFilterInput variant='outline-light' visibilityFilter={visibilityFilter}/>
+                        </Form>
                     </Navbar>
                     {/* Future use of Navigation component, need to pass {users} and {onLoggedOut} functions, and need to render with only some Routes below? */}
                     {/* <Navigation /> */}
