@@ -4,8 +4,10 @@
 }
 
 .movie-poster {
-  width: 50%;
+  width: 35%;
   margin: 20px auto;
+  border-radius: 5%;
+  border: 2px solid #5bc0de;
 }
 
 .label-title {
@@ -30,4 +32,16 @@
 
 Link:hover {
   text-decoration: none;
+}
+
+@media all and (max-width: 770px) {
+  .movie-poster {
+    width: 70%;
+  }
+}
+
+@media all and (max-width: 375px) {
+  .movie-poster {
+    width: 90%;
+  }
 }
