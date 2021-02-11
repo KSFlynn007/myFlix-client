@@ -33,11 +33,7 @@ class MainView extends React.Component {
         super();
 //initial state is set to null
         this.state = {
-            user: null,
-            // movies: [],
-            // selectedMovie: null,
-            // genre: [],
-            // director: []
+            user: null
         };
         this.onLoggedOut = this.onLoggedOut.bind(this);
     }
