@@ -5,8 +5,7 @@ import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
 
 import { setMovies } from '../../actions/actions';
 
-// not written yet:
-// import MoviesList from '../movies-list/movies-list';
+import MoviesList from '../movies-list/movies-list';
 
 import { DirectorView } from '../director-view/director-view';
 import { GenreView } from '../genre-view/genre-view';
@@ -98,60 +97,64 @@ class MainView extends React.Component {
         <Router>
             <ScrollToTop />
             <div className='main-view'>
-                    <Navbar expand onToggle='sm' bg='dark' variant='dark' sticky='top'>
-                        <Nav>
-                            <Nav.Item>
-                                <Nav.Link className='navLinkHome' as={Link} to={`/`} target='_self'>myFlix Home</Nav.Link>
-                            </Nav.Item>
-                            <Nav.Item>
-                                <Nav.Link className='navLink' as={Link} to={`/users/${user}`} target='_self'>Profile</Nav.Link>
-                            </Nav.Item>
-                            <Nav.Item>
-                                <Nav.Link className='navLink' as={Link} to={`/login`} target='_self' onClick={this.onLoggedOut}>Log Out</Nav.Link>
-                            </Nav.Item>
-                        </Nav>
-                        <Form inline>
-                            <VisibilityFilterInput variant='outline-light' visibilityFilter={visibilityFilter}/>
-                        </Form>
-                    </Navbar>
-                    {/* Future use of Navigation component, need to pass {users} and {onLoggedOut} functions, and need to render with only some Routes below? */}
-                    {/* <Navigation /> */}
-                <Switch>
-                    <Route exact path={['/', '/login']}
-                    render={() => {
-                        if (!user) return <LoginView onLoggedIn={(data) => this.onLoggedIn(data)}/>;
-                        return <Row className='movieCard-row'>{movies.map((m) => <MovieCard key={m._id} movie={m} />)}</Row>
-                    }}
-                    />
+                {/* Future use of Navigation component, need to pass {users} and {onLoggedOut} functions, and need to render with only some Routes below? */}
+                {/* <Navigation /> */}
+                <Navbar bg="dark" variant="dark" expand="md" sticky='top'>
+                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                    <Navbar.Collapse id="basic-navbar-nav">
+                    <Nav className="mr-auto">
+                        <Nav.Item>
+                            <Nav.Link className='navLinkHome' as={Link} to={`/`} target='_self'>myFlix Home</Nav.Link>
+                        </Nav.Item>
+                        <Nav.Item>
+                            <Nav.Link className='navLink' as={Link} to={`/users/${user}`} target='_self'>Profile</Nav.Link>
+                        </Nav.Item>
+                        <Nav.Item>
+                            <Nav.Link className='navLink' as={Link} to={`/login`} target='_self' onClick={this.onLoggedOut}>Log Out</Nav.Link>
+                        </Nav.Item>
+                    </Nav>
+                <Form inline>
+                    <VisibilityFilterInput variant="outline-light" visibilityFilter={visibilityFilter} />
+                </Form>
+                </Navbar.Collapse>
+            </Navbar>
+            <Switch>
+                <Route exact path={['/', '/login']}
+                render={() => {
+                    if (!user) return (<LoginView onLoggedIn={(data) => this.onLoggedIn(data)}/>);
+                    // return <Row className='movieCard-row'>{movies.map((m) => <MovieCard key={m._id} movie={m} />)}</Row>
+                    return <Row className='movieCard-row'><MoviesList movies={movies}/></Row>
+                }}
+                />
 
-                    <Route exact path='/nav'
-                    render={() => {return <Navigation />}}/>
-                    
-                    <Route path='/register'
-                    render={() => { return <RegisterView />}} />
+                <Route exact path='/nav'
+                render={() => {return <Navigation />}}/>
+                
+                <Route path='/register'
+                render={() => { return <RegisterView />}} />
 
-                    <Route path='/movies/:movieId' 
-                    render={({match}) => { return <MovieView movie={movies.find(m => m._id === match.params.movieId)}/>}}/>
+                <Route path='/movies/:movieId' 
+                render={({match}) => { return <MovieView movie={movies.find(m => m._id === match.params.movieId)}/>}}/>
 
-                    <Route path='/directors/:name' 
-                    render={({match}) => {
-                        if(!movies.length) return <div className='main-view'/>;
-                        return <DirectorView director={movies.find((m) => m.Director.Name === match.params.name)} movies={movies} />
-                    }}/>
+                <Route path='/directors/:name' 
+                render={({match}) => {
+                    if(!movies.length) return <div className='main-view'/>;
+                    return <DirectorView director={movies.find((m) => m.Director.Name === match.params.name)} movies={movies} />
+                }}/>
 
-                    <Route path='/genres/:name' 
-                    render={({match}) => {
-                        if(!movies.length) return <div className='main-view'/>;
-                        return <GenreView genre={movies.find((m) => m.Genre.Name === match.params.name)} movies={movies}/>
-                    }}/>
+                <Route path='/genres/:name' 
+                render={({match}) => {
+                    if(!movies.length) return <div className='main-view'/>;
+                    return <GenreView genre={movies.find((m) => m.Genre.Name === match.params.name)} movies={movies}/>
+                }}/>
 
-                    <Route exact path='/users/:username'
-                    render={() => {
-                        if (!user) return <LoginView onLoggedIn={(data) => this.onLoggedIn(data)} />;
-                        if (movies.length === 0) return;
-                        return <ProfileView movies={movies}/>}}/>
-                    
-                    </Switch>
+                <Route exact path='/users/:username'
+                render={() => {
+                    if (!user) return <LoginView onLoggedIn={(data) => this.onLoggedIn(data)} />;
+                    if (movies.length === 0) return;
+                    return <ProfileView movies={movies}/>}}/>
+                
+            </Switch>
             </div>
         </Router>
         </div>    

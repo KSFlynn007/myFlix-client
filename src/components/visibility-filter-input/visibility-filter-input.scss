@@ -10,3 +10,10 @@
   border-radius: 5%;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
+
+@media all and (max-width: 767px) {
+  .form-control-search {
+    width: 50%;
+    margin-top: 5px;
+  }
+}
