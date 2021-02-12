@@ -1,5 +1,8 @@
 # myFlix-client
 
-Client-side myFlix app, built with React
+Client-side myFlix app, built with React, React-Bootstrap and Redux
 
-package.json use of proxy for RESTAPI (heroku) can only be used for up to two APIs, if more, will need sep. middleware
+If working on anything regarding server-side, download "movie_api" repo, API used is hosted at www.m-y-f-l-i-x.herokuapp.com.
+
+
+
