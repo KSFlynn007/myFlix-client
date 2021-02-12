@@ -1,17 +1,17 @@
-.movieCard-col {
-  margin: 10px 0px;
-}
-
 .movie-card {
   text-align: center;
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100%;
+  border: 2px solid;
+  margin: 5px;
 }
 
 .movie-img {
-  padding: 5px;
+  margin-top: 20px;
+  width: 75%;
+  border-radius: 5%;
+  border: 2px solid #5bc0de;
 }
 
 .more-button {

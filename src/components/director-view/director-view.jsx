@@ -32,14 +32,14 @@ export class DirectorView extends React.Component {
         return (
             <div className='director-view'>
                 <Container>
-                    <Card className='director-card'>
+                    <Card className='director-card' border='info'>
                         <Card.Body>
                             <Card.Title>{director.Director.Name}</Card.Title>
                             <Card.Subtitle className='text-muted'>{this.formatDate(director.Director.Birthday)}</Card.Subtitle>
                             <Card.Text className='director-bio'>{director.Director.Bio}</Card.Text>
                         </Card.Body>
                     </Card>
-                    <Card className='director-moreMovies'>
+                    <Card className='director-moreMovies' border='info'>
                         <Card.Body>
                             <Card.Title>Movies by {director.Director.Name}:</Card.Title>
                             <ListGroup className='director-MovieCard'>

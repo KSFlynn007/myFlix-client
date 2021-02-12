@@ -1,16 +1,22 @@
 import React from 'react';
 import axios from 'axios';
-import propTypes from 'prop-types';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
+
+import { setMovies } from '../../actions/actions';
+
+import MoviesList from '../movies-list/movies-list';
 
 import { DirectorView } from '../director-view/director-view';
 import { GenreView } from '../genre-view/genre-view';
 import { LoginView } from '../login-view/login-view';
 import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
-import { ProfileView } from '../profile-view/profile-view'
-import { RegisterView } from '../registration-view/registration-view'
+import Navigation from '../navigation/navigation';
+import { ProfileView } from '../profile-view/profile-view';
+import { RegisterView } from '../registration-view/registration-view';
+import ScrollToTop from '../scroll-to-top/scroll-to-top';
+import VisibilityFilterInput from '../visibility-filter-input/visibility-filter-input';
 import Config from '../../config';
 
 import './main-view.scss'
@@ -18,20 +24,16 @@ import './main-view.scss'
 import {
     Navbar,
     Nav, 
-    Row,
+    Form
 } from 'react-bootstrap';
 
 
-export class MainView extends React.Component {
+class MainView extends React.Component {
     constructor() {
         super();
 //initial state is set to null
         this.state = {
-            movies: [],
-            selectedMovie: null,
-            user: null,
-            genre: [],
-            director: []
+            user: null
         };
         this.onLoggedOut = this.onLoggedOut.bind(this);
     }
@@ -77,43 +79,49 @@ export class MainView extends React.Component {
                 tempObject.Director.Birthday = new Date(movie.Director.Birthday)
                 return tempObject
             });
-            // Assigning result to state
-            this.setState({
-                // old setState before above data.map was:
-                // movies: response.data
-                movies: response.data
-            });
+            // edited response.data above with .map method, returning movies now:
+            this.props.setMovies(movies);
         })
         .catch(function(error) {
             console.log(error);
         });
     }
-
+    
     render() {
-        const { movies, user } = this.state;
+        let {movies, visibilityFilter} = this.props;
+        let {user} = this.state;
         
         return(
         <div>
         <Router>
+            <ScrollToTop />
             <div className='main-view'>
-                    <Navbar expand onToggle='sm' bg='dark' variant='dark' sticky='top'>
-                        <Nav>
-                            <Nav.Item>
-                                <Nav.Link className='navLinkHome' as={Link} to={`/`} target='_self'>myFlix Home</Nav.Link>
-                            </Nav.Item>
-                            <Nav.Item>
-                                <Nav.Link className='navLink' as={Link} to={`/users/${user}`} target='_self'>Profile</Nav.Link>
-                            </Nav.Item>
-                            <Nav.Item>
-                                <Nav.Link className='navLink' as={Link} to={`/login`} target='_self' onClick={this.onLoggedOut}>Log Out</Nav.Link>
-                            </Nav.Item>
-                        </Nav>
-                    </Navbar>
-                <Switch>
+                {/* Future use of Navigation component, need to pass {users} and {onLoggedOut} functions, and need to render with only some Routes below? */}
+                {/* <Navigation /> */}
+                <Navbar bg='dark' variant='dark' expand='md' sticky='top'>
+                    <Navbar.Toggle aria-controls='basic-navbar-nav' />
+                    <Navbar.Collapse id='basic-navbar-nav'>
+                    <Nav className='mr-auto'>
+                        <Nav.Item>
+                            <Nav.Link className='navLinkHome' as={Link} to={`/`} target='_self'>myFlix Home</Nav.Link>
+                        </Nav.Item>
+                        <Nav.Item>
+                            <Nav.Link className='navLink' as={Link} to={`/users/${user}`} target='_self'>Profile</Nav.Link>
+                        </Nav.Item>
+                        <Nav.Item>
+                            <Nav.Link className='navLink' as={Link} to={`/login`} target='_self' onClick={this.onLoggedOut}>Log Out</Nav.Link>
+                        </Nav.Item>
+                    </Nav>
+                <Form inline>
+                    <VisibilityFilterInput variant='outline-light' visibilityFilter={visibilityFilter} />
+                </Form>
+                </Navbar.Collapse>
+            </Navbar>
+            <Switch>
                 <Route exact path={['/', '/login']}
                 render={() => {
-                    if (!user) return <LoginView onLoggedIn={(data) => this.onLoggedIn(data)}/>;
-                    return <Row className='movieCard-row'>{movies.map((m) => <MovieCard key={m._id} movie={m} />)}</Row>
+                    if (!user) return (<LoginView onLoggedIn={(data) => this.onLoggedIn(data)}/>);
+                    return <MoviesList movies={movies}/>
                 }}
                 />
                 
@@ -141,33 +149,16 @@ export class MainView extends React.Component {
                     if (movies.length === 0) return;
                     return <ProfileView movies={movies}/>}}/>
                 
-                </Switch>
+            </Switch>
             </div>
         </Router>
         </div>    
-        )
-
-        
+        );
     }
 }
 
-MainView.propTypes = {
-  movie: propTypes.shape({
-    _id: propTypes.string.isRequired,
-    Title: propTypes.string.isRequired,
-    Description: propTypes.string.isRequired,
-    Year: propTypes.number.isRequired,
-    ImageUrl: propTypes.string.isRequired,
-    Genre: propTypes.shape({
-      Name: propTypes.string.isRequired,
-      Description: propTypes.string.isRequired,
-    }),
-    Director: propTypes.shape({
-      Name: propTypes.string.isRequired,
-      Bio: propTypes.string.isRequired,
-      Birthday: propTypes.instanceOf(Date)
-    }),
-    Featured: propTypes.bool,
-  }),
-  user: propTypes.string
+let mapStateToProps = state => {
+    return { movies: state.movies }
 }
+
+export default connect(mapStateToProps, {setMovies} )(MainView);

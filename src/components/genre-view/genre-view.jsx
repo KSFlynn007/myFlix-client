@@ -26,14 +26,14 @@ export class GenreView extends React.Component {
 
         return(
             <div className='genre-view'>
-                <Container>
-                    <Card className='genre-card'>
+                <Container className='wrapper container-fluid'>
+                    <Card className='genre-card' border='info'>
                         <Card.Body>
                             <Card.Title>{genre.Genre.Name}</Card.Title>
                             <Card.Text>{genre.Genre.Description}</Card.Text>
                         </Card.Body>
                     </Card>
-                    <Card className='genres-moreMovies'>
+                    <Card className='genres-moreMovies' border='info'>
                         <Card.Body>
                             <Card.Title>Other {genre.Genre.Name} Movies:</Card.Title>
                             <ListGroup>
@@ -47,6 +47,7 @@ export class GenreView extends React.Component {
                             </ListGroup>
                         </Card.Body>
                     </Card>
+
                     <Card.Footer>
                         <Link to={`/`}>
                             <Button className='returnButton' variant='dark'>Return to Movie List</Button>
