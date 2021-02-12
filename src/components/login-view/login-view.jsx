@@ -33,9 +33,9 @@ export function LoginView(props) {
     };
 
   return (
-    <React.Fragment>
+    <div className='login-view'>
       <Form className='login-form'>
-        <h1 className='login-header'>Login Here:</h1>
+        <h1 className='login-header'>Login:</h1>
         <Form.Group controlId='formBasicEmail'>
           <Form.Label>Username</Form.Label>
           <Form.Control
@@ -60,7 +60,7 @@ export function LoginView(props) {
         </Button>
         <Button className='swap-button' type='button' variant='info' onClick={swapView}>Not Registered?</Button>
       </Form>
-    </React.Fragment>
+    </div>
   );
 }
 

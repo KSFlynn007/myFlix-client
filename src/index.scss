@@ -1,7 +1,10 @@
-// dummy content
+html {
+  min-height: 100%;
+}
 
-$color: steelblue;
-
-.my-flix {
-  color: $color;
+body {
+  // background-image: linear-gradient(to bottom, #343a40 0%, #5bc0de 100%);
+  // mix of two main colors - info and dark nav:
+  // background-color: #487d8f;
+  background-color: #ccdfe5;
 }

@@ -2,8 +2,19 @@
   margin: 30px;
 }
 
-@media all and (min-width: 768px) {
+.genre-card,
+.genres-moreMovies {
+  border: 2px solid;
+  margin-top: 10px;
+}
+
+.genre-view-movies-flex {
+  width: 50%;
+  align-self: center;
+}
+
+@media all and (max-width: 768px) {
   .genre-view-movies-flex {
-    display: flex;
+    width: 100%;
   }
 }
