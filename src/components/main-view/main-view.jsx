@@ -98,10 +98,10 @@ class MainView extends React.Component {
             <div className='main-view'>
                 {/* Future use of Navigation component, need to pass {users} and {onLoggedOut} functions, and need to render with only some Routes below? */}
                 {/* <Navigation /> */}
-                <Navbar bg="dark" variant="dark" expand="md" sticky='top'>
-                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                    <Navbar.Collapse id="basic-navbar-nav">
-                    <Nav className="mr-auto">
+                <Navbar bg='dark' variant='dark' expand='md' sticky='top'>
+                    <Navbar.Toggle aria-controls='basic-navbar-nav' />
+                    <Navbar.Collapse id='basic-navbar-nav'>
+                    <Nav className='mr-auto'>
                         <Nav.Item>
                             <Nav.Link className='navLinkHome' as={Link} to={`/`} target='_self'>myFlix Home</Nav.Link>
                         </Nav.Item>
@@ -113,7 +113,7 @@ class MainView extends React.Component {
                         </Nav.Item>
                     </Nav>
                 <Form inline>
-                    <VisibilityFilterInput variant="outline-light" visibilityFilter={visibilityFilter} />
+                    <VisibilityFilterInput variant='outline-light' visibilityFilter={visibilityFilter} />
                 </Form>
                 </Navbar.Collapse>
             </Navbar>

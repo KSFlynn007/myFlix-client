@@ -40,7 +40,7 @@ export class MovieView extends React.Component {
         return(
             <div className='movie-view'>
                 <Card className='movie-view-card' border='info'>
-                    <Card.Img className='movie-poster' variant="top" src={movie.ImageURL} />
+                    <Card.Img className='movie-poster' variant='top' src={movie.ImageURL} />
                     <Card.Title className='label-title'>{movie.Title}</Card.Title>
                     <Card.Body>
                         <Card.Text className='label-body'>{movie.Description}</Card.Text>
