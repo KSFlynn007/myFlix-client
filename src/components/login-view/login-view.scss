@@ -1,8 +1,14 @@
 .login-form {
-  margin: 20px;
+  margin: 20px 200px;
   padding: 30px;
 }
 
 .login-header {
   text-align: center;
+}
+
+@media all and (max-width: 925px) {
+  .login-form {
+    margin: 0px;
+  }
 }

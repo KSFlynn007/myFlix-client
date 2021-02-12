@@ -3,7 +3,7 @@ import propTypes from 'prop-types';
 import axios from 'axios';
 import Config from '../../config';
 
-import { Form, Button } from 'react-bootstrap';
+import { Form, Button, Container } from 'react-bootstrap';
 
 import './registration-view.scss';
 
@@ -40,7 +40,7 @@ export function RegisterView(props) {
   
 
     return(
-        <div>
+        <Container>
             <Form className='register-form'>
                 <h1 className='register-header'>Welcome to myFlix Registration!</h1>
                 <Form.Group controlId='formBasicText'>
@@ -89,7 +89,7 @@ export function RegisterView(props) {
                 <Button type='button' variant='dark' onClick={handleRegister}>Submit</Button>
                 <Button className='swap-button' type='button' variant='info' onClick={swapView}>Already registered?</Button>
             </Form>
-        </div>
+        </Container>
     );
 }
 

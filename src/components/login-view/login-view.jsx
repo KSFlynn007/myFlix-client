@@ -5,7 +5,7 @@ import Config from '../../config';
 
 import './login-view.scss';
 
-import { Form, Button} from 'react-bootstrap';
+import { Form, Button, Container} from 'react-bootstrap';
 
 export function LoginView(props) {
     const [ username, setUsername ] = useState('');
@@ -33,7 +33,7 @@ export function LoginView(props) {
     };
 
   return (
-    <div className='login-view'>
+    <Container className='login-view'>
       <Form className='login-form'>
         <h1 className='login-header'>Login:</h1>
         <Form.Group controlId='formBasicEmail'>
@@ -60,7 +60,7 @@ export function LoginView(props) {
         </Button>
         <Button className='swap-button' type='button' variant='info' onClick={swapView}>Not Registered?</Button>
       </Form>
-    </div>
+    </Container>
   );
 }
 

@@ -1,5 +1,5 @@
 .register-form {
-  margin: 20px;
+  margin: 20px 200px;
   padding: 30px;
 }
 
@@ -11,4 +11,10 @@
 .swap-button {
   display: block;
   margin: 20px auto 0px;
+}
+
+@media all and (max-width: 925px) {
+  .register-form {
+    margin: 0px;
+  }
 }
