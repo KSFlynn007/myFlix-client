@@ -1,10 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import './visibility-filter-input.scss';
+import { setFilter } from '../../actions/actions';
 
+import './visibility-filter-input.scss';
 import Form from 'react-bootstrap/Form';
 
-import { setFilter } from '../../actions/actions';
 
 function VisibilityFilterInput(props) {
     return <Form.Control
@@ -19,3 +19,4 @@ export default connect(
     null,
     { setFilter }
 )(VisibilityFilterInput);
+

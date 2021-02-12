@@ -183,9 +183,9 @@ export class ProfileView extends React.Component {
                         return (
                           <div key={movie._id}>
                             <Card className='favorites-item card-content' style={{ width: '16rem', flex: 1 }}>
-                              {/* <Card.Img>{movie.ImageURL}</Card.Img> */}
+                              {/* <Card.Img>{movie.ImageUrl}</Card.Img> */}
                               <Card.Title className='movie-card-title'>{movie.Title}</Card.Title>
-                              <Card.Title className='text-muted fav-subtitle'>{movie.Year}</Card.Title>
+                              <Card.Subtitle className='text-muted fav-subtitle'>{movie.Year}</Card.Subtitle>
                               <Card.Body className='movie-card-body'>
                                 <Button size='sm' className='profile-button view-movie' variant='info' as={Link} to={`/movies/${movie._id}`} target='_self'>
                                   View Movie
@@ -207,8 +207,8 @@ export class ProfileView extends React.Component {
           <Tab className='tab-item' eventKey='update' title='Update'>
             <Card className='update-card' border='info'>
                 <Card.Title className='profile-title'>Update Profile</Card.Title>
-                <Card.Subtitle>If you are not updating a certain field (ex; email), then leave that field empty.
-                  If you are not updating your password, please enter your old password for verification.
+                <Card.Subtitle className='card-subtitle-update'>If you are not updating a certain field (ex; email), then leave that field empty.
+                  <span className='password-instructions'>*You must enter in either a new or existing password to verify the change!</span>
                 </Card.Subtitle>
                 <Card.Body>
                 <Form noValidate validated={validated} className='update-form' onSubmit={(e) => this.handleUpdate(e, this.Username, this.Password, this.Email, this.Birthday)}>
