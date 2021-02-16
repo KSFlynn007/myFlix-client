@@ -3,6 +3,7 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
 
+
 import { setMovies } from '../../actions/actions';
 
 import MoviesList from '../movies-list/movies-list';
@@ -144,10 +145,10 @@ class MainView extends React.Component {
                 }}/>
 
                 <Route exact path='/users/:username'
-                render={() => {
+                render={({history}) => {
                     if (!user) return <LoginView onLoggedIn={(data) => this.onLoggedIn(data)} />;
                     if (movies.length === 0) return;
-                    return <ProfileView movies={movies}/>}}/>
+                    return <ProfileView history={history} movies={movies}/>}}/>
                 
             </Switch>
             </div>

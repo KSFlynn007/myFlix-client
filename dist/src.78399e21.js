@@ -54227,7 +54227,8 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
         });
 
         alert('Changes have been saved!');
-        localStorage.setItem('user', _this4.state.Username);
+        localStorage.setItem('user', _this4.state.Username); // this.props.history.push(`/users/${username}`);
+
         window.location.pathname = "/users/".concat(username); // console.log(response.data);
       }).catch(function (error) {
         console.log(error);
@@ -54267,7 +54268,8 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
       }).then(function () {
         localStorage.removeItem('user');
         localStorage.removeItem('token');
-        alert('Your account has been deleted');
+        alert('Your account has been deleted'); // this.props.history.push(`/`);
+
         window.location.pathname = "/";
       }).catch(function (e) {
         console.log(e);
@@ -54886,7 +54888,8 @@ var MainView = /*#__PURE__*/function (_React$Component) {
       }), _react.default.createElement(_reactRouterDom.Route, {
         exact: true,
         path: "/users/:username",
-        render: function render() {
+        render: function render(_ref4) {
+          var history = _ref4.history;
           if (!user) return _react.default.createElement(_loginView.LoginView, {
             onLoggedIn: function onLoggedIn(data) {
               return _this3.onLoggedIn(data);
@@ -54894,6 +54897,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
           });
           if (movies.length === 0) return;
           return _react.default.createElement(_profileView.ProfileView, {
+            history: history,
             movies: movies
           });
         }
