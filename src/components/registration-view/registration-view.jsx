@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import propTypes from 'prop-types';
 import axios from 'axios';
 import Config from '../../config';
+import { useHistory } from 'react-router-dom';
 
 import { Form, Button, Container } from 'react-bootstrap';
 
@@ -12,10 +13,12 @@ export function RegisterView(props) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [birthday, setBirthday] = useState('');
+  const history = useHistory();
 
     const swapView = (e) => {
         e.preventDefault();
-        window.location.pathname = `/login`
+        history.push(`/login`);
+        // window.location.pathname = `/login`
     }
   
     const handleRegister = (e) => {

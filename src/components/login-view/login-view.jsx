@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import propTypes from 'prop-types';
 import axios from 'axios';
 import Config from '../../config';
+import { useHistory } from 'react-router-dom';
 
 import './login-view.scss';
 
@@ -10,10 +11,13 @@ import { Form, Button, Container} from 'react-bootstrap';
 export function LoginView(props) {
     const [ username, setUsername ] = useState('');
     const [ password, setPassword ] = useState('');
+    const history = useHistory();
 
     const swapView = (e) => {
         e.preventDefault();
-        window.location.pathname = `/register`
+        history.push(`/register`);
+        // using window is breaking virtual DOM
+        // window.location.pathname = `/register`
     }
 
     const handleSubmit = (e) => {

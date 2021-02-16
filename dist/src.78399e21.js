@@ -53746,6 +53746,8 @@ var _axios = _interopRequireDefault(require("axios"));
 
 var _config = _interopRequireDefault(require("../../config"));
 
+var _reactRouterDom = require("react-router-dom");
+
 require("./login-view.scss");
 
 var _reactBootstrap = require("react-bootstrap");
@@ -53783,9 +53785,12 @@ function LoginView(props) {
       password = _useState4[0],
       setPassword = _useState4[1];
 
+  var history = (0, _reactRouterDom.useHistory)();
+
   var swapView = function swapView(e) {
     e.preventDefault();
-    window.location.pathname = "/register";
+    history.push("/register"); // using window is breaking virtual DOM
+    // window.location.pathname = `/register`
   };
 
   var handleSubmit = function handleSubmit(e) {
@@ -53845,7 +53850,7 @@ LoginView.propTypes = {
   onLoggedIn: _propTypes.default.func.isRequired,
   onRegister: _propTypes.default.func
 };
-},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","axios":"../node_modules/axios/index.js","../../config":"config.js","./login-view.scss":"components/login-view/login-view.scss","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js"}],"components/movie-view/movie-view.scss":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","axios":"../node_modules/axios/index.js","../../config":"config.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js","./login-view.scss":"components/login-view/login-view.scss","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js"}],"components/movie-view/movie-view.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
@@ -54464,6 +54469,8 @@ var _axios = _interopRequireDefault(require("axios"));
 
 var _config = _interopRequireDefault(require("../../config"));
 
+var _reactRouterDom = require("react-router-dom");
+
 var _reactBootstrap = require("react-bootstrap");
 
 require("./registration-view.scss");
@@ -54507,9 +54514,11 @@ function RegisterView(props) {
       birthday = _useState8[0],
       setBirthday = _useState8[1];
 
+  var history = (0, _reactRouterDom.useHistory)();
+
   var swapView = function swapView(e) {
     e.preventDefault();
-    window.location.pathname = "/login";
+    history.push("/login"); // window.location.pathname = `/login`
   };
 
   var handleRegister = function handleRegister(e) {
@@ -54604,7 +54613,7 @@ RegisterView.propTypes = {
   }),
   onRegister: _propTypes.default.func
 };
-},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","axios":"../node_modules/axios/index.js","../../config":"config.js","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js","./registration-view.scss":"components/registration-view/registration-view.scss"}],"components/scroll-to-top/scroll-to-top.jsx":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","axios":"../node_modules/axios/index.js","../../config":"config.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js","./registration-view.scss":"components/registration-view/registration-view.scss"}],"components/scroll-to-top/scroll-to-top.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
