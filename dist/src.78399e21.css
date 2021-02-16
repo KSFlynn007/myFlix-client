@@ -232,6 +232,10 @@ Link:hover {
   padding: 20px;
 }
 
+.navbar-nav {
+  align-items: center;
+}
+
 .navLinkHome {
   font-size: 22px;
 }
