@@ -1,6 +1,5 @@
 # myFlix-client
 Client-side myFlix app, built with React, React-Bootstrap and Redux
-[![Netlify Status](https://api.netlify.com/api/v1/badges/59509a02-5811-4cc9-a714-4ec2970cc50c/deploy-status)](https://app.netlify.com/sites/flynn-myflix/deploys)
 
 ## API
 Server-side API created by me, open access to anyone to use. API hosted with heroku, can be found at [myFlix DB](www.m-y-f-l-i-x.herokuapp.com)
