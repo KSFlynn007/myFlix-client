@@ -25,7 +25,7 @@ As a user, I should be able to login to access movies and my profile
 ```
 Given a user has registered before
 When they enter their login information on the main welcome page
-And it is correct informatio
+And it is correct information
 Then they can access all movies and their profile
 ```
 
